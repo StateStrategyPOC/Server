@@ -14,7 +14,7 @@ public class FermiGameMapFactory extends GameMapFactory {
 
 	@Override
 	public GameMap makeMap() {
-		return new GameMap(this.makeGraph(new File("Fermi_map.txt")), 97, 1,
+		return new GameMap(this.makeGraph(new File("maps/Fermi_map.txt")), 97, 1,
 				23, 14, "FERMI");
 	}
 

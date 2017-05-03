@@ -13,7 +13,7 @@ public class GalvaniGameMapFactory extends GameMapFactory {
 
 	@Override
 	public GameMap makeMap() {
-		return new GameMap(this.makeGraph(new File("Galvani_map.txt")), 97, 1,
+		return new GameMap(this.makeGraph(new File("maps/Galvani_map.txt")), 97, 1,
 				23, 14, "GALVANI");
 	}
 
