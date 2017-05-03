@@ -165,7 +165,7 @@ public class ReqRespHandler extends Thread {
      */
     private void subscribe(PlayerToken playerToken) throws IOException {
         Game game = this.gameManager.getGame(playerToken.getGameId());
-        PubSubHandler pubSubHandler = new PubSubHandler(this.objectOutputStream, playerToken);
+        PubSubHandler pubSubHandler = new PubSubHandler(this.socket,this.objectOutputStream, playerToken);
         game.addPubSubHandler(pubSubHandler);
         this.communicationHandler.addPubSubHandler(pubSubHandler);
         if (game.getPlayers().size() == 2) {

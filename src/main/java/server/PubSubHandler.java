@@ -5,6 +5,7 @@ import common.RemoteMethodCall;
 
 import java.io.IOException;
 import java.io.ObjectOutputStream;
+import java.net.Socket;
 import java.util.concurrent.ConcurrentLinkedQueue;
 
 /**
@@ -20,6 +21,7 @@ public class PubSubHandler extends Thread {
     // The object output stream used to perform the remote method call on the
     // subscriber
     private final ObjectOutputStream objectOutputStream;
+    private final Socket socket;
     private boolean runningFlag;
 
     /**
@@ -32,7 +34,8 @@ public class PubSubHandler extends Thread {
      * @param playerToken The token that identifies a player along with the game is playing
      *
      */
-    public PubSubHandler(ObjectOutputStream outputStream, PlayerToken playerToken){
+    public PubSubHandler(Socket socket, ObjectOutputStream outputStream, PlayerToken playerToken){
+        this.socket = socket;
         this.playerToken = playerToken;
         this.buffer = new ConcurrentLinkedQueue<>();
         this.objectOutputStream = outputStream;
@@ -66,6 +69,13 @@ public class PubSubHandler extends Thread {
                 try {
                     this.perform(remoteMethodCall);
                 } catch (IOException e) {
+                    this.runningFlag = false;
+                    try {
+                        this.objectOutputStream.close();
+                        this.socket.close();
+                    } catch (IOException e1) {
+                        e1.printStackTrace();
+                    }
                     e.printStackTrace();
                 }
             else {
@@ -79,6 +89,12 @@ public class PubSubHandler extends Thread {
                     e.printStackTrace();
                 }
             }
+        }
+        try {
+            this.objectOutputStream.close();
+            this.socket.close();
+        } catch (IOException e) {
+            e.printStackTrace();
         }
     }
 
