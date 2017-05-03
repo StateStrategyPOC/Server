@@ -1,7 +1,5 @@
 package common;
 
-import server.GameStatus;
-
 import java.io.Serializable;
 
 /**
