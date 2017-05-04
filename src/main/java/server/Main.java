@@ -6,7 +6,7 @@ import java.io.IOException;
  * Inits the entire application.
  *
  */
-public class MainServer {
+public class Main {
     public static void main(String[] args) {
         try {
             CommunicationHandler.getInstance().init(29999);

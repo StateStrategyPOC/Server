@@ -30,7 +30,7 @@ public class AlienTurn {
         // Actions to be set after a move action
         if (action.getClass().equals(MoveAction.class)) {
             MoveAction moveAction = (MoveAction) action;
-            if (moveAction.getTarget().getSectorType() == SectorType.DANGEROUS) {
+            if (moveAction.getTarget().getSectorType().equals(SectorType.DANGEROUS)) {
                 nextActions.add(DrawSectorCardAction.class);
             } else {
                 nextActions.add(EndTurnAction.class);

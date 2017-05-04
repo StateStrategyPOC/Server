@@ -7,7 +7,6 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
 /**
- * Created by giorgiopea on 19/04/17.
  *
  * Manages the network communication between the client and the server by spawning threads
  * as necessary.

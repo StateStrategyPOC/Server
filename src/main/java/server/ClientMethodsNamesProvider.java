@@ -41,10 +41,6 @@ public class ClientMethodsNamesProvider {
         return "asyncNotification";
     }
 
-    public String subscribe() {
-        return "setPlayerTokenAndSubscribe";
-    }
-
     public String chatMessage() {
         return "publishChatMsg";
     }
