@@ -9,8 +9,6 @@ import java.net.Socket;
 import java.util.concurrent.ConcurrentLinkedQueue;
 
 /**
- * Created by giorgiopea on 19/04/17.
- *
  * Manages a persistent connection with a client in the logic of the publisher/subscriber pattern
  */
 public class PubSubHandler extends Thread {
@@ -29,12 +27,14 @@ public class PubSubHandler extends Thread {
      * method calls on the subscriber. An empty queue of remote method calls for
      * the handler is automatically created as well.
      *
-     * @param outputStream
-     *            the socket used perform remote method calls on the subscriber
-     * @param playerToken The token that identifies a player along with the game is playing
+     * @param socket The socket used to perform remote method calls on the subscriber.
+     *
+     * @param outputStream The output stream used to perform remote method calls on the subscriber.
+     *
+     * @param playerToken The token that identifies a player along with the game is playing.
      *
      */
-    public PubSubHandler(Socket socket, ObjectOutputStream outputStream, PlayerToken playerToken){
+    public PubSubHandler(Socket socket, ObjectOutputStream outputStream, PlayerToken playerToken) {
         this.socket = socket;
         this.playerToken = playerToken;
         this.buffer = new ConcurrentLinkedQueue<>();
@@ -45,16 +45,13 @@ public class PubSubHandler extends Thread {
     /**
      * Performs a remote method call on the subscriber.
      *
-     * @param remoteMethodCall
-     *            the remote method call to be performed on the subscriber.
+     * @param remoteMethodCall The remote method call to be performed on the subscriber.
      * @throws IOException Networking problem.
      */
     private void perform(RemoteMethodCall remoteMethodCall) throws IOException {
         this.objectOutputStream.writeObject(remoteMethodCall);
         this.objectOutputStream.flush();
     }
-
-
 
 
     /**
@@ -101,7 +98,8 @@ public class PubSubHandler extends Thread {
     public PlayerToken getPlayerToken() {
         return playerToken;
     }
-    public void setRunningFlag(boolean runningFlag){
+
+    public void setRunningFlag(boolean runningFlag) {
         this.runningFlag = runningFlag;
     }
 

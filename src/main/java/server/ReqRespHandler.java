@@ -10,7 +10,6 @@ import java.net.Socket;
 import java.util.ArrayList;
 
 /**
- * Created by giorgiopea on 19/04/17.
  *
  * Manages a connection with the client in a request response fashion.
  */
