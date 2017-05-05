@@ -353,17 +353,16 @@ public class Game{
                         turnNumber++;
 
                         // Reset the timeout
-
-                        timer.cancel();
-                        timer = new Timer();
-                        timeout = new TurnTimeout(this);
-                        timer.schedule(timeout, TURN_TIMEOUT);
                         for (PubSubHandler pubSubHandler : this.pubSubHandlers){
                             if (pubSubHandler.getPlayerToken().equals(currentPlayer.getPlayerToken())){
                                 pubSubHandler.queueNotification(new RemoteMethodCall(this.clientMethodsNamesProvider.startTurn(), new ArrayList<>()));
                             }
                         }
                     }
+                    timer.cancel();
+                    timer = new Timer();
+                    timeout = new TurnTimeout(this);
+                    timer.schedule(timeout, TURN_TIMEOUT);
                     boolean winH = checkWinConditions(PlayerType.HUMAN);
                     boolean winA = checkWinConditions(PlayerType.ALIEN);
 

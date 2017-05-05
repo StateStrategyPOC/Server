@@ -121,8 +121,8 @@ public class ReqRespHandler extends Thread {
      * the client/player. A notification is sent to the client/player as well.
      * This method is invoked by reflection.
      *
-     * @param gameMapName the name of map to be associated with the new game.
-     * @param playerName  the client/player unique identifier.
+     * @param gameMapName The name of map to be associated with the new game.
+     * @param playerName  Rhe client/player unique identifier.
      * @throws IOException Networking problem.
      */
     private void joinNewGame(String gameMapName, String playerName)
@@ -141,8 +141,8 @@ public class ReqRespHandler extends Thread {
      * game. A notification is sent to the client/player as well.
      * This method is invoked by reflection.
      *
-     * @param gameId     the id of game the client wants to join.
-     * @param playerName the client/player unique identifier.
+     * @param gameId     The id of game the client wants to join.
+     * @param playerName The client/player unique identifier.
      * @throws IOException Networking problem.
      */
     private void joinGame(Integer gameId, String playerName) throws IOException {
@@ -190,7 +190,13 @@ public class ReqRespHandler extends Thread {
     private void onDemandGameStart(PlayerToken playerToken) throws IOException {
         Game game = this.gameManager.getGame(playerToken.getGameId());
         ArrayList<Object> parameters = new ArrayList<>();
-        parameters.add(new RRClientNotification(true, null, null, null));
+        if (game.getCurrentPlayer().equals(playerToken)){
+            parameters.add(new RRClientNotification(true, null, null, null));
+        }
+        else {
+            parameters.add(new RRClientNotification(false,null,null,null));
+        }
+
         this.sendData(new RemoteMethodCall(this.clientMethodsNamesProvider.syncNotification(), parameters));
         this.closeDataFlow();
         game.startGame();
@@ -200,9 +206,9 @@ public class ReqRespHandler extends Thread {
      * A service that processes the specified action sent by the client/player
      * and notifies the client/player. This method is invoked by reflection.
      *
-     * @param action      the action sent by the client/player to be performed on the
+     * @param action      The action sent by the client/player to be performed on the
      *                    game.
-     * @param playerToken the client/player unique identifier.
+     * @param playerToken The client/player unique identifier.
      * @throws IOException Networking problem.
      */
     private void makeAction(Action action, PlayerToken playerToken) throws IOException {
@@ -217,12 +223,12 @@ public class ReqRespHandler extends Thread {
      * A service that delivers a text message to all the subscribers of a
      * specific topic in the logic of the pub/sub pattern. This method is invoked by reflection.
      *
-     * @param message     the text message to be delivered to all the subscribers of a
+     * @param message     The text message to be delivered to all the subscribers of a
      *                    specific topic in the logic of the pub/sub pattern.
-     * @param playerToken the token of the player who wants to send the text message.
+     * @param playerToken The token of the player who wants to send the text message.
      *                    From this token the topic(a game), whose subscribers have to
      *                    be delivered the text message, is derived.
-     * @throws IOException Networking problem
+     * @throws IOException Networking problem.
      */
     private void publishChatMsg(String message,
                                 PlayerToken playerToken) throws IOException {
