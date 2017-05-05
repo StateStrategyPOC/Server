@@ -1,33 +1,37 @@
 package effects;
 
-import common.*;
+import common.EndTurnAction;
+import common.Player;
 import server.Game;
-
+import server_store.StoreAction;
 
 /**
  * Represents the effect associated to the action of ending a turn.
  *
+ * @author Andrea Sessa
+ * @author Giorgio Pea
+ * @version 1.1
+ * @see ActionEffect
+ * @see EndTurnAction
  */
 
 public class EndTurnEffect extends ActionEffect {
-    public static boolean executeEffect(Game game,
-                                        RRClientNotification rrNotification,
-                                        PSClientNotification psNotification, Action action) {
+
+
+    public static boolean executeEffect(Game game, StoreAction action) {
         EndTurnAction castedAction = (EndTurnAction) action;
-        Player currentPlayer = game.getCurrentPlayer();
-        currentPlayer.setAdrenalined(false);
-        currentPlayer.setSedated(false);
-        currentPlayer.setHasMoved(false);
-        rrNotification.setMessage("\nYou have ended your turn");
-        psNotification.setMessage("\n[GLOBAL MESSAGE]: "
-                + currentPlayer.getName()
+        game.getCurrentPlayer().setAdrenalined(false);
+        game.getCurrentPlayer().setSedated(false);
+        game.getCurrentPlayer().setHasMoved(false);
+        game.getLastRRclientNotification().setMessage("\nYou have ended your turn");
+        game.getLastPSclientNotification().setMessage("\n[GLOBAL MESSAGE]: "
+                + game.getCurrentPlayer().getName()
                 + " has ended its turn.\n[GLOBAL MESSAGE]: ");
-
+        game.setPreviousPlayer(game.getCurrentPlayer());
         shiftCurrentPlayer(game);
-        psNotification.setMessage(psNotification.getMessage() + currentPlayer.getName() + " now is your turn");
+        game.getLastPSclientNotification().setMessage(game.getLastPSclientNotification().getMessage() + game.getCurrentPlayer().getName() + " now is your turn");
         // Notify the client
-        game.setLastAction(castedAction);
-
+        game.setLastAction(action);
         return true;
     }
 
@@ -48,6 +52,5 @@ public class EndTurnEffect extends ActionEffect {
         }
         game.setCurrentPlayer(game.getPlayers().get(index));
     }
-
 
 }

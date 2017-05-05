@@ -5,7 +5,10 @@ import java.io.Serializable;
 /**
  * Represents a generic notification the server sends to the client in response
  * to one of its requests. A base, generic notification contains a text message
- *
+ * 
+ * @author Andrea Sessa
+ * @author Giorgio Pea
+ * @version 1.0
  */
 public class ClientNotification implements Serializable {
 	// A field automatically created for serialization purposes
@@ -51,5 +54,12 @@ public class ClientNotification implements Serializable {
 	 */
 	public void setMessage(String message) {
 		this.message = message;
+	}
+
+	@Override
+	public String toString() {
+		return "ClientNotification{" +
+				"message='" + message + '\'' +
+				'}';
 	}
 }

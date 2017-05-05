@@ -2,7 +2,6 @@ package common;
 
 /**
  * Represents a sector card in the game
- *
  */
 public class SectorCard extends Card {
 	// A field automatically created for serialization purposes

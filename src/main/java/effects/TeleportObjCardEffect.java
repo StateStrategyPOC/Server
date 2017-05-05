@@ -5,14 +5,17 @@ import server.Game;
 
 /**
  * Represents the effect of a teleport object card
- *
+ * 
+ * @see ObjectCardEffect
+ * @see TeleportObjectCard
+ * @author Andrea Sessa
+ * @author Giorgio Pea
+ * @version 1.0
  */
 public class TeleportObjCardEffect extends ObjectCardEffect {
 
-	public static boolean executeEffect(Game game,
-										RRClientNotification rrNotification,
-										PSClientNotification psNotification, ObjectCard objectCard) {
-		GameMap map = game.getMap();
+	public static boolean executeEffect(Game game, ObjectCard card) {
+		GameMap map = game.getGameMap();
 		Player curr = game.getCurrentPlayer();
 		Sector humanSector = map.getHumanSector();
 
@@ -20,9 +23,9 @@ public class TeleportObjCardEffect extends ObjectCardEffect {
 		curr.getCurrentSector().removePlayer(curr);
 		curr.setCurrentSector(humanSector);
 		humanSector.addPlayer(curr);
-		rrNotification.setMessage("You've teleported to the human sector");
-		psNotification
-				.setMessage(psNotification.getMessage()
+		game.getLastRRclientNotification().setMessage("You've teleported to the human sector");
+		game.getLastPSclientNotification()
+				.setMessage(game.getLastPSclientNotification().getMessage()
 						+ "\n[GLOBAL MESSAGE]: He/She will be teleported to the human sector");
 		return true;
 	}

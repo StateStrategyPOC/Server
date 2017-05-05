@@ -25,7 +25,7 @@ public class PlayerToken implements Serializable {
 	 * Constructs a token that identifies in an unique way a player. This token
 	 * is constructed from the type of the player it refers to, and produces a
 	 * universal unique identifier for the player.
-	 * 
+	 *
 	 * @param playerType
 	 *            the type of the player the token refers to
 	 * @see PlayerType
@@ -37,7 +37,7 @@ public class PlayerToken implements Serializable {
 	}
 	/**
 	 * Gets the type of the player the token refers to
-	 * 
+	 *
 	 * @return the type of the player the token refers to
 	 */
 	public PlayerType getPlayerType() {
@@ -69,8 +69,6 @@ public class PlayerToken implements Serializable {
 				return false;
 		} else if (!playerId.equals(other.playerId))
 			return false;
-		if (playerType != other.playerType)
-			return false;
-		return true;
+		return playerType == other.playerType;
 	}
 }

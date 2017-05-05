@@ -2,7 +2,9 @@ package common;
 
 /**
  * Represents a local noise sector card
- *
+ * 
+ * @author Andrea Sessa
+ * @author Giorgio Pea
  *
  */
 public class LocalNoiseSectorCard extends SectorCard {

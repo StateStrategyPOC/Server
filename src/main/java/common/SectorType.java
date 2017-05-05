@@ -1,7 +1,7 @@
 package common;
 
 /**
- * Represents the possible type of a {@link Sector}
+ * Represents a the type of a sector
  *
  */
 public enum SectorType {

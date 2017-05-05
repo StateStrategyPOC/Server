@@ -1,17 +1,19 @@
 package common;
 
-import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
 /**
  * Represents a notification to be delivered to all the subscribers of a topic
  * in the logic of the publisher-subscriber pattern.
- *
+ * 
+ * @see ClientNotification
+ * @author Andrea Sessa
+ * @author Giorgio Pea
+ * @version 1.0
  */
 
-public class PSClientNotification extends ClientNotification implements
-		Serializable {
+public class PSClientNotification extends ClientNotification {
 	private static final long serialVersionUID = 1L;
 
 	private ArrayList<PlayerToken> deadPlayers;
@@ -20,7 +22,8 @@ public class PSClientNotification extends ClientNotification implements
 	private boolean alienWins;
 	private PlayerToken escapedPlayer;
 
-	/**
+
+    /**
 	 * Constructs a notification o be delivered to all the subscribers of a
 	 * topic in the logic of the publisher-subscriber pattern. An empty list of
 	 * dead players and attacked players is automatically created as well
@@ -83,10 +86,10 @@ public class PSClientNotification extends ClientNotification implements
 	/**
 	 * Adds a new player to the list of dead players
 	 * 
-	 * @param deadPlayer
+	 * @param deadPlayers
 	 *            the player to add to the list
 	 * @throws IllegalArgumentException
-	 *             If the argument is null
+	 *             if deadPlayer is null
 	 */
 	public void addDeadPlayers(PlayerToken deadPlayer) {
 		if (deadPlayer == null)
@@ -106,8 +109,9 @@ public class PSClientNotification extends ClientNotification implements
 	/**
 	 * Adds a new player to the list of the attacked player
 	 * 
-	 * @param attackedPlayer
-	 * @throws IllegalArgumentException If the argument is null
+	 * @param attackedPlayers
+	 * @throws IllegalArgumentExceptio
+	 *             if attackedPlayer is null
 	 */
 	public void addAttackedPlayers(PlayerToken attackedPlayer) {
 		if (attackedPlayer == null)

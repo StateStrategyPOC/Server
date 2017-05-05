@@ -1,25 +1,28 @@
 package effects;
 
 import common.ObjectCard;
-import common.PSClientNotification;
 import common.Player;
-import common.RRClientNotification;
+import common.SuppressorObjectCard;
 import server.Game;
 
 /**
  * Represents the effect of a suppressor object card
- *
+ * 
+ * @see ObjectCardEffect
+ * @see SuppressorObjectCard
+ * @author Andrea Sessa
+ * @author Giorgio Pea
+ * @version 1.0
  */
 public class SuppressorEffect extends ObjectCardEffect {
-	public static boolean executeEffect(Game game,
-										RRClientNotification rrNotification,
-										PSClientNotification psNotification, ObjectCard objectCard) {
+
+	public static boolean executeEffect(Game game, ObjectCard objectCard) {
 		Player currentPlayer = game.getCurrentPlayer();
 		currentPlayer.setSedated(true);
-		rrNotification
+		game.getLastRRclientNotification()
 				.setMessage("You will not draw any sector card this turn");
-		psNotification
-				.setMessage(psNotification.getMessage()
+		game.getLastPSclientNotification()
+				.setMessage(game.getLastPSclientNotification().getMessage()
 						+ "\n[GLOBAL MESSAGE]: He/she will not draw any sector card this turn");
 		return true;
 	}

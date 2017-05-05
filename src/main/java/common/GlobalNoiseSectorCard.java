@@ -2,13 +2,15 @@ package common;
 
 /**
  * Represents a global noise sector card
- *
+ * 
+ * @author Andrea Sessa
+ * @author Giorgio Pea
  *
  */
 public class GlobalNoiseSectorCard extends SectorCard {
 	private static final long serialVersionUID = 1L;
 	// Represents the sector of noise
-	private Sector sector;
+	private final Sector sector;
 
 	/**
 	 * Constructs a global noise sector card from: a boolean value that

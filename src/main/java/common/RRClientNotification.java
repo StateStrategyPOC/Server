@@ -22,7 +22,7 @@ public class RRClientNotification extends ClientNotification {
 	 * result of the action it refers to and from the list of cards the client
 	 * has drawn by performing the action above mentioned, all along with an
 	 * empty text message
-	 * 
+	 *
 	 * @param actionResult
 	 *            the result of the action the notification refers to
 	 * @param drawedCards
@@ -52,7 +52,7 @@ public class RRClientNotification extends ClientNotification {
 		super("");
 		this.drawedCards = new ArrayList<>();
 		this.lightedSectors = new ArrayList<>();
-        this.playerToken = null;
+		this.playerToken = null;
 	}
 
 	public PlayerToken getPlayerToken() {
@@ -61,7 +61,7 @@ public class RRClientNotification extends ClientNotification {
 
 	/**
 	 * Gets the result of the action it refers to
-	 * 
+	 *
 	 * @return the result of the action it refers to
 	 */
 	public boolean getActionResult() {
@@ -70,7 +70,7 @@ public class RRClientNotification extends ClientNotification {
 
 	/**
 	 * Sets the result of the action it refers to
-	 * 
+	 *
 	 * @param result
 	 *            the new action result to be set
 	 */
@@ -81,7 +81,7 @@ public class RRClientNotification extends ClientNotification {
 	/**
 	 * Gets the list of cards the client has drawn by performing the action
 	 * referred by the notification
-	 * 
+	 *
 	 * @return the list of cards the client has drawn by performing the action
 	 *         referred by the notification
 	 */
@@ -99,7 +99,7 @@ public class RRClientNotification extends ClientNotification {
 
 	/**
 	 * Adds a new card to the list of drawn card
-	 * 
+	 *
 	 * @param card
 	 *            the card to add to the list
 	 * @throws IllegalArgumentException
@@ -113,10 +113,10 @@ public class RRClientNotification extends ClientNotification {
 
 	/**
 	 * Add a new Sector to the list of lighted sectors
-	 * 
+	 *
 	 * @param sector
 	 *            the sector to add to the list
-	 * 
+	 *
 	 * @throws IllegalArgumentException
 	 *             if sector is null
 	 */

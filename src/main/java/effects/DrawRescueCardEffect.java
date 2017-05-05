@@ -6,38 +6,39 @@ import server.Game;
 /**
  * Represents the effect associated to the action of drawing a rescue card from
  * the deck containing rescue cards
- *
+ * 
+ * @see ActionEffect
+ * @see DrawRescueCardAction
+ * @author Andrea Sessa
+ * @author Giorgio Pea
+ * @version 1.0
  */
 public class DrawRescueCardEffect extends ActionEffect {
+	public static boolean executeEffect(Game game) {
+		RescueCard card = (RescueCard) game.getRescueDeck().popCard();
+		if (card.getType() == RescueType.GREEN) {
+			game.getCurrentPlayer().setPlayerState(PlayerState.ESCAPED);
+			game.getCurrentPlayer().getCurrentSector()
+					.setSectorType(SectorType.CLOSED_RESCUE);
+			game.getLastPSclientNotification().setMessage(game.getLastPSclientNotification().getMessage()
+					+ "\n[GLOBAL MESSAGE]: "
+					+ game.getCurrentPlayer().getName()
+					+ " has escaped from aliens!");
+			game.getLastRRclientNotification().addCard(card);
+			game.getLastPSclientNotification().setEscapedPlayer(game.getCurrentPlayer().getPlayerToken());
+			EndTurnEffect.executeEffect(game, new EndTurnAction());
+			return true;
+		} else {
+			game.getLastRRclientNotification().addCard(card);
+			game.getCurrentPlayer().getCurrentSector()
+					.setSectorType(SectorType.CLOSED_RESCUE);
+			game.getLastPSclientNotification().setMessage(game.getLastPSclientNotification().getMessage()
+					+ "\n[GLOBAL MESSAGE]: "
+					+ game.getCurrentPlayer().getName()
+					+ " has not escaped from aliens");
+			return false;
+		}
 
-    public static boolean executeEffect(Game game,
-                                        RRClientNotification rrNotification,
-                                        PSClientNotification psNotification) {
-        RescueCard card = (RescueCard) game.getRescueDeck().popCard();
-        Player currentPlayer = game.getCurrentPlayer();
-        if (card.getType() == RescueType.GREEN) {
-            currentPlayer.setPlayerState(PlayerState.ESCAPED);
-            currentPlayer.getCurrentSector()
-                    .setSectorType(SectorType.CLOSED_RESCUE);
-            psNotification.setMessage(psNotification.getMessage()
-                    + "\n[GLOBAL MESSAGE]: "
-                    + game.getCurrentPlayer().getName()
-                    + " has escaped from aliens!");
-            rrNotification.addCard(card);
-            psNotification.setEscapedPlayer(currentPlayer.getPlayerToken());
-            EndTurnEffect.executeEffect(game, rrNotification, psNotification, new EndTurnAction());
-            return true;
-        } else {
-            rrNotification.addCard(card);
-            currentPlayer.getCurrentSector()
-                    .setSectorType(SectorType.CLOSED_RESCUE);
-            psNotification.setMessage(psNotification.getMessage()
-                    + "\n[GLOBAL MESSAGE]: "
-                    + game.getCurrentPlayer().getName()
-                    + " has not escaped from aliens");
-            return false;
-        }
-
-    }
+	}
 
 }

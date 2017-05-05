@@ -2,7 +2,11 @@ package common;
 
 /**
  * Represents an attack object card in the game
- *
+ * 
+ * @see ObjectCard
+ * @author Andrea Sessa
+ * @author Giorgio Pea
+ * @version 1.0
  */
 public class AttackObjectCard extends ObjectCard {
 	// A field automatically created for serialization purposes

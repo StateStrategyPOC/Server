@@ -4,7 +4,10 @@ import java.io.Serializable;
 
 /**
  * Represents a container of public data concerning a game
- *
+ * 
+ * @author Andrea Sessa
+ * @author Giorgio Pea
+ * @version 1.0
  */
 public class GamePublicData implements Serializable {
 	// A field automatically created for serialization purposes

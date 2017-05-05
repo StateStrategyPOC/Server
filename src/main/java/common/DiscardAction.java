@@ -1,40 +1,21 @@
 package common;
 
+import server_store.StoreAction;
+
 /**
  * Represents the action of discarding an object card in the game
- *
+ * 
+ * @see Action
+ * @author Andrea Sessa
+ * @author Giorgio Pea
+ * @version 1.0
  */
-public class DiscardAction extends Action {
-	// A field used only for serialization purposes
-	private static final long serialVersionUID = 1L;
-	// The object card to be discarded
-	private final ObjectCard objectCard;
+public class DiscardAction extends StoreAction {
 
-	/**
-	 * Constructs an action of discarding an object card. This action is
-	 * constructed from the object card to be discarded
-	 * 
-	 * @param objectCard
-	 *            the object card to be discarded
-	 */
-	public DiscardAction(ObjectCard objectCard) {
-		this.objectCard = objectCard;
-	}
+    public ObjectCard payload;
 
-	/**
-	 * Gets the object card to be discarded
-	 * 
-	 * @return the object card to be discarded
-	 */
-	public ObjectCard getObjectCard() {
-		return objectCard;
-	}
-
-	/**
-	 * @see Object#toString()
-	 */
-	@Override
-	public String toString() {
-		return "DiscardAction [objectCard=" + objectCard + "]";
-	}
+    public DiscardAction(ObjectCard objectCard) {
+        super("@GAMEACTION_DISCARD_OBJ_CARD");
+        this.payload = objectCard;
+    }
 }

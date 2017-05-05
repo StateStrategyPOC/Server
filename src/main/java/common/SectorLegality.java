@@ -1,9 +1,10 @@
 package common;
 
 /**
- * Represent the legality of a {@link common.Sector}
+ * Represent the type of a sector
  *
  */
 public enum SectorLegality {
+
 	ALL, NONE, HUMAN
 }

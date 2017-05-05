@@ -1,6 +1,5 @@
 package common;
 
-
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
@@ -20,8 +19,6 @@ public class Sector implements Serializable {
 	private volatile SectorLegality legality;
 	// The list of player in this sector
 	private volatile ArrayList<Player> players;
-    // Boolean attribute used for deciding if the sector can be crossed
-    // with an Human/Alien movement
 	private volatile boolean hasBeenChecked;
 
 	public boolean isHasBeenChecked() {
@@ -47,8 +44,8 @@ public class Sector implements Serializable {
 	public Sector(Coordinate coordinate, SectorType sectorType) {
 		this.coordinate = coordinate;
 		this.sectorType = sectorType;
-		this.players = new ArrayList<>();
-        this.hasBeenChecked = false;
+		this.hasBeenChecked = false;
+		players = new ArrayList<Player>();
 
 		switch (this.sectorType.toString()) {
 		case "DANGEROUS":
@@ -114,7 +111,7 @@ public class Sector implements Serializable {
 	 * @return The set of the players in the sector
 	 */
 	public List<Player> getPlayers() {
-		return new ArrayList<Player>(players);
+		return this.players;
 	}
 
 	/**

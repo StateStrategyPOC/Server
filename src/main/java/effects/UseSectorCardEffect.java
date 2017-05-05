@@ -1,27 +1,31 @@
 package effects;
 
-import common.*;
+import common.SectorCard;
+import common.UseSectorCardAction;
 import server.Game;
+import server_store.StoreAction;
 
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 
 /**
  * Represents the effect of using a sector card
- *
+ * 
+ * @see ActionEffect
+ * @see UseSectorCardAction
+ * @author Andrea Sessa
+ * @author Giorgio Pea
+ * @version 1.0
  */
 public class UseSectorCardEffect extends ActionEffect {
 
-	public static boolean executeEffect(Game game,
-										RRClientNotification rrNotification,
-										PSClientNotification psNotification, Action action) {
+	public static boolean executeEffect(Game game, StoreAction action) {
 		UseSectorCardAction castedAction = (UseSectorCardAction) action;
-		SectorCardsMapper mapper = SectorCardsMapper.getInstance();
 		game.setLastAction(action);
 		try {
-			Method executeMethod = mapper.getEffect(castedAction.getCard().getClass()).getMethod("executeEffect", Game.class, RRClientNotification.class, PSClientNotification.class, SectorCard.class);
-			return (boolean)  executeMethod.invoke(null,game, rrNotification, psNotification, castedAction.getCard());
-		} catch (IllegalAccessException | NoSuchMethodException | InvocationTargetException e) {
+			Method executeMethod = SectorCardsMapper.getInstance().getEffect(castedAction.getSectorCard()).getMethod("executeEffect", Game.class, SectorCard.class);
+			return (boolean)  executeMethod.invoke(null,game, castedAction.getSectorCard());
+		} catch (InstantiationException | IllegalAccessException | NoSuchMethodException | InvocationTargetException e) {
 			e.printStackTrace();
 
 		}

@@ -1,90 +1,90 @@
 package server;
 
 import common.*;
+import server_store.StoreAction;
 
 import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Represents a human turn in the game
- *
+ * Created by giorgiopea on 13/03/17.
  */
 public class HumanTurn {
 
-		private static List<Class<? extends Action>> initialActions;
-		public static List<Class<? extends Action>> getInitialActions(){
-			if(initialActions == null){
-				initialActions = new ArrayList<Class<? extends Action>>();
-				initialActions.add(MoveAction.class);
-				initialActions.add(UseObjAction.class);
-			}
-			return initialActions;
-		}
-		public static List<Class<? extends Action>> nextAction(Action action, Player currentPlayer){
-			List<Class<? extends Action>> nextActions = new ArrayList<>();
+    private static List<String> initialActions;
+    public static List<String> getInitialActions(){
+        if(initialActions == null){
+            initialActions = new ArrayList<String>();
+            initialActions.add("@GAMEACTION_MOVE");
+            initialActions.add("@GAMEACTION_USE_OBJ_CARD");
+        }
+        return initialActions;
+    }
+    public static List<String> nextAction(StoreAction action, Player currentPlayer){
+        List<String> nextActions = new ArrayList<>();
 
-			// Actions to be set after a moveToSector action
-			if (action.getClass().equals(MoveAction.class)) {
-				MoveAction move = (MoveAction) action;
-				SectorType sectorType = move.getTarget().getSectorType();
+        // Actions to be set after a moveToSector action
+        if (action.type.equals("@GAMEACTION_MOVE")) {
+            MoveAction move = (MoveAction) action;
+            SectorType sectorType = move.getTargetSector().getSectorType();
 
-				if (sectorType == SectorType.DANGEROUS) {
-					if (!currentPlayer.isSedated()) {
-						nextActions.add(DrawSectorCardAction.class);
-					}
-					nextActions.add(UseObjAction.class);
-					nextActions.add(EndTurnAction.class);
-				} else if (sectorType == SectorType.OPEN_RESCUE) {
-					nextActions.add(DrawRescueCardAction.class);
-				} else {
-					nextActions.add(UseObjAction.class);
-					nextActions.add(EndTurnAction.class);
-				}
-			}
-			// Actions to be set after a draw sector card action
-			else if (action.getClass().equals(DrawSectorCardAction.class)) {
-				nextActions.add(UseSectorCardAction.class);
-			}
-			// Actions to be set after a use sector card action
-			else if (action.getClass().equals(UseSectorCardAction.class)) {
-				SectorCard card = ((UseSectorCardAction) action).getCard();
-				// If the sector card used has an object
-				if (card.hasObjectAssociated()) {
-					if (currentPlayer.getPrivateDeck().getSize() == 4) {
-						nextActions.add(DiscardAction.class);
-					} else {
-						nextActions.add(EndTurnAction.class);
-					}
-				} else {
-					nextActions.add(EndTurnAction.class);
-				}
-				nextActions.add(UseObjAction.class);
-			}
+            if (sectorType == SectorType.DANGEROUS) {
+                if (!currentPlayer.isSedated()) {
+                    nextActions.add("@GAMEACTION_DRAW_SECTOR_CARD");
+                }
+                nextActions.add("@GAMEACTION_USE_OBJ_CARD");
+                nextActions.add("@GAMEACTION_END_TURN");
+            } else if (sectorType == SectorType.OPEN_RESCUE) {
+                nextActions.add("@GAMEACTION_DRAW_RESCUE_CARD");
+            } else {
+                nextActions.add("@GAMEACTION_USE_OBJ_CARD");
+                nextActions.add("@GAMEACTION_END_TURN");
+            }
+        }
+        // Actions to be set after a draw sector card action
+        else if (action.type.equals("@GAMEACTION_DRAW_SECTOR_CARD")) {
+            nextActions.add("@GAMEACTION_USE_SECTOR_CARD");
+        }
+        // Actions to be set after a use sector card action
+        else if (action.type.equals("@GAMEACTION_USE_SECTOR_CARD")) {
+            SectorCard card = ((UseSectorCardAction) action).getSectorCard();
+            // If the sector card used has an object
+            if (card.hasObjectAssociated()) {
+                if (currentPlayer.getPrivateDeck().getSize() == 4) {
+                    nextActions.add("@GAMEACTION_DISCARD_OBJ_CARD");
+                } else {
+                    nextActions.add("@GAMEACTION_END_TURN");
+                }
+            } else {
+                nextActions.add("@GAMEACTION_END_TURN");
+            }
+            nextActions.add("@GAMEACTION_USE_OBJ_CARD");
+        }
 
-			// Actions to be set after a discard object card action
-			else if (action.getClass().equals(DiscardAction.class)) {
-				nextActions.add(UseObjAction.class);
-				nextActions.add(EndTurnAction.class);
-			}
-			// Actions to be set after a use object card action
-			else if (action.getClass().equals(UseObjAction.class)) {
-				if (currentPlayer.getPrivateDeck().getSize() > 0) {
-					nextActions.add(UseObjAction.class);
-				}
-				if (!currentPlayer.isHasMoved()) {
-					nextActions.add(MoveAction.class);
-				} else {
-					nextActions.add(EndTurnAction.class);
-				}
-			} else if (action.getClass().equals(DrawRescueCardAction.class)) {
-				nextActions.add(EndTurnAction.class);
-				nextActions.add(UseObjAction.class);
-			} else if (action.getClass().equals(MoveAttackAction.class)) {
-				if (currentPlayer.getPrivateDeck().getSize() > 0) {
-					nextActions.add(UseObjAction.class);
-				}
-				nextActions.add(EndTurnAction.class);
-			}
-			return nextActions;
-		}
+        // Actions to be set after a discard object card action
+        else if (action.type.equals("@GAMEACTION_DISCARD_OBJ_CARD")) {
+            nextActions.add("@GAMEACTION_USE_OBJ_CARD");
+            nextActions.add("@GAMEACTION_END_TURN");
+        }
+        // Actions to be set after a use object card action
+        else if (action.type.equals("@GAMEACTION_USE_OBJ_CARD")) {
+            if (currentPlayer.getPrivateDeck().getSize() > 0) {
+                nextActions.add("@GAMEACTION_USE_OBJ_CARD");
+            }
+            if (!currentPlayer.isHasMoved()) {
+                nextActions.add("@GAMEACTION_MOVE");
+            } else {
+                nextActions.add("@GAMEACTION_END_TURN");
+            }
+        } else if (action.type.equals("@GAMEACTION_DRAW_RESCUE_CARD")) {
+            nextActions.add("@GAMEACTION_END_TURN");
+            nextActions.add("@GAMEACTION_USE_OBJ_CARD");
+        } else if (action.type.equals("@GAMEACTION_MOVE_ATTACK")) {
+            if (currentPlayer.getPrivateDeck().getSize() > 0) {
+                nextActions.add("@GAMEACTION_USE_OBJ_CARD");
+            }
+            nextActions.add("@GAMEACTION_END_TURN");
+        }
+        return nextActions;
+    }
 }

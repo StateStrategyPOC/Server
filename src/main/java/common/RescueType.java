@@ -1,9 +1,10 @@
 package common;
 
 /**
- * Represent the type of a {@link common.RescueCard}
+ * Represent the type of a rescue card
  *
  */
 public enum RescueType {
+
 	RED, GREEN
 }

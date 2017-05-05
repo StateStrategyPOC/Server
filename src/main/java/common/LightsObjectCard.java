@@ -2,22 +2,17 @@ package common;
 
 /**
  * Represents a lights object card
- *
+ * 
+ * @author Andrea Sessa
+ * @author Giorgio Pea
+ * @version 1.0
  */
 public class LightsObjectCard extends ObjectCard {
 	private static final long serialVersionUID = 1L;
 	// The target of the lights effect
 	private final Sector centralSector;
 
-	/**
-	 * Constructs a lights object card. This card is constructed from the sector
-	 * whose neighbors must be checked in order to find out if there is any
-	 * player inside
-	 * 
-	 * @param centralSector
-	 *            the sector whose neighbors must be checked in order to find
-	 *            out if there is any player inside
-	 */
+
 	public LightsObjectCard(Sector centralSector) {
 		this.centralSector = centralSector;
 	}

@@ -1,7 +1,11 @@
 package common;
 
 /**
- * Represents the state of a {@link Player}.
+ * Represent the status of a player
+ * 
+ * @author Andrea Sessa
+ * @author Giorgio Pea
+ * @version 1.0
  */
 public enum PlayerState {
 

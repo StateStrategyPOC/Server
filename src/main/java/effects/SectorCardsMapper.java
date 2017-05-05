@@ -14,16 +14,20 @@ import java.util.Map;
  * plain sector cards that don't embed any logic, so an association has to be
  * made between these objects and their logic/effects.
  *
+ * @author Andrea Sessa
+ * @author Giorgio Pea
+ * @version 1.0
+ * @see SectorCard
+ * @see SectorCardEffect
  */
 public class SectorCardsMapper {
-
     private Map<Class<? extends SectorCard>, Class<? extends SectorCardEffect>> fromSectorToSectorEffect;
-
     private static SectorCardsMapper instance = new SectorCardsMapper();
 
-    public static SectorCardsMapper getInstance(){
+    public static SectorCardsMapper getInstance() {
         return instance;
     }
+
     /**
      * Constructs a sector card - effect mapper. This mapper is implemented as
      * an hash map that maps sector card class types to sector card effect class
@@ -43,10 +47,13 @@ public class SectorCardsMapper {
     /**
      * Produces the sector card effect mapped to a sector card
      *
-     * @param sectorCardClass the sector card for which retrieve the effect
+     * @param sectorCard the sector card for which retrieve the effect
      * @return the effect associated with the sector card
+     * @throws InstantiationException
+     * @throws IllegalAccessException
      */
-    public Class<? extends SectorCardEffect> getEffect(Class<? extends SectorCard> sectorCardClass) {
-        return this.fromSectorToSectorEffect.get(sectorCardClass);
+    public Class<? extends SectorCardEffect> getEffect(SectorCard sectorCard)
+            throws InstantiationException, IllegalAccessException {
+        return fromSectorToSectorEffect.get(sectorCard.getClass());
     }
 }

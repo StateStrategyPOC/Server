@@ -3,13 +3,14 @@ package server;
 import java.io.IOException;
 
 /**
- * Inits the entire application.
+ * Created by giorgiopea on 10/03/17.
  *
  */
-public class MainServer {
+public class Main {
+
     public static void main(String[] args) {
         try {
-            CommunicationHandler.getInstance().init(29999);
+            CommunicationHandler.getInstance().init();
         } catch (IOException e) {
             e.printStackTrace();
         }
