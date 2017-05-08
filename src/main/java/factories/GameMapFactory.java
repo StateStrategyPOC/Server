@@ -14,19 +14,18 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.NoSuchElementException;
 
 /**
  * Represents a factory of generic game maps
  *
  */
 public abstract class GameMapFactory {
-	/**
-	 * Makes the graph representing a game map
-	 * 
-	 * @param file
-	 *            the file that represent contains the map's information
-	 * @return The undirected graph representing a map
-	 */
+    /**
+     * Produces an undirected graph of {@link Sector}s given a file representing the structure of a game map.
+     * @param file A file representing the structure of  a game map.
+     * @return An undirected graph of {@link Sector}s representing the logic model behind a game map.
+     */
 	public UndirectedGraph<Sector, DefaultEdge> makeGraph(File file) {
 		UndirectedGraph<Sector, DefaultEdge> graph = new SimpleGraph<Sector, DefaultEdge>(
 				DefaultEdge.class);
@@ -152,10 +151,28 @@ public abstract class GameMapFactory {
 		return graph;
 	}
 
+    /**
+     * Returns the factory that creates the game map whose type matches the given identifier.
+     * @param factoryIdentifier An identifier for a game map.
+     * @return The factory that produces a game map that matches the given identifier.
+     * @throws NoSuchMethodException If no game map matches the given identifier.
+     */
+	public static GameMapFactory provideCorrectFactory(String factoryIdentifier) throws NoSuchMethodException{
+		switch (factoryIdentifier){
+			case "GALILEI":
+				return new GalileiGameMapFactory();
+			case "FERMI":
+				return new FermiGameMapFactory();
+			case "GALVANI":
+				return new GalvaniGameMapFactory();
+		}
+		throw new NoSuchElementException("No factory matches the given identifier");
+	}
+
 	/**
-	 * Makes a generic game map
+	 * Makes a generic game map.
 	 * 
-	 * @return a generic game map
+	 * @return a generic game map.
 	 */
 	public abstract GameMap makeMap();
 }

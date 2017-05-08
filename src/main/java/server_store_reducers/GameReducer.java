@@ -18,12 +18,10 @@ import java.util.Timer;
 
 /**
  * Handles the logic related to the slice of the app's state
- * represented by a single game
+ * represented by a single game.
  */
 public class GameReducer implements Reducer {
-    /**
-     * @see server_store.Reducer
-     */
+
     @Override
     public ServerState reduce(StoreAction action, State state) {
         ServerState castedState = (ServerState) state;
@@ -45,12 +43,24 @@ public class GameReducer implements Reducer {
 
     }
 
+    /**
+     * Changes a game in the list of games in the app's state so that the game can be started on demand.
+     * @param action The action that has triggered this task, see {@link GameStartableGameAction}.
+     * @param state The app's current state.
+     * @return The app's new state.
+     */
     private ServerState startableGame(StoreAction action, ServerState state) {
         GameStartableGameAction castedAction = (GameStartableGameAction) action;
         castedAction.getGame().setStartableGame(castedAction.isStartable());
         return state;
     }
 
+    /**
+     * Changes a game in the list of games in the app's state so that a new chat message is added to the game.
+     * @param action The action that has triggered this task, see {@link GamePutChatMsg}.
+     * @param state The app's current state.
+     * @return The app's new state.
+     */
     private ServerState putChatMsg(StoreAction action, ServerState state) {
         GamePutChatMsg castedAction = (GamePutChatMsg) action;
         for (Game game : state.getGames()) {
@@ -300,7 +310,6 @@ public class GameReducer implements Reducer {
         }
         return true;
     }
-
     private Player getPlayerByToken(PlayerToken playerToken, List<Player> players) throws NoSuchElementException {
         for (Player player : players) {
             if (player.getPlayerToken().equals(playerToken)) {
