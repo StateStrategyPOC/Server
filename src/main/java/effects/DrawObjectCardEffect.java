@@ -1,6 +1,6 @@
 package effects;
 
-import common.DrawObjectCardAction;
+
 import common.ObjectCard;
 import server.Game;
 
@@ -9,12 +9,11 @@ import server.Game;
  * object cards
  * 
  * @see ActionEffect
- * @see DrawObjectCardAction
  * @author Andrea Sessa
  * @author Giorgio Pea
  * @version 1.1
  */
-public class DrawObjectCardEffect extends ActionEffect {
+class DrawObjectCardEffect extends ActionEffect {
 
 
 	public static boolean executeEffect(Game game) {

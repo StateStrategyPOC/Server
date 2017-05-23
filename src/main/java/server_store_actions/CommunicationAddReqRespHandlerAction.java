@@ -8,7 +8,7 @@ import server_store.StoreAction;
  */
 public class CommunicationAddReqRespHandlerAction extends StoreAction {
 
-    private ReqRespHandler payload;
+    private final ReqRespHandler payload;
 
     public CommunicationAddReqRespHandlerAction(ReqRespHandler reqRespHandler) {
         super("@COMMUNICATION_ADD_REQRESP_HANDLER");

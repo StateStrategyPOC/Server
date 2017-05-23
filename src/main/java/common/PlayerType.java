@@ -8,5 +8,5 @@ package common;
  * @version 1.0
  */
 public enum PlayerType {
-	HUMAN, ALIEN;
+	HUMAN, ALIEN
 }

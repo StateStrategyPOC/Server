@@ -21,8 +21,8 @@ import java.util.Map;
  * @see SectorCardEffect
  */
 public class SectorCardsMapper {
-    private Map<Class<? extends SectorCard>, Class<? extends SectorCardEffect>> fromSectorToSectorEffect;
-    private static SectorCardsMapper instance = new SectorCardsMapper();
+    private final Map<Class<? extends SectorCard>, Class<? extends SectorCardEffect>> fromSectorToSectorEffect;
+    private static final SectorCardsMapper instance = new SectorCardsMapper();
 
     public static SectorCardsMapper getInstance() {
         return instance;
@@ -52,8 +52,7 @@ public class SectorCardsMapper {
      * @throws InstantiationException
      * @throws IllegalAccessException
      */
-    public Class<? extends SectorCardEffect> getEffect(SectorCard sectorCard)
-            throws InstantiationException, IllegalAccessException {
+    public Class<? extends SectorCardEffect> getEffect(SectorCard sectorCard) {
         return fromSectorToSectorEffect.get(sectorCard.getClass());
     }
 }

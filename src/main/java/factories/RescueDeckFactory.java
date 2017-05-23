@@ -17,7 +17,7 @@ public class RescueDeckFactory extends DeckFactory {
 
 	@Override
 	public Deck makeDeck() {
-		List<Card> deck = new ArrayList<Card>();
+		List<Card> deck = new ArrayList<>();
 		for (int i = 0; i < 3; i++) {
 			deck.add(new RescueCard(RescueType.GREEN));
 		}

@@ -19,7 +19,7 @@ public class DiscardDeck {
 	 * Constructs an empty discard deck
 	 */
 	public DiscardDeck() {
-		this.content = new ArrayList<Card>();
+		this.content = new ArrayList<>();
 	}
 
 	/**
@@ -39,13 +39,13 @@ public class DiscardDeck {
 	 * 
 	 */
 	public List<Card> getCards() {
-		return new ArrayList<Card>(this.content);
+		return new ArrayList<>(this.content);
 	}
 
 	/**
 	 * Removes all the cards of the discard deck
 	 */
 	public void removeCards() {
-		this.content.removeAll(this.content);
+		this.content.clear();
 	}
 }

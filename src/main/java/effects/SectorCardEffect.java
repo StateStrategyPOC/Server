@@ -11,6 +11,6 @@ import common.SectorCard;
  * @version 1.0
  *
  */
-public abstract class SectorCardEffect {
+abstract class SectorCardEffect {
 
 }

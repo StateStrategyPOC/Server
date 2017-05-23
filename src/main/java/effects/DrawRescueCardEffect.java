@@ -13,7 +13,7 @@ import server.Game;
  * @author Giorgio Pea
  * @version 1.0
  */
-public class DrawRescueCardEffect extends ActionEffect {
+class DrawRescueCardEffect extends ActionEffect {
 	public static boolean executeEffect(Game game) {
 		RescueCard card = (RescueCard) game.getRescueDeck().popCard();
 		if (card.getType() == RescueType.GREEN) {

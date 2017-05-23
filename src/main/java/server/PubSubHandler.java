@@ -20,7 +20,7 @@ public class PubSubHandler extends Thread {
     private final PlayerToken playerToken;
     // The object output stream used to perform the remote method call on the
     // subscriber
-    private ObjectOutputStream objectOutputStream;
+    private final ObjectOutputStream objectOutputStream;
     private boolean runningFlag;
 
     /**

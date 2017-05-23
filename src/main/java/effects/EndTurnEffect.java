@@ -19,7 +19,6 @@ public class EndTurnEffect extends ActionEffect {
 
 
     public static boolean executeEffect(Game game, StoreAction action) {
-        EndTurnAction castedAction = (EndTurnAction) action;
         game.getCurrentPlayer().setAdrenalined(false);
         game.getCurrentPlayer().setSedated(false);
         game.getCurrentPlayer().setHasMoved(false);

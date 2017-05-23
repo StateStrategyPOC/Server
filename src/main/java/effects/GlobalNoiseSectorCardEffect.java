@@ -14,7 +14,7 @@ import server.Game;
  * @author Giorgio Pea
  * @version 1.0
  */
-public class GlobalNoiseSectorCardEffect extends SectorCardEffect {
+class GlobalNoiseSectorCardEffect extends SectorCardEffect {
 	public static boolean executeEffect(Game game, SectorCard sectorCard) {
 		// Notify all the player
 		String name = game.getCurrentPlayer().getName();

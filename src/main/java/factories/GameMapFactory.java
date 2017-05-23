@@ -26,13 +26,13 @@ public abstract class GameMapFactory {
      * @param file A file representing the structure of  a game map.
      * @return An undirected graph of {@link Sector}s representing the logic model behind a game map.
      */
-	public UndirectedGraph<Sector, DefaultEdge> makeGraph(File file) {
-		UndirectedGraph<Sector, DefaultEdge> graph = new SimpleGraph<Sector, DefaultEdge>(
+    UndirectedGraph<Sector, DefaultEdge> makeGraph(File file) {
+		UndirectedGraph<Sector, DefaultEdge> graph = new SimpleGraph<>(
 				DefaultEdge.class);
 		// Intermediate data-structure from which to build the map graph
 		// Sectors are organized in columns, based on their coordinate
-		List<List<Sector>> listOfColsOfSectors = new ArrayList<List<Sector>>();
-		List<Sector> colOfSectors = new ArrayList<Sector>();
+		List<List<Sector>> listOfColsOfSectors = new ArrayList<>();
+		List<Sector> colOfSectors = new ArrayList<>();
 		BufferedReader fileReaderBuffer;
 		Coordinate coordinate;
 		Sector sector;
@@ -64,7 +64,7 @@ public abstract class GameMapFactory {
 				// when need to add a column to listOfColsOfSectors
 				if (coordinate.getX() != xCoord) {
 					// Current to which the sectors belong
-					colOfSectors = new ArrayList<Sector>();
+					colOfSectors = new ArrayList<>();
 					listOfColsOfSectors.add(colOfSectors);
 				}
 				// current coordinate
@@ -155,9 +155,9 @@ public abstract class GameMapFactory {
      * Returns the factory that creates the game map whose type matches the given identifier.
      * @param factoryIdentifier An identifier for a game map.
      * @return The factory that produces a game map that matches the given identifier.
-     * @throws NoSuchMethodException If no game map matches the given identifier.
+     * @throws NoSuchElementException If no game map matches the given identifier.
      */
-	public static GameMapFactory provideCorrectFactory(String factoryIdentifier) throws NoSuchMethodException{
+	public static GameMapFactory provideCorrectFactory(String factoryIdentifier) throws NoSuchElementException {
 		switch (factoryIdentifier){
 			case "GALILEI":
 				return new GalileiGameMapFactory();

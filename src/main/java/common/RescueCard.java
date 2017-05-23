@@ -7,7 +7,7 @@ package common;
 public class RescueCard extends Card {
 	// A field automatically created for serialization purposes
 	private static final long serialVersionUID = 1L;
-	private RescueType type;
+	private final RescueType type;
 
 	/**
 	 * Constructs a rescue card from its type

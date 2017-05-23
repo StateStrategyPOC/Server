@@ -14,11 +14,11 @@ public class Player implements Serializable {
     // Player's state
     private PlayerState playerState;
     // Player's public deck
-    private PrivateDeck privateDeck;
-    private volatile boolean isSedated;
-    private volatile boolean isAdrenalined;
-    private volatile boolean hasMoved;
-    private volatile String name;
+    private final PrivateDeck privateDeck;
+    private boolean isSedated;
+    private boolean isAdrenalined;
+    private boolean hasMoved;
+    private final String name;
 
 
     public Player(String name) {

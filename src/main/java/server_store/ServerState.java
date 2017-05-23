@@ -18,7 +18,7 @@ public class ServerState extends State implements Serializable {
     private List<ReqRespHandler> reqRespHandlers;
     private List<PubSubHandler> pubSubHandlers;
     private int tcpPort;
-    private long turnTimeout;
+    private final long turnTimeout;
     private boolean isServerListening;
 
     public ServerState() {

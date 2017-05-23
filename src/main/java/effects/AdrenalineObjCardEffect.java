@@ -14,7 +14,7 @@ import server.Game;
  * @author Giorgio Pea
  * @version 1.0
  */
-public class AdrenalineObjCardEffect extends ObjectCardEffect {
+class AdrenalineObjCardEffect extends ObjectCardEffect {
 
 	public static boolean executeEffect(Game game, ObjectCard card) {
 		Player currentPlayer = game.getCurrentPlayer();

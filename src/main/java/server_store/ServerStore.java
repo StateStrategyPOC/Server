@@ -23,8 +23,8 @@ public class ServerStore {
     private final static Logger storeLogger = Logger.getLogger("Store Logger");
 
     private ObservableServerState observableState;
-    private final Map<String, Reducer> actionTypeToReducer = new HashMap<String, Reducer>();
-    private final Map<String, Effect> actionTypeToEffect = new HashMap<String, Effect>();
+    private final Map<String, Reducer> actionTypeToReducer = new HashMap<>();
+    private final Map<String, Effect> actionTypeToEffect = new HashMap<>();
 
 
     public static ServerStore getInstance(){
@@ -46,11 +46,11 @@ public class ServerStore {
         this.actionTypeToReducer.put(actionType, reducer);
     }
 
-    public void registerEffect(Effect effect, String actionType) {
+    private void registerEffect(Effect effect, String actionType) {
         this.actionTypeToEffect.put(actionType, effect);
     }
 
-    public void dispatchAction(StoreAction action) {
+    public synchronized void dispatchAction(StoreAction action) {
         String prefix = action.type.substring(0, action.type.indexOf("_"));
         Reducer reducer = this.actionTypeToReducer.get(prefix);
         if (reducer != null) {
@@ -76,7 +76,7 @@ public class ServerStore {
         this.observableState.addObserver(observer);
     }
 
-    public void init(ServerState initialState) {
+    private void init(ServerState initialState) {
         this.observableState = new ObservableServerState(initialState);
     }
 

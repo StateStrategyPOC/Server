@@ -8,7 +8,7 @@ import server_store.StoreAction;
  */
 public class GamesAddGameAction extends StoreAction {
 
-    private Game payload;
+    private final Game payload;
 
     public GamesAddGameAction(Game game) {
         super("@GAMES_ADD_GAME");

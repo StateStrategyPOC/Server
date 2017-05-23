@@ -14,10 +14,10 @@ public class RemoteMethodCall implements Serializable {
 	// A field automatically created for serialization purposes
 	private static final long serialVersionUID = 1L;
 	// The name of the method this class groups with its parameters
-	private String methodName;
+	private final String methodName;
 	// The list of parameters this class groups with the name of the method they
 	// are referred to
-	private ArrayList<Object> methodParameters;
+	private final ArrayList<Object> methodParameters;
 
 	/**
 	 * Constructs a remote method call from the name of the method to be invoked
@@ -45,7 +45,7 @@ public class RemoteMethodCall implements Serializable {
 	 */
 	public RemoteMethodCall(String methodName) {
 		this.methodName = methodName;
-		this.methodParameters = new ArrayList<Object>();
+		this.methodParameters = new ArrayList<>();
 	}
 
 	/**

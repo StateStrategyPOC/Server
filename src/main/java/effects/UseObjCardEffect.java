@@ -18,15 +18,15 @@ import java.util.List;
  * @see ActionEffect
  * @see UseObjAction
  */
-public class UseObjCardEffect extends ActionEffect {
+class UseObjCardEffect extends ActionEffect {
     /**
      * Initializes the effect wrapping inside an UseObjAction
      *
      * @param objectCard
      * The action that needs to be enriched with its effect
      */
-    private static List<Class<? extends Card>> beforeMoveCards = new ArrayList<Class<? extends Card>>();
-    private static List<Class<? extends Card>> afterMoveCards = new ArrayList<Class<? extends Card>>();
+    private static final List<Class<? extends Card>> beforeMoveCards = new ArrayList<>();
+    private static final List<Class<? extends Card>> afterMoveCards = new ArrayList<>();
 
     private static void produceUtilsDataStructure() {
         beforeMoveCards.add(AdrenalineObjectCard.class);
@@ -72,13 +72,7 @@ public class UseObjCardEffect extends ActionEffect {
             Method executeMethod = ObjectCardsMapper.getInstance().getEffect(castedAction.getObjectCard()).getMethod("executeEffect", Game.class, ObjectCard.class);
             return (boolean) executeMethod.invoke(null,game, castedAction.getObjectCard());
 
-        } catch (InstantiationException | IllegalAccessException e) {
-            e.printStackTrace();
-            return false;
-        } catch (NoSuchMethodException e) {
-            e.printStackTrace();
-            return false;
-        } catch (InvocationTargetException e) {
+        } catch ( IllegalAccessException | InvocationTargetException | NoSuchMethodException e) {
             e.printStackTrace();
             return false;
         }

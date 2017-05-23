@@ -19,9 +19,9 @@ import java.util.Map;
  */
 public class GameActionMapper {
 
-	private static GameActionMapper instance = new GameActionMapper();
+	private static final GameActionMapper instance = new GameActionMapper();
 
-    private Map<String, Class<? extends ActionEffect>> fromActionToActionEffect;
+    private final Map<String, Class<? extends ActionEffect>> fromActionToActionEffect;
 
     public static GameActionMapper getInstance(){
         return instance;

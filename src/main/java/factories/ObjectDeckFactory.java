@@ -18,7 +18,7 @@ public class ObjectDeckFactory extends DeckFactory {
 
 	@Override
 	public Deck makeDeck() {
-		List<Card> deck = new ArrayList<Card>();
+		List<Card> deck = new ArrayList<>();
 		// Object cards insertion
 		deck.add(new AttackObjectCard(null));
 		deck.add(new AttackObjectCard(null));

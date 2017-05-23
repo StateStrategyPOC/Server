@@ -15,7 +15,7 @@ import server.Game;
  * @version 1.0
  *
  */
-public class SilenceSectorCardEffect extends SectorCardEffect {
+class SilenceSectorCardEffect extends SectorCardEffect {
 
 
 	public static boolean executeEffect(Game game, SectorCard sectorCard) {

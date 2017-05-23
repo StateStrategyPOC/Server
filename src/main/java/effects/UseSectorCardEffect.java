@@ -17,7 +17,7 @@ import java.lang.reflect.Method;
  * @author Giorgio Pea
  * @version 1.0
  */
-public class UseSectorCardEffect extends ActionEffect {
+class UseSectorCardEffect extends ActionEffect {
 
 	public static boolean executeEffect(Game game, StoreAction action) {
 		UseSectorCardAction castedAction = (UseSectorCardAction) action;
@@ -25,7 +25,7 @@ public class UseSectorCardEffect extends ActionEffect {
 		try {
 			Method executeMethod = SectorCardsMapper.getInstance().getEffect(castedAction.getSectorCard()).getMethod("executeEffect", Game.class, SectorCard.class);
 			return (boolean)  executeMethod.invoke(null,game, castedAction.getSectorCard());
-		} catch (InstantiationException | IllegalAccessException | NoSuchMethodException | InvocationTargetException e) {
+		} catch ( IllegalAccessException | NoSuchMethodException | InvocationTargetException e) {
 			e.printStackTrace();
 
 		}

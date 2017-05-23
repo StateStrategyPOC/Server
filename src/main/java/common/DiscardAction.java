@@ -12,7 +12,7 @@ import server_store.StoreAction;
  */
 public class DiscardAction extends StoreAction {
 
-    public ObjectCard payload;
+    public final ObjectCard payload;
 
     public DiscardAction(ObjectCard objectCard) {
         super("@GAMEACTION_DISCARD_OBJ_CARD");

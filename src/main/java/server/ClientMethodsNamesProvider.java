@@ -5,7 +5,7 @@ package server;
  *
  */
 public class ClientMethodsNamesProvider {
-    private static ClientMethodsNamesProvider instance = new ClientMethodsNamesProvider();
+    private static final ClientMethodsNamesProvider instance = new ClientMethodsNamesProvider();
 
     public static ClientMethodsNamesProvider getInstance() {
         return instance;
@@ -14,10 +14,10 @@ public class ClientMethodsNamesProvider {
     private ClientMethodsNamesProvider() {
     }
 
-    public String sendAvailableGames(){
+    String sendAvailableGames(){
         return "setAvailableGames";
     }
-    public String syncNotification(){
+    String syncNotification(){
         return "syncNotification";
     }
 

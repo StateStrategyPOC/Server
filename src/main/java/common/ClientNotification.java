@@ -24,7 +24,7 @@ public class ClientNotification implements Serializable {
 	 * @param message
 	 *            the text message contained by the notification
 	 */
-	public ClientNotification(String message) {
+	ClientNotification(String message) {
 		this.message = message;
 	}
 
@@ -33,7 +33,7 @@ public class ClientNotification implements Serializable {
 	 * response to one of its requests. This notification is constructed from a
 	 * text message that is empty
 	 */
-	public ClientNotification() {
+	ClientNotification() {
 		this("");
 	}
 

@@ -16,7 +16,7 @@ import java.util.Timer;
  */
 public class Game {
     // Communication related stuff
-    public static int counter = 0;
+    private static int counter = 0;
 
     private List<Player> players;
     private ObjectDeck objectDeck;

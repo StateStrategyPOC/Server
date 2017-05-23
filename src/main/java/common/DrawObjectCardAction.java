@@ -9,7 +9,7 @@ import server_store.StoreAction;
  * @author Giorgio Pea
  * @version 1.0
  */
-public class DrawObjectCardAction extends StoreAction {
+class DrawObjectCardAction extends StoreAction {
 
 	public DrawObjectCardAction() {
         super("@GAMEACTION_DRAW_OBJ_CARD");

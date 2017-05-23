@@ -14,7 +14,7 @@ public class AlienTurn {
     private static List<String> initialActions;
     public static List<String> getInitialActions(){
         if(initialActions == null){
-            initialActions = new ArrayList<String>();
+            initialActions = new ArrayList<>();
             initialActions.add("@GAMEACTION_MOVE");
             initialActions.add("@GAMEACTION_MOVE_ATTACK");
         }
@@ -22,7 +22,7 @@ public class AlienTurn {
     }
 
     public static List<String> nextAction(StoreAction action, Player currentPlayer) {
-        List<String> nextActions = new ArrayList<String>();
+        List<String> nextActions = new ArrayList<>();
         // Actions to be set after a move action
         switch (action.type) {
             case "@GAMEACTION_MOVE":

@@ -16,8 +16,8 @@ import java.util.List;
 public class PSClientNotification extends ClientNotification {
 	private static final long serialVersionUID = 1L;
 
-	private ArrayList<PlayerToken> deadPlayers;
-	private ArrayList<PlayerToken> attackedPlayers;
+	private final ArrayList<PlayerToken> deadPlayers;
+	private final ArrayList<PlayerToken> attackedPlayers;
 	private boolean humanWins;
 	private boolean alienWins;
 	private PlayerToken escapedPlayer;
@@ -30,8 +30,8 @@ public class PSClientNotification extends ClientNotification {
 	 */
 	public PSClientNotification() {
 		super("");
-		deadPlayers = new ArrayList<PlayerToken>();
-		attackedPlayers = new ArrayList<PlayerToken>();
+		deadPlayers = new ArrayList<>();
+		attackedPlayers = new ArrayList<>();
 	}
 
 	/**

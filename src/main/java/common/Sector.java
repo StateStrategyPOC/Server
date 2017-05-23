@@ -14,12 +14,12 @@ public class Sector implements Serializable {
 	// The coordinate of the sector
 	private final Coordinate coordinate;
 	// The sector type(Safe, Dangerous,...)
-	private volatile SectorType sectorType;
+	private SectorType sectorType;
 	// The Legality of the sector(only for human, only for alien, ...)
-	private volatile SectorLegality legality;
+	private SectorLegality legality;
 	// The list of player in this sector
-	private volatile ArrayList<Player> players;
-	private volatile boolean hasBeenChecked;
+	private final ArrayList<Player> players;
+	private boolean hasBeenChecked;
 
 	public boolean isHasBeenChecked() {
 		return hasBeenChecked;
@@ -45,7 +45,7 @@ public class Sector implements Serializable {
 		this.coordinate = coordinate;
 		this.sectorType = sectorType;
 		this.hasBeenChecked = false;
-		players = new ArrayList<Player>();
+		players = new ArrayList<>();
 
 		switch (this.sectorType.toString()) {
 		case "DANGEROUS":

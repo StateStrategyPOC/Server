@@ -11,7 +11,7 @@ import server_store.StoreAction;
  */
 public class UseSectorCardAction extends StoreAction {
 
-    private SectorCard sectorCard;
+    private final SectorCard sectorCard;
 
     public UseSectorCardAction(SectorCard sectorCard) {
         super("@GAMEACTION_USE_SECTOR_CARD");

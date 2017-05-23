@@ -18,7 +18,7 @@ import java.util.List;
  * @author Giorgio Pea
  * @version 1.1
  */
-public class LightObjectCardEffect extends ObjectCardEffect {
+class LightObjectCardEffect extends ObjectCardEffect {
 	public static boolean executeEffect(Game game, ObjectCard objectCard) {
 		LightsObjectCard castedObjectCard = (LightsObjectCard) objectCard;
 		Sector targetSector = castedObjectCard.getTarget();
@@ -27,7 +27,7 @@ public class LightObjectCardEffect extends ObjectCardEffect {
 		neighboorSectors.add(targetSector);
 		List<Sector> incriminatedSectors = new ArrayList<>();
 		String globalMessage = "\n[GLOBAL MESSAGE]: Players spotted:";
-        String msg = "";
+        StringBuilder msg = new StringBuilder();
 		for (Sector sector : neighboorSectors) {
 			if (!sector.getPlayers().isEmpty()){
                 incriminatedSectors.add(sector);
@@ -36,17 +36,17 @@ public class LightObjectCardEffect extends ObjectCardEffect {
 		}
 		for (Sector sector : incriminatedSectors){
             for (Player player : sector.getPlayers()){
-                if (msg.equals("")){
-                    msg += player.getName() + " in sector "+sector.getCoordinate().toString();
+                if (msg.toString().equals("")){
+                    msg.append(player.getName()).append(" in sector ").append(sector.getCoordinate().toString());
                 }
                 else {
-                    msg += ", "+player.getName() + " in sector "+sector.getCoordinate().toString();
+                    msg.append(", ").append(player.getName()).append(" in sector ").append(sector.getCoordinate().toString());
                 }
 
             }
         }
-		if ( msg.equals("")){
-            msg = "none";
+		if ( msg.toString().equals("")){
+            msg = new StringBuilder("none");
         }
         game.getLastRRclientNotification().setMessage(game.getLastRRclientNotification().getMessage()+". Players spotted: "+msg);
 		game.getLastPSclientNotification().setMessage(game.getLastPSclientNotification().getMessage() + globalMessage+msg);

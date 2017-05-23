@@ -25,7 +25,7 @@ public class RescueDeck extends Deck {
 		if (!this.content.isEmpty()) {
 			Card card = this.content.get(0);
 			this.content.remove(0);
-			return (RescueCard) card;
+			return card;
 		}
 		return null;
 

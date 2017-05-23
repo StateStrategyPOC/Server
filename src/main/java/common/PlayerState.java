@@ -9,5 +9,5 @@ package common;
  */
 public enum PlayerState {
 
-	DEAD, ALIVE, ESCAPED;
+	DEAD, ALIVE, ESCAPED
 }

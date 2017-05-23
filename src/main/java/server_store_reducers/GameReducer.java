@@ -110,7 +110,7 @@ public class GameReducer implements Reducer {
 
         try {
             game.setGameMap(GameMapFactory.provideCorrectFactory(game.getMapName()).makeMap());
-        } catch (NoSuchMethodException e) {
+        } catch (NoSuchElementException e) {
             game.setGameMap(new GalileiGameMapFactory().makeMap());
         }
 

@@ -16,7 +16,7 @@ import server_store.StoreAction;
  * @author Giorgio Pea
  * @version 1.2
  */
-public class DiscardObjCardEffect extends ActionEffect {
+class DiscardObjCardEffect extends ActionEffect {
 	public static boolean executeEffect(Game game, StoreAction action) {
 		DiscardAction castedAction = (DiscardAction) action;
 		Player currentPlayer = game.getCurrentPlayer();

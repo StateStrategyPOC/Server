@@ -112,11 +112,11 @@ public class ReqRespHandler extends Thread {
      */
     private void getGames() throws IOException {
         List<Game> games = this.serverStore.getState().getGames();
-        List<GamePublicData> gamesList = new ArrayList<GamePublicData>();
+        List<GamePublicData> gamesList = new ArrayList<>();
         for (Game game : games) {
             gamesList.add(game.getGamePublicData());
         }
-        ArrayList<Object> parameters = new ArrayList<Object>();
+        ArrayList<Object> parameters = new ArrayList<>();
         parameters.add(gamesList);
         this.sendData(
                 new RemoteMethodCall(this.clientMethodsNamesProvider.sendAvailableGames(), parameters));
@@ -172,7 +172,7 @@ public class ReqRespHandler extends Thread {
      * @param playerToken The client identifier.
      * @throws IOException Networking problem.
      */
-    private void subscribe(PlayerToken playerToken) throws IOException {
+    private void subscribe(PlayerToken playerToken) {
         this.serverStore.dispatchAction(new CommunicationAddPubSubHandlerAction(new PubSubHandler(this.socket, this.objectOutputStream, playerToken)));
         //this.serverStore.dispatchAction(new GameStartGameAction(playerToken.gameId));
         //this.serverStore.dispatchAction(new CommunicationRemoveReqRespHandlerAction(this.uuid));

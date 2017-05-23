@@ -72,7 +72,7 @@ public class ObjectDeck extends Deck {
 		}
 		Card card = this.content.get(0);
 		this.content.remove(0);
-		return (ObjectCard) card;
+		return card;
 	}
 
 }

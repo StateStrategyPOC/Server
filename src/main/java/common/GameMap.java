@@ -20,9 +20,9 @@ import java.util.Set;
 public class GameMap {
 
 	// The map's associated graph
-	private UndirectedGraph<Sector, DefaultEdge> graph;
+	private final UndirectedGraph<Sector, DefaultEdge> graph;
 	// A searchable version of the map's associated graph
-	private NeighborIndex<Sector, DefaultEdge> searchableGraph;
+	private final NeighborIndex<Sector, DefaultEdge> searchableGraph;
 	// The human starting sector
 	private final Sector humanSector;
 	// The alien starting sector
@@ -38,7 +38,7 @@ public class GameMap {
 	// The map's name
 	private final String name;
 	// The rescue sectors of the map
-	private List<Sector> escapes;
+	private final List<Sector> escapes;
 
 	/**
 	 * Constructs a generic map in the game from an undirected graph, from
@@ -68,7 +68,7 @@ public class GameMap {
 			int horizontalLength, int verticalLength, String name) {
 		this.name = name;
 		this.graph = graph;
-		this.searchableGraph = new NeighborIndex<Sector, DefaultEdge>(
+		this.searchableGraph = new NeighborIndex<>(
 				this.graph);
 		this.startingHorizontalCoord = startingHorizontalCoord;
 		this.startingVerticalCoord = startingVerticalCoord;
@@ -260,7 +260,7 @@ public class GameMap {
 	 * @return A list of the rescue sector of the map
 	 */
 	private List<Sector> findEscapes() {
-		List<Sector> toReturn = new ArrayList<Sector>();
+		List<Sector> toReturn = new ArrayList<>();
 		Set<Sector> sectors = this.graph.vertexSet();
 		for (Sector s : sectors) {
 			if (s.getSectorType() == SectorType.OPEN_RESCUE

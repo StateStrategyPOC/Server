@@ -18,7 +18,7 @@ import java.util.Map;
  * @version 1.0
  */
 public class ObjectCardsMapper {
-	private Map<Class<? extends ObjectCard>, Class<? extends ObjectCardEffect>> fromObjectCardToObjectCardEffect;
+	private final Map<Class<? extends ObjectCard>, Class<? extends ObjectCardEffect>> fromObjectCardToObjectCardEffect;
 	private static ObjectCardsMapper instance;
 
 	public static ObjectCardsMapper getInstance(){
@@ -32,7 +32,7 @@ public class ObjectCardsMapper {
 	 * possible to get an actual object card effect object
 	 */
 	private ObjectCardsMapper() {
-		fromObjectCardToObjectCardEffect = new HashMap<Class<? extends ObjectCard>, Class<? extends ObjectCardEffect>>();
+		fromObjectCardToObjectCardEffect = new HashMap<>();
 		fromObjectCardToObjectCardEffect.put(TeleportObjectCard.class,
 				TeleportObjCardEffect.class);
 		fromObjectCardToObjectCardEffect.put(AttackObjectCard.class,
@@ -56,8 +56,7 @@ public class ObjectCardsMapper {
 	 * @throws InstantiationException
 	 * @throws IllegalAccessException
 	 */
-	public Class<? extends ObjectCardEffect> getEffect(ObjectCard objectCard)
-			throws InstantiationException, IllegalAccessException {
+	public Class<? extends ObjectCardEffect> getEffect(ObjectCard objectCard) {
 		return this.fromObjectCardToObjectCardEffect.get(objectCard.getClass());
 	}
 

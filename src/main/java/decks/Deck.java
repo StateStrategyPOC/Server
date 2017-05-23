@@ -10,7 +10,7 @@ import java.util.List;
  */
 public abstract class Deck {
 	// The set of cards contained in the deck
-	protected List<Card> content;
+	final List<Card> content;
 
 	/**
 	 * Constructs a deck from a set of cards
@@ -18,7 +18,7 @@ public abstract class Deck {
 	 * @param content
 	 *            the set of cards to insert in the deck
 	 */
-	public Deck(List<Card> content) {
+	Deck(List<Card> content) {
 		this.content = content;
 	}
 

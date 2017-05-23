@@ -13,14 +13,14 @@ import java.util.List;
  */
 public class PrivateDeck implements Serializable {
 	// The set of object cards contained in the private deck
-	private volatile List<ObjectCard> content;
+	private final List<ObjectCard> content;
 
 	/**
 	 * Constructs a private deck of object cards owned by a player. This private
 	 * deck is constructed with no cards.
 	 */
 	public PrivateDeck() {
-		this.content = new ArrayList<ObjectCard>();
+		this.content = new ArrayList<>();
 	}
 
 	/**
@@ -60,8 +60,7 @@ public class PrivateDeck implements Serializable {
 	 *         index
 	 */
 	public ObjectCard getCard(int cardIndex) {
-		ObjectCard card = this.content.get(cardIndex);
-		return card;
+		return this.content.get(cardIndex);
 	}
 
 	/**
@@ -77,7 +76,7 @@ public class PrivateDeck implements Serializable {
 	/**
 	 * Adds a card to the private deck's set of cards
 	 * 
-	 * @param objectCard
+	 * @param card
 	 *            the card to be added to the private deck's set of cards
 	 * @return true if the card will not increase the size of the private deck's
 	 *         set of cards to 5, false otherwise

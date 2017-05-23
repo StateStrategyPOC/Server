@@ -13,7 +13,7 @@ import server.Game;
  * @author Giorgio Pea
  * @version 1.0
  */
-public class DefenseObjCardEffect extends ObjectCardEffect {
+class DefenseObjCardEffect extends ObjectCardEffect {
 
 	public static boolean executeEffect(Game game, ObjectCard card) {
 		game.getLastRRclientNotification().setMessage("You've defended from an attack");

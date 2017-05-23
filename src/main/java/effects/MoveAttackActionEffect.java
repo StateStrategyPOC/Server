@@ -19,7 +19,7 @@ import java.util.List;
  * @see ActionEffect
  * @see MoveAttackAction
  */
-public class MoveAttackActionEffect extends ActionEffect {
+class MoveAttackActionEffect extends ActionEffect {
     private static boolean verifyMoveLegality(Sector source, Sector target, PlayerType playerType){
         if (source.equals(target)){
             return false;
@@ -43,8 +43,8 @@ public class MoveAttackActionEffect extends ActionEffect {
         Sector targetSector = game.getGameMap().getSectorByCoords(
                 castedAction.getTargetSector().getCoordinate());
         Player currentPlayer = game.getCurrentPlayer();
-        String rrMessage = "";
-        String psMessage = "";
+        StringBuilder rrMessage = new StringBuilder();
+        StringBuilder psMessage = new StringBuilder();
         List<Player> deadPlayers = new ArrayList<>();
         int adrenalineBooster = 0;
         if (currentPlayer.isAdrenalined()){
@@ -58,7 +58,7 @@ public class MoveAttackActionEffect extends ActionEffect {
                 // For each player contained in the target sector
                 for (Player player : targetSector.getPlayers()) {
                     PrivateDeck playerPrivateDeck = player.getPrivateDeck();
-                    ArrayList<ObjectCard> privateDeckContent = new ArrayList<ObjectCard>(
+                    ArrayList<ObjectCard> privateDeckContent = new ArrayList<>(
                             playerPrivateDeck.getContent());
                     Iterator<ObjectCard> iterator = privateDeckContent
                             .iterator();
@@ -79,14 +79,8 @@ public class MoveAttackActionEffect extends ActionEffect {
                         player.setCurrentSector(null);
                         // Notify the rest of the players
                         game.getLastPSclientNotification().addDeadPlayers(player.getPlayerToken());
-                        rrMessage += "You have attacked sector "
-                                + targetSector.getCoordinate().toString()
-                                + " and so " + player.getName() + " is dead.";
-                        psMessage += "[GLOBAL MESSAGE]: "
-                                + currentPlayer.getName()
-                                + " has attacked sector "
-                                + targetSector.getCoordinate().toString()
-                                + " and so " + player.getName() + " is dead.";
+                        rrMessage.append("You have attacked sector ").append(targetSector.getCoordinate().toString()).append(" and so ").append(player.getName()).append(" is dead.");
+                        psMessage.append("[GLOBAL MESSAGE]: ").append(currentPlayer.getName()).append(" has attacked sector ").append(targetSector.getCoordinate().toString()).append(" and so ").append(player.getName()).append(" is dead.");
                     } else {
                         if (game.getCurrentPlayer().getPlayerToken().getPlayerType().equals(PlayerType.ALIEN) ){
                             game.getCurrentPlayer().setSpeed(3);
@@ -94,30 +88,17 @@ public class MoveAttackActionEffect extends ActionEffect {
                         // Otherwise p has been attacked
                         game.getLastPSclientNotification().addAttackedPlayers(player.getPlayerToken()
                         );
-                        rrMessage += "You have attacked sector "
-                                + targetSector.getCoordinate().toString()
-                                + " and so " + player.getName()
-                                + " has defended.";
+                        rrMessage.append("You have attacked sector ").append(targetSector.getCoordinate().toString()).append(" and so ").append(player.getName()).append(" has defended.");
 
-                        psMessage += "[GLOBAL MESSAGE]: "
-                                + currentPlayer.getName()
-                                + " has attacked sector "
-                                + targetSector.getCoordinate().toString()
-                                + " and so " + player.getName()
-                                + " has defended.";
+                        psMessage.append("[GLOBAL MESSAGE]: ").append(currentPlayer.getName()).append(" has attacked sector ").append(targetSector.getCoordinate().toString()).append(" and so ").append(player.getName()).append(" has defended.");
                     }
                 }
-                if (rrMessage.equals("")) {
-                    rrMessage += "You have attacked sector "
-                            + targetSector.getCoordinate().toString()
-                            + " but it contained no players.";
-                    psMessage += "[GLOBAL MESSAGE]: " + currentPlayer.getName()
-                            + " has attacked sector "
-                            + targetSector.getCoordinate().toString()
-                            + " but it contained no players.";
+                if (rrMessage.toString().equals("")) {
+                    rrMessage.append("You have attacked sector ").append(targetSector.getCoordinate().toString()).append(" but it contained no players.");
+                    psMessage.append("[GLOBAL MESSAGE]: ").append(currentPlayer.getName()).append(" has attacked sector ").append(targetSector.getCoordinate().toString()).append(" but it contained no players.");
                 }
-                game.getLastRRclientNotification().setMessage(rrMessage);
-                game.getLastPSclientNotification().setMessage(psMessage);
+                game.getLastRRclientNotification().setMessage(rrMessage.toString());
+                game.getLastPSclientNotification().setMessage(psMessage.toString());
                 for (Player player : deadPlayers){
                     targetSector.removePlayer(player);
                 }
