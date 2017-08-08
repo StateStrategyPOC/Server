@@ -14,7 +14,9 @@ public class RRClientNotification extends ClientNotification {
 	private boolean actionResult;
 	private final ArrayList<Card> drawedCards;
 	private final ArrayList<Sector> lightedSectors;
+	private final ArrayList<GamePublicData> availableGames;
 	private final PlayerToken playerToken;
+	private final String gameMapName;
 
 	/**
 	 * Constructs a notification to be delivered to a single client in response
@@ -22,7 +24,6 @@ public class RRClientNotification extends ClientNotification {
 	 * result of the action it refers to and from the list of cards the client
 	 * has drawn by performing the action above mentioned, all along with an
 	 * empty text message
-	 *
 	 * @param actionResult
 	 *            the result of the action the notification refers to
 	 * @param drawedCards
@@ -30,16 +31,29 @@ public class RRClientNotification extends ClientNotification {
 	 *            action referred by the notification
 	 * @param sectors
 	 *            the list of sectors to "light" on the GUI after using a light
-	 *            sevtor card
+	 * @param availableGames
+	 * @param gameMapName
 	 */
 	public RRClientNotification(boolean actionResult,
-                                ArrayList<Card> drawedCards, ArrayList<Sector> sectors, PlayerToken playerToken) {
+								ArrayList<Card> drawedCards, ArrayList<Sector> sectors, ArrayList<GamePublicData> availableGames, PlayerToken playerToken, String gameMapName) {
 		super("");
 		this.actionResult = actionResult;
 		this.drawedCards = drawedCards;
 		this.lightedSectors = sectors;
+		this.availableGames = availableGames;
 		this.playerToken = playerToken;
+		this.gameMapName = gameMapName;
 	}
+	public RRClientNotification(PlayerToken playerToken){
+        super("");
+        this.drawedCards = new ArrayList<>();
+        this.lightedSectors = new ArrayList<>();
+        this.playerToken = playerToken;
+        this.availableGames = null;
+        this.gameMapName = null;
+        this.actionResult = true;
+    }
+
 
 	/**
 	 * * Constructs a notification to be delivered to a single client in
@@ -53,7 +67,17 @@ public class RRClientNotification extends ClientNotification {
 		this.drawedCards = new ArrayList<>();
 		this.lightedSectors = new ArrayList<>();
 		this.playerToken = null;
+		this.availableGames = null;
+		this.gameMapName = null;
 	}
+	public RRClientNotification(boolean actionResult){
+        this.drawedCards = new ArrayList<>();
+        this.lightedSectors = new ArrayList<>();
+        this.playerToken = null;
+        this.availableGames = null;
+        this.gameMapName = null;
+        this.actionResult = true;
+    }
 
 	public PlayerToken getPlayerToken() {
 		return playerToken;
@@ -123,4 +147,15 @@ public class RRClientNotification extends ClientNotification {
 	public void addSector(Sector sector) {
 		this.lightedSectors.add(sector);
 	}
+
+	public ArrayList<GamePublicData> getGames() {
+		return this.availableGames;
+	}
+
+
+
+	public String getGameMapName() {
+		return this.gameMapName;
+	}
+
 }

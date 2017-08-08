@@ -9,26 +9,20 @@ import server_store.StoreAction;
  */
 public class GameMakeActionAction extends StoreAction {
 
-    private final PlayerToken playerToken;
     private final StoreAction action;
-    private final Game game;
+    private final PlayerToken playerToken;
 
-    public GameMakeActionAction(Game game, PlayerToken playerToken, StoreAction action) {
-        super("@GAME_MAKE_ACTION");
+    public GameMakeActionAction(PlayerToken playerToken, StoreAction action) {
+        super("@SERVER_GAME_MAKE_ACTION","@SERVER_GROUP");
         this.playerToken = playerToken;
         this.action = action;
-        this.game = game;
-    }
-
-    public PlayerToken getPlayerToken() {
-        return playerToken;
     }
 
     public StoreAction getAction() {
         return action;
     }
 
-    public Game getGame() {
-        return game;
+    public PlayerToken getPlayerToken() {
+        return playerToken;
     }
 }

@@ -38,6 +38,7 @@ public class Game {
     private boolean didHumansWin;
     private boolean startableGame;
     private String lastChatMsg;
+    private final List<PubSubHandler> pubSubHandlers;
 
     public Game(String gameMapName) {
         counter++;
@@ -54,6 +55,7 @@ public class Game {
         this.didHumansWin = false;
         this.didHumansWin = false;
         this.lastChatMsg = "";
+        this.pubSubHandlers = new ArrayList<>();
     }
 
     public boolean isStartableGame() {
@@ -214,5 +216,9 @@ public class Game {
 
     public String getLastChatMsg() {
         return lastChatMsg;
+    }
+
+    public List<PubSubHandler> getPubSubHandlers() {
+        return pubSubHandlers;
     }
 }

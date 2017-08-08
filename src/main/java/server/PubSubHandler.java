@@ -1,11 +1,17 @@
 package server;
 
+import common.PSClientNotification;
 import common.PlayerToken;
 import common.RemoteMethodCall;
+import server_store.ServerStore;
+import server_store.StoreAction;
+import server_store_actions.GameMakeActionAction;
 
 import java.io.IOException;
 import java.io.ObjectOutputStream;
 import java.net.Socket;
+import java.util.Observable;
+import java.util.Observer;
 import java.util.concurrent.ConcurrentLinkedQueue;
 
 /**
@@ -16,7 +22,7 @@ public class PubSubHandler extends Thread {
     // The socket associated to the handler
     private final Socket socket;
     // A queue of messages to send to the subscriber
-    private final ConcurrentLinkedQueue<RemoteMethodCall> buffer;
+    private final ConcurrentLinkedQueue<PSClientNotification> buffer;
     private final PlayerToken playerToken;
     // The object output stream used to perform the remote method call on the
     // subscriber
@@ -54,7 +60,7 @@ public class PubSubHandler extends Thread {
      *            The remote method call to be performed on the subscriber
      * @throws IOException Networking problem.
      */
-    private void perform(RemoteMethodCall remoteMethodCall) throws IOException {
+    private void perform(PSClientNotification remoteMethodCall) throws IOException {
         this.objectOutputStream.writeObject(remoteMethodCall);
         this.objectOutputStream.flush();
     }
@@ -67,7 +73,7 @@ public class PubSubHandler extends Thread {
      */
     public void run() {
         while (this.runningFlag) {
-            RemoteMethodCall remoteMethodCall = buffer.poll();
+            PSClientNotification remoteMethodCall = buffer.poll();
             if (remoteMethodCall != null)
                 try {
                     this.perform(remoteMethodCall);
@@ -106,8 +112,8 @@ public class PubSubHandler extends Thread {
         return playerToken;
     }
 
-    public void queueNotification(RemoteMethodCall remoteMethodCall) {
-        buffer.add(remoteMethodCall);
+    public void queueNotification(PSClientNotification psClientNotification) {
+        buffer.add(psClientNotification);
         synchronized (buffer) {
             buffer.notify();
         }

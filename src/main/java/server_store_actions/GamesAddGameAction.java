@@ -11,7 +11,7 @@ public class GamesAddGameAction extends StoreAction {
     private final Game payload;
 
     public GamesAddGameAction(Game game) {
-        super("@GAMES_ADD_GAME");
+        super("@GAMES_ADD_GAME","@SERVER_GROUP");
         this.payload = game;
     }
 

@@ -11,7 +11,7 @@ public class GameStartableGameAction extends StoreAction {
     private final boolean isStartable;
 
     public GameStartableGameAction(Game game, boolean isStartable) {
-        super("@GAME_STARTABLE_GAME");
+        super("@SERVER_GAME_STARTABLE_GAME","@SERVER_GROUP");
         this.game = game;
         this.isStartable = isStartable;
     }

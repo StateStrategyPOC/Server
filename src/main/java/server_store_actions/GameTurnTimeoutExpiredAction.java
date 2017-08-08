@@ -11,7 +11,7 @@ public class GameTurnTimeoutExpiredAction extends StoreAction {
     private final Game game;
 
     public GameTurnTimeoutExpiredAction(Game game) {
-        super("@GAME_TURNTIMEOUT_EXPIRED");
+        super("@SERVER_GAME_TURNTIMEOUT_EXPIRED","@SERVER_GROUP");
         this.game = game;
     }
 

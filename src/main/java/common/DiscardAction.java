@@ -15,7 +15,7 @@ public class DiscardAction extends StoreAction {
     public final ObjectCard payload;
 
     public DiscardAction(ObjectCard objectCard) {
-        super("@GAMEACTION_DISCARD_OBJ_CARD");
+        super("@GAMEACTION_DISCARD_OBJ_CARD","@COMMON_GROUP");
         this.payload = objectCard;
     }
 }

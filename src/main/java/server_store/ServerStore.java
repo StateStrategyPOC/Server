@@ -1,17 +1,10 @@
 package server_store;
 
-import server_store_effects.*;
-import server_store_reducers.CommunicationReducer;
-import server_store_reducers.GameActionReducer;
-import server_store_reducers.GameReducer;
-import server_store_reducers.GamesReducer;
 
-import java.sql.Timestamp;
+
 import java.util.HashMap;
 import java.util.Map;
-import java.util.NoSuchElementException;
 import java.util.Observer;
-import java.util.logging.Logger;
 
 /**
  * Created by giorgiopea on 09/03/17.
@@ -77,18 +70,5 @@ public class ServerStore {
             e.printStackTrace();
         }
     }
-    /*private void registerReducers(){
-        this.registerReducer(new CommunicationReducer(),"@COMMUNICATION");
-        this.registerReducer(new GamesReducer(),"@GAMES");
-        this.registerReducer(new GameReducer(),"@GAME");
-        this.registerReducer(new GameActionReducer(), "@GAMEACTION");
-    }
-    private void registerEffects(){
-        this.registerEffect(new GameMakeActionEffect(),"@GAME_MAKE_ACTION");
-        this.registerEffect(new GameStartGameEffect(),"@GAME_START_GAME");
-        this.registerEffect(new GamePutChatMsgEffect(),"@GAME_PUT_CHAT_MSG");
-        this.registerEffect(new GameTurnTimeoutExpiredEffect(),"@GAME_TURNTIMEOUT_EXPIRED");
-        this.registerEffect(new GameStartableGameEffect(),"@GAME_STARTABLE_GAME");
-    }*/
 }
 

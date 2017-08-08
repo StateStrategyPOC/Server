@@ -2,21 +2,19 @@ package server_store_actions;
 
 import server_store.StoreAction;
 
-/**
- * Created by giorgiopea on 13/03/17.
- */
-public class GameAddPlayerAction extends StoreAction {
+public class ServerJoinGameAction extends StoreAction {
 
-    private final int gameId;
+    private final Integer gameId;
     private final String playerName;
 
-    public GameAddPlayerAction(int gameId, String playerName) {
-        super("@GAME_ADD_PLAYER");
+
+    public ServerJoinGameAction(Integer gameId, String playerName) {
+        super("@SERVER_JOIN_GAME", "@SERVER_GROUP");
         this.gameId = gameId;
         this.playerName = playerName;
     }
 
-    public int getGameId() {
+    public Integer getGameId() {
         return gameId;
     }
 

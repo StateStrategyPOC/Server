@@ -13,7 +13,7 @@ public class GameActionAction extends StoreAction {
     private final StoreAction action;
 
     public GameActionAction(StoreAction action, Game game) {
-        super(action.type);
+        super("@SERVER_GAME_GAME_ACTION","@SERVER_GROUP");
         this.action = action;
         this.game = game;
     }

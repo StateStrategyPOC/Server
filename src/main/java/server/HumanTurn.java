@@ -24,7 +24,7 @@ public class HumanTurn {
         List<String> nextActions = new ArrayList<>();
 
         // Actions to be set after a moveToSector action
-        switch (action.type) {
+        switch (action.getActionIdentifier()) {
             case "@GAMEACTION_MOVE":
                 MoveAction move = (MoveAction) action;
                 SectorType sectorType = move.getTargetSector().getSectorType();

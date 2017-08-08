@@ -8,19 +8,15 @@ import server_store.StoreAction;
  * Created by giorgiopea on 04/05/17.
  *
  */
-public class GamePutChatMsg extends StoreAction {
-    private final Game game;
+public class GamePostMsgAction extends StoreAction {
+
     private final PlayerToken playerToken;
     private final String message;
-    public GamePutChatMsg(Game game , String message, PlayerToken playerToken) {
-        super("@GAME_PUT_CHAT_MSG");
-        this.message = message;
-        this.playerToken = playerToken;
-        this.game = game;
-    }
 
-    public Game getGame() {
-        return game;
+    public GamePostMsgAction(String message, PlayerToken playerToken) {
+        super("@SERVER_POST_MSG","@SERVER_GROUP");
+        this.playerToken = playerToken;
+        this.message = message;
     }
 
     public PlayerToken getPlayerToken() {

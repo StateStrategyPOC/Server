@@ -24,7 +24,7 @@ public class AlienTurn {
     public static List<String> nextAction(StoreAction action, Player currentPlayer) {
         List<String> nextActions = new ArrayList<>();
         // Actions to be set after a move action
-        switch (action.type) {
+        switch (action.getActionIdentifier()) {
             case "@GAMEACTION_MOVE":
                 MoveAction moveAction = (MoveAction) action;
                 if (moveAction.getTargetSector().getSectorType().equals(SectorType.DANGEROUS)) {

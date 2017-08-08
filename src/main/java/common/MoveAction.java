@@ -13,7 +13,7 @@ public class MoveAction extends StoreAction {
     private final Sector targetSector;
 
     public MoveAction(Sector target) {
-        super("@GAMEACTION_MOVE");
+        super("@GAMEACTION_MOVE","@COMMON_GROUP");
         this.targetSector = target;
     }
 

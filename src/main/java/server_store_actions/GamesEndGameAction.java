@@ -11,7 +11,7 @@ public class GamesEndGameAction extends StoreAction {
     private final Game game;
 
     public GamesEndGameAction(Game game) {
-        super("@GAMES_END_GAME");
+        super("@SERVER_GAMES_END_GAME","@SERVER_GROUP");
         this.game = game;
     }
 

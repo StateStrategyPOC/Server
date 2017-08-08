@@ -15,7 +15,7 @@ public class UseObjAction extends StoreAction {
     private final ObjectCard objectCard;
 
     public UseObjAction(ObjectCard objectCard) {
-        super("@GAMEACTION_USE_OBJ_CARD");
+        super("@GAMEACTION_USE_OBJ_CARD","@COMMON_GROUP");
         this.objectCard = objectCard;
     }
 

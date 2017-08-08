@@ -14,7 +14,7 @@ public class UseSectorCardAction extends StoreAction {
     private final SectorCard sectorCard;
 
     public UseSectorCardAction(SectorCard sectorCard) {
-        super("@GAMEACTION_USE_SECTOR_CARD");
+        super("@GAMEACTION_USE_SECTOR_CARD","@COMMON_GROUP");
         this.sectorCard = sectorCard;
     }
 

@@ -12,6 +12,6 @@ import server_store.StoreAction;
 class DrawObjectCardAction extends StoreAction {
 
 	public DrawObjectCardAction() {
-        super("@GAMEACTION_DRAW_OBJ_CARD");
+        super("@GAMEACTION_DRAW_OBJ_CARD","@COMMON_GROUP");
 	}
 }
