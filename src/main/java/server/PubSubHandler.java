@@ -13,6 +13,7 @@ import java.net.Socket;
 import java.util.Observable;
 import java.util.Observer;
 import java.util.concurrent.ConcurrentLinkedQueue;
+import java.util.concurrent.LinkedBlockingQueue;
 
 /**
  * Manages a persistent connection with a client in the logic of the publisher/subscriber pattern
@@ -22,7 +23,7 @@ public class PubSubHandler extends Thread {
     // The socket associated to the handler
     private final Socket socket;
     // A queue of messages to send to the subscriber
-    private final ConcurrentLinkedQueue<PSClientNotification> buffer;
+    private final LinkedBlockingQueue<PSClientNotification> buffer;
     private final PlayerToken playerToken;
     // The object output stream used to perform the remote method call on the
     // subscriber
@@ -44,7 +45,7 @@ public class PubSubHandler extends Thread {
     public PubSubHandler(Socket socket, ObjectOutputStream outputStream, PlayerToken playerToken)  {
         this.socket = socket;
         this.playerToken = playerToken;
-        this.buffer = new ConcurrentLinkedQueue<>();
+        this.buffer = new LinkedBlockingQueue<>();
         this.objectOutputStream = outputStream;
         this.runningFlag = true;
     }
@@ -74,7 +75,7 @@ public class PubSubHandler extends Thread {
     public void run() {
         while (this.runningFlag) {
             PSClientNotification remoteMethodCall = buffer.poll();
-            if (remoteMethodCall != null)
+            if (remoteMethodCall != null){
                 try {
                     this.perform(remoteMethodCall);
                 } catch (IOException e) {
@@ -87,6 +88,8 @@ public class PubSubHandler extends Thread {
                     }
                     e.printStackTrace();
                 }
+            }
+
             else {
                 try {
                     // If there are no incoming remote method calls the thread

@@ -16,10 +16,10 @@ public class GameSubscribeSidePolicy implements SidePolicy {
         ServerStore SERVER_STORE = ServerStore.getInstance();
         Game game = Helpers.findGameById(castedAction.getPlayerToken().getGameId(), SERVER_STORE.getState().getGames());
         if (game == null) {
-            SERVER_STORE.propagateAction(new ServerSetResponseAction(new RRClientNotification(false)));
+            SERVER_STORE.propagateAction(new ServerSetResponseAction(new RRClientNotification(false), castedAction.getHandlerId()));
             return;
         }
-        SERVER_STORE.propagateAction(new ServerTransformChannelAction(game, castedAction.getPlayerToken()));
+        SERVER_STORE.propagateAction(new ServerTransformChannelAction(game, castedAction.getPlayerToken(), castedAction.getHandlerId()));
         if (game.getPlayers().size() == 8) {
             SERVER_STORE.propagateAction(new GameStartGameAction(game));
         } else if (game.getPlayers().size() == 2) {

@@ -4,15 +4,19 @@ import common.PlayerToken;
 import server.Game;
 import server_store.StoreAction;
 
+import java.util.UUID;
+
 public class ServerTransformChannelAction extends StoreAction {
 
     private final Game game;
     private final PlayerToken playerToken;
+    private final UUID handlerId;
 
-    public ServerTransformChannelAction(Game game, PlayerToken playerToken) {
+    public ServerTransformChannelAction(Game game, PlayerToken playerToken, UUID handlerId) {
         super("@SERVER_TRANSFORM_CHANNEL", "@SERVER_GROUP");
         this.game = game;
         this.playerToken = playerToken;
+        this.handlerId = handlerId;
     }
 
     public PlayerToken getPlayerToken() {
@@ -21,5 +25,9 @@ public class ServerTransformChannelAction extends StoreAction {
 
     public Game getGame() {
         return game;
+    }
+
+    public UUID getHandlerId() {
+        return handlerId;
     }
 }

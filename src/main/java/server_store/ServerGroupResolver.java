@@ -34,7 +34,5 @@ public class ServerGroupResolver extends Resolver {
                 new PolicyCouple(new BlankPolicy(), null));
         this.policiesMap.put("@SERVER_TRANSFORM_CHANNEL",
                 new PolicyCouple(new BlankPolicy(), null));
-        this.policiesMap.put("@SERVER_TRANSFORM_CHANNEL",
-                new PolicyCouple(new BlankPolicy(), null));
     }
 }

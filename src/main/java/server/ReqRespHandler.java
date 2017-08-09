@@ -13,6 +13,7 @@ import java.io.ObjectOutputStream;
 import java.net.Socket;
 import java.util.Observable;
 import java.util.Observer;
+import java.util.UUID;
 
 /**
  *
@@ -24,8 +25,10 @@ public class ReqRespHandler extends Thread implements Observer {
     private ObjectInputStream objectInputStream;
     private ObjectOutputStream objectOutputStream;
     private final ServerStore SERVER_STORE;
+    private final UUID id;
 
     public ReqRespHandler(Socket socket) {
+        this.id = UUID.randomUUID();
         this.SERVER_STORE = ServerStore.getInstance();
         this.socket = socket;
         try {
@@ -54,6 +57,7 @@ public class ReqRespHandler extends Thread implements Observer {
 
         }
     }
+
 
     private ActionOnTheWire getRequest(ObjectInputStream inputStream) throws IOException, ClassNotFoundException {
         ActionOnTheWire request = (ActionOnTheWire) inputStream.readObject();
@@ -84,52 +88,56 @@ public class ReqRespHandler extends Thread implements Observer {
 
     private void resolveClientRequest(ActionOnTheWire request){
         if (request.getIdentifierMapper().equals(ServerMethodsNameProvider.getGames())){
-            this.SERVER_STORE.propagateAction(new GamesGetGamesAction());
+            this.SERVER_STORE.propagateAction(new GamesGetGamesAction(id));
         }
         else if (request.getIdentifierMapper().equals(ServerMethodsNameProvider.joinGame())){
             Integer gameId = (Integer) request.getParameters().get(0);
             String playerName = (String) request.getParameters().get(1);
-            this.SERVER_STORE.propagateAction(new GameJoinGameAction(gameId,playerName));
+            this.SERVER_STORE.propagateAction(new GameJoinGameAction(gameId,playerName,id));
         }
         else if (request.getIdentifierMapper().equals(ServerMethodsNameProvider.joinNewGame())){
             String gameMapName = (String) request.getParameters().get(0);
             String playerName = (String) request.getParameters().get(1);
             Game game = new Game(gameMapName);
             this.SERVER_STORE.propagateAction(new GamesAddGameAction(game));
-            this.SERVER_STORE.propagateAction(new GameJoinGameAction(game.getGamePublicData().getId(),playerName));
+            this.SERVER_STORE.propagateAction(new GameJoinGameAction(game.getGamePublicData().getId(),playerName,id));
         }
         else if (request.getIdentifierMapper().equals(ServerMethodsNameProvider.makeAction())){
             StoreAction action = (StoreAction) request.getParameters().get(0);
             PlayerToken playerToken = (PlayerToken) request.getParameters().get(1);
-            this.SERVER_STORE.propagateAction(new GameMakeActionAction(playerToken,action));
+            this.SERVER_STORE.propagateAction(new GameMakeActionAction(playerToken,action,id));
         }
         else if (request.getIdentifierMapper().equals(ServerMethodsNameProvider.onDemandGameStart())){
             PlayerToken playerToken = (PlayerToken) request.getParameters().get(0);
-            this.SERVER_STORE.propagateAction(new GameOnDemandStartAction(playerToken));
+            this.SERVER_STORE.propagateAction(new GameOnDemandStartAction(playerToken,id));
         }
         else if (request.getIdentifierMapper().equals(ServerMethodsNameProvider.publishChatMsg())){
             String message = (String) request.getParameters().get(0);
             PlayerToken playerToken = (PlayerToken) request.getParameters().get(1);
-            this.SERVER_STORE.propagateAction(new GamePostMsgAction(message,playerToken));
+            this.SERVER_STORE.propagateAction(new GamePostMsgAction(message,playerToken,id));
         }
         else if (request.getIdentifierMapper().equals(ServerMethodsNameProvider.subscribe())){
             PlayerToken playerToken = (PlayerToken) request.getParameters().get(0);
-            this.SERVER_STORE.propagateAction(new GameSubscribeAction(playerToken));
+            this.SERVER_STORE.propagateAction(new GameSubscribeAction(playerToken,id));
         }
     }
 
     private void transformChannel(StoreAction propagatedAction) {
         ServerTransformChannelAction castedAction = (ServerTransformChannelAction) propagatedAction;
-        this.SERVER_STORE.propagateAction(new GameSetPSHandlersAction(castedAction.getGame(),castedAction.getPlayerToken(),this.socket,this.objectOutputStream));
+        if (castedAction.getHandlerId().equals(this.id)){
+            this.SERVER_STORE.propagateAction(new GameSetPSHandlersAction(castedAction.getGame(),castedAction.getPlayerToken(),this.socket,this.objectOutputStream));
+        }
     }
 
     private void setResponse(StoreAction propagatedAction){
         ServerSetResponseAction castedAction = (ServerSetResponseAction) propagatedAction;
-        try {
-            this.sendRequest(castedAction.getResponse(),this.objectOutputStream);
-            this.closeConnection(this.socket, this.objectOutputStream,this.objectInputStream);
-        } catch (IOException e) {
-            e.printStackTrace();
+        if (castedAction.getHandlerId().equals(this.id)){
+            try {
+                this.sendRequest(castedAction.getResponse(),this.objectOutputStream);
+                this.closeConnection(this.socket, this.objectOutputStream,this.objectInputStream);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
         }
     }
 }

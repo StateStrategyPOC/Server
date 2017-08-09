@@ -1,6 +1,5 @@
 package server_side_policies;
 
-import common.Player;
 import common.RRClientNotification;
 import server.Game;
 import server.Helpers;
@@ -18,10 +17,10 @@ public class GameJoinGameSidePolicy implements SidePolicy {
         ServerStore SERVER_STORE = ServerStore.getInstance();
         Game game = Helpers.findGameById(castedAction.getGameId(),SERVER_STORE.getState().getGames());
         if (game == null){
-            SERVER_STORE.propagateAction(new ServerSetResponseAction(new RRClientNotification(false)));
+            SERVER_STORE.propagateAction(new ServerSetResponseAction(new RRClientNotification(false), castedAction.getHandlerId()));
             return;
         }
-        SERVER_STORE.propagateAction(new ServerSetResponseAction(game.getLastRRclientNotification()));
+        SERVER_STORE.propagateAction(new ServerSetResponseAction(game.getLastRRclientNotification(),castedAction.getHandlerId()));
 
     }
 }

@@ -20,7 +20,7 @@ public class GameOnDemandStartSidePolicy implements SidePolicy {
         Game game = Helpers.findGameById(castedAction.getPlayerToken().getGameId(), state.getGames());
         RRClientNotification rrClientNotification;
         if (game == null) {
-            SERVER_STORE.propagateAction(new ServerSetResponseAction(new RRClientNotification(false)));
+            SERVER_STORE.propagateAction(new ServerSetResponseAction(new RRClientNotification(false), castedAction.getHandlerId()));
             return;
         }
         if (game.getCurrentPlayer().getPlayerToken().equals(castedAction.getPlayerToken())) {
@@ -33,7 +33,7 @@ public class GameOnDemandStartSidePolicy implements SidePolicy {
         }
         PSClientNotification notification = new PSClientNotification();
         notification.setGameNeedToStart(true);
-        SERVER_STORE.propagateAction(new ServerSetResponseAction(rrClientNotification));
+        SERVER_STORE.propagateAction(new ServerSetResponseAction(rrClientNotification, castedAction.getHandlerId()));
         SERVER_STORE.propagateAction(new ServerSetNotificationAction(notification));
     }
 }

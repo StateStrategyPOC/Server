@@ -10,7 +10,6 @@ import server_store.ServerStore;
 import server_store.SidePolicy;
 import server_store.StoreAction;
 import server_store_actions.GamePostMsgAction;
-import server_store_actions.ServerSetNotificationAction;
 import server_store_actions.ServerSetResponseAction;
 
 public class GamePostChatMsgSidePolicy implements SidePolicy {
@@ -22,10 +21,10 @@ public class GamePostChatMsgSidePolicy implements SidePolicy {
         notification.setIncomingMsg(castedAction.getMessage());
         Game game = Helpers.findGameById(castedAction.getPlayerToken().getGameId(),SERVER_STORE.getState().getGames());
         if (game == null){
-            SERVER_STORE.propagateAction(new ServerSetResponseAction(new RRClientNotification(false)));
+            SERVER_STORE.propagateAction(new ServerSetResponseAction(new RRClientNotification(false), castedAction.getHandlerId()));
             return;
         }
-        SERVER_STORE.propagateAction(new ServerSetResponseAction(new RRClientNotification(true)));
+        SERVER_STORE.propagateAction(new ServerSetResponseAction(new RRClientNotification(true), castedAction.getHandlerId()));
         notification.setGameId(castedAction.getPlayerToken().getGameId());
         for (PubSubHandler handler : game.getPubSubHandlers()){
             handler.queueNotification(notification);
