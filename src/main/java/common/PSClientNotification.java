@@ -27,6 +27,7 @@ public class PSClientNotification extends ClientNotification {
 	private boolean turnNeedToStart;
 	private boolean gameCanBeStarted;
 	private boolean turnNeedToEnd;
+	private String gameMapName;
 
 
     /**
@@ -177,5 +178,13 @@ public class PSClientNotification extends ClientNotification {
 
     public void setTurnNeedToEnd(boolean turnNeedToEnd) {
         this.turnNeedToEnd = turnNeedToEnd;
+    }
+
+    public String getGameMapName() {
+        return gameMapName;
+    }
+
+    public void setGameMapName(String gameMapName) {
+        this.gameMapName = gameMapName;
     }
 }

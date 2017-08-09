@@ -3,6 +3,7 @@ package server_side_policies;
 import common.*;
 import server.Game;
 import server.Helpers;
+import server.PubSubHandler;
 import server_store.ServerState;
 import server_store.ServerStore;
 import server_store.SidePolicy;
@@ -33,7 +34,12 @@ public class GameOnDemandStartSidePolicy implements SidePolicy {
         }
         PSClientNotification notification = new PSClientNotification();
         notification.setGameNeedToStart(true);
+        notification.setGameMapName(game.getMapName());
         SERVER_STORE.propagateAction(new ServerSetResponseAction(rrClientNotification, castedAction.getHandlerId()));
-        SERVER_STORE.propagateAction(new ServerSetNotificationAction(notification));
+        for (PubSubHandler handler : game.getPubSubHandlers()){
+            if (!handler.getPlayerToken().equals(game.getCurrentPlayer().getPlayerToken())){
+                handler.queueNotification(notification);
+            }
+        }
     }
 }
