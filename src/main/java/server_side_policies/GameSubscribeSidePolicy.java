@@ -9,7 +9,7 @@ import server_store.SidePolicy;
 import server_store.StoreAction;
 import server_store_actions.*;
 
-public class SubscribeToGameSidePolicy implements SidePolicy {
+public class GameSubscribeSidePolicy implements SidePolicy {
     @Override
     public void apply(ServerState state, StoreAction action) {
         GameSubscribeAction castedAction = (GameSubscribeAction) action;

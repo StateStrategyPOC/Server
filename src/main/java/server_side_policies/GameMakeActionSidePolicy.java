@@ -27,8 +27,6 @@ public class GameMakeActionSidePolicy implements SidePolicy {
             return;
         }
         SERVER_STORE.propagateAction(new ServerSetResponseAction(game.getLastRRclientNotification()));
-        SERVER_STORE.propagateAction(new ServerSetNotificationAction(game.getLastPSclientNotification()));
-
 
         for (PubSubHandler handler : game.getPubSubHandlers()) {
             handler.queueNotification(game.getLastPSclientNotification());

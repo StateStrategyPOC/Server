@@ -9,7 +9,7 @@ import server_store.StoreAction;
 import server_store_actions.GameStartGameAction;
 import server_store_actions.GameStartableGameAction;
 
-public class GameStartableSidePolicy implements SidePolicy {
+public class GameStartableGameSidePolicy implements SidePolicy {
     @Override
     public void apply(ServerState state, StoreAction action) {
         GameStartableGameAction castedAction = (GameStartableGameAction) action;

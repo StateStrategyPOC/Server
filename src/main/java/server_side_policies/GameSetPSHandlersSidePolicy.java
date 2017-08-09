@@ -5,12 +5,12 @@ import server.PubSubHandler;
 import server_store.ServerState;
 import server_store.SidePolicy;
 import server_store.StoreAction;
-import server_store_actions.ServerSetPSHandlersAction;
+import server_store_actions.GameSetPSHandlersAction;
 
-public class ServerSetPSHandlersSidePolicy implements SidePolicy {
+public class GameSetPSHandlersSidePolicy implements SidePolicy {
     @Override
     public void apply(ServerState state, StoreAction action) {
-        ServerSetPSHandlersAction castedAction = (ServerSetPSHandlersAction) action;
+        GameSetPSHandlersAction castedAction = (GameSetPSHandlersAction) action;
         PubSubHandler handler = castedAction.getGame().getPubSubHandlers().get(castedAction.getGame().getPubSubHandlers().size()-1);
         ConnectionListener.getInstance().registerPubSubHandler(handler);
     }

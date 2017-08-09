@@ -1,5 +1,6 @@
 package server;
 
+import common.ActionOnTheWire;
 import common.PlayerToken;
 import common.RRClientNotification;
 import server_store.ServerStore;
@@ -119,7 +120,7 @@ public class ReqRespHandler extends Thread implements Observer {
 
     private void transformChannel(StoreAction propagatedAction) {
         ServerTransformChannelAction castedAction = (ServerTransformChannelAction) propagatedAction;
-        this.SERVER_STORE.propagateAction(new ServerSetPSHandlersAction(castedAction.getGame(),castedAction.getPlayerToken(),this.socket,this.objectOutputStream));
+        this.SERVER_STORE.propagateAction(new GameSetPSHandlersAction(castedAction.getGame(),castedAction.getPlayerToken(),this.socket,this.objectOutputStream));
     }
 
     private void setResponse(StoreAction propagatedAction){

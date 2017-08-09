@@ -8,7 +8,7 @@ public class GameSubscribeAction extends StoreAction {
     private final PlayerToken playerToken;
 
     public GameSubscribeAction(PlayerToken playerToken) {
-        super("@SERVER_SUBSCRIBE","@SERVER_GROUP");
+        super("@SERVER_GAME_SUBSCRIBE","@SERVER_GROUP");
         this.playerToken = playerToken;
     }
 

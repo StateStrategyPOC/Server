@@ -15,6 +15,7 @@ public class ServerStore {
     private final Map<String, Resolver> actionGroupToResolver;
     private final static ServerStore instance = new ServerStore();
     private ObservableServerState observableState;
+    private final StoreLogger STORE_LOGGER;
 
 
     public static ServerStore getInstance(){
@@ -23,6 +24,7 @@ public class ServerStore {
 
     private ServerStore(){
         this.actionGroupToResolver = new HashMap<>();
+        this.STORE_LOGGER = StoreLogger.getInstance();
         this.produceInitialState();
         this.fillResolverMap();
     }
@@ -53,15 +55,15 @@ public class ServerStore {
      * Propagates an
      * @param action
      */
-    public void propagateAction(StoreAction action) {
+    public synchronized void propagateAction(StoreAction action) {
         Resolver resolver = this.actionGroupToResolver.get(action.getActionGroupIdentifier());
         try {
             PolicyCouple policyCouple = resolver.resolve(action);
-            //PRE_LOG
+            this.STORE_LOGGER.logPreStatePropagation(action,this.getState());
             if (policyCouple.getStatePolicy() != null){
                 this.observableState.setServerState(policyCouple.getStatePolicy().apply(this.getState(), action),action);
             }
-            //POST_LOG
+            this.STORE_LOGGER.logPostStatePropagation(this.getState());
             if (policyCouple.getSidePolicy() != null){
                 policyCouple.getSidePolicy().apply(this.getState(),action);
             }

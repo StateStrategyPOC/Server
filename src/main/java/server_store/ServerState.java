@@ -74,4 +74,15 @@ public class ServerState extends State implements Serializable {
         return turnTimeout;
     }
 
+    @Override
+    public String toString() {
+        return "ServerState{" +
+                "games=" + games +
+                ", reqRespHandlers=" + reqRespHandlers +
+                ", pubSubHandlers=" + pubSubHandlers +
+                ", tcpPort=" + tcpPort +
+                ", turnTimeout=" + turnTimeout +
+                ", isServerListening=" + isServerListening +
+                '}';
+    }
 }

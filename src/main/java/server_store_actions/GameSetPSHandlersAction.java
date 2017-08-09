@@ -7,15 +7,15 @@ import server_store.StoreAction;
 import java.io.ObjectOutputStream;
 import java.net.Socket;
 
-public class ServerSetPSHandlersAction extends StoreAction {
+public class GameSetPSHandlersAction extends StoreAction {
 
     private final Game game;
     private final Socket socket;
     private final ObjectOutputStream outputStream;
     private final PlayerToken playerToken;
 
-    public ServerSetPSHandlersAction(Game game, PlayerToken playerToken, Socket socket, ObjectOutputStream outputStream) {
-        super("@SERVER_SET_PS","@SERVER_GROUP");
+    public GameSetPSHandlersAction(Game game, PlayerToken playerToken, Socket socket, ObjectOutputStream outputStream) {
+        super("@SERVER_GAME_SET_PS","@SERVER_GROUP");
         this.game = game;
         this.playerToken = playerToken;
         this.socket = socket;
