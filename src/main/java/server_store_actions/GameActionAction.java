@@ -1,7 +1,7 @@
 package server_store_actions;
 
 import server.Game;
-import server_store.StoreAction;
+import common.StoreAction;
 
 /**
  * Created by giorgiopea on 21/03/17.

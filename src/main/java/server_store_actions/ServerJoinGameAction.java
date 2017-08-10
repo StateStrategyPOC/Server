@@ -1,6 +1,6 @@
 package server_store_actions;
 
-import server_store.StoreAction;
+import common.StoreAction;
 
 public class ServerJoinGameAction extends StoreAction {
 

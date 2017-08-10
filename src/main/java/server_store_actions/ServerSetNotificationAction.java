@@ -1,7 +1,7 @@
 package server_store_actions;
 
 import common.PSClientNotification;
-import server_store.StoreAction;
+import common.StoreAction;
 
 public class ServerSetNotificationAction extends StoreAction {
 

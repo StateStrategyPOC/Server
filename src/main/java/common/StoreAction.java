@@ -1,4 +1,4 @@
-package server_store;
+package common;
 
 import java.io.Serializable;
 

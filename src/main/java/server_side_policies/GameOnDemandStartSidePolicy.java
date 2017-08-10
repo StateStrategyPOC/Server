@@ -7,11 +7,9 @@ import server.PubSubHandler;
 import server_store.ServerState;
 import server_store.ServerStore;
 import server_store.SidePolicy;
-import server_store.StoreAction;
+import common.StoreAction;
 import server_store_actions.GameStartGameAction;
 import server_store_actions.GameOnDemandStartAction;
-import server_store_actions.ServerSetNotificationAction;
-import server_store_actions.ServerSetResponseAction;
 
 public class GameOnDemandStartSidePolicy implements SidePolicy {
     @Override

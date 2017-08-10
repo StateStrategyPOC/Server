@@ -1,5 +1,7 @@
 package server_store;
 
+import common.StoreAction;
+
 import java.io.File;
 import java.io.IOException;
 import java.text.DateFormat;

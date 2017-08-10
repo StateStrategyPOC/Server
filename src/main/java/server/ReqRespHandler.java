@@ -5,7 +5,7 @@ import common.GamePublicData;
 import common.PlayerToken;
 import common.RRClientNotification;
 import server_store.ServerStore;
-import server_store.StoreAction;
+import common.StoreAction;
 import server_store_actions.*;
 
 import java.io.IOException;
@@ -13,8 +13,6 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.net.Socket;
 import java.util.ArrayList;
-import java.util.Observable;
-import java.util.Observer;
 import java.util.UUID;
 
 /**
@@ -61,7 +59,8 @@ public class ReqRespHandler extends Thread {
 
 
     private ActionOnTheWire getRequest(ObjectInputStream inputStream) throws IOException, ClassNotFoundException {
-        return (ActionOnTheWire) inputStream.readObject();
+        ActionOnTheWire action = (ActionOnTheWire) inputStream.readObject();
+        return action;
     }
 
     private void sendRequest(RRClientNotification response, ObjectOutputStream outputStream)  {

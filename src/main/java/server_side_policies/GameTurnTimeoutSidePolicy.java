@@ -5,7 +5,7 @@ import server.Game;
 import server.PubSubHandler;
 import server_store.ServerState;
 import server_store.SidePolicy;
-import server_store.StoreAction;
+import common.StoreAction;
 import server_store_actions.GameTurnTimeoutExpiredAction;
 
 public class GameTurnTimeoutSidePolicy implements SidePolicy {

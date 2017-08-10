@@ -1,7 +1,7 @@
 package effects;
 
 import common.*;
-import server_store.StoreAction;
+import common.StoreAction;
 
 import java.util.HashMap;
 import java.util.Map;

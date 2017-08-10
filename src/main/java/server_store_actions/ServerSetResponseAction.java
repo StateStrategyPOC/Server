@@ -1,7 +1,7 @@
 package server_store_actions;
 
 import common.RRClientNotification;
-import server_store.StoreAction;
+import common.StoreAction;
 
 import java.util.UUID;
 

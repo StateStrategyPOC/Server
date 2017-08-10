@@ -1,7 +1,7 @@
 package server_store_actions;
 
 import server.ReqRespHandler;
-import server_store.StoreAction;
+import common.StoreAction;
 
 public class ServerAddReqRespHandlerAction extends StoreAction {
 

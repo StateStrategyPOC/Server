@@ -1,7 +1,5 @@
 package common;
 
-import server_store.StoreAction;
-
 /**
  * Represents the action of using an object card in the game
  * 

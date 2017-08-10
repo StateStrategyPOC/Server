@@ -1,16 +1,14 @@
 package server_side_policies;
 
 import common.PSClientNotification;
-import common.RRClientNotification;
 import server.Game;
 import server.Helpers;
 import server.PubSubHandler;
 import server_store.ServerState;
 import server_store.ServerStore;
 import server_store.SidePolicy;
-import server_store.StoreAction;
+import common.StoreAction;
 import server_store_actions.GamePostMsgAction;
-import server_store_actions.ServerSetResponseAction;
 
 public class GamePostChatMsgSidePolicy implements SidePolicy {
     @Override

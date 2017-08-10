@@ -3,7 +3,7 @@ package server_state_policies;
 import server.PubSubHandler;
 import server_store.ServerState;
 import server_store.StatePolicy;
-import server_store.StoreAction;
+import common.StoreAction;
 import server_store_actions.GamesEndGameAction;
 
 public class GamesEndGameStatePolicy implements StatePolicy {

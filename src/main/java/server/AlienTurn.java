@@ -1,7 +1,7 @@
 package server;
 
 import common.*;
-import server_store.StoreAction;
+import common.StoreAction;
 
 import java.util.ArrayList;
 import java.util.List;

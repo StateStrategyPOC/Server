@@ -2,15 +2,13 @@ package server_side_policies;
 
 import common.EndTurnAction;
 import common.PSClientNotification;
-import common.RRClientNotification;
 import server.*;
 import server_store.ServerState;
 import server_store.ServerStore;
 import server_store.SidePolicy;
-import server_store.StoreAction;
+import common.StoreAction;
 import server_store_actions.GameMakeActionAction;
 import server_store_actions.GamesEndGameAction;
-import server_store_actions.ServerSetResponseAction;
 
 public class GameMakeActionSidePolicy implements SidePolicy {
     @Override

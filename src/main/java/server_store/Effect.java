@@ -1,5 +1,7 @@
 package server_store;
 
+import common.StoreAction;
+
 /**
  * Created by giorgiopea on 08/03/17.
  *

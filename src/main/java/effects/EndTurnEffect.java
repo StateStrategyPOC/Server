@@ -3,7 +3,7 @@ package effects;
 import common.EndTurnAction;
 import common.Player;
 import server.Game;
-import server_store.StoreAction;
+import common.StoreAction;
 
 /**
  * Represents the effect associated to the action of ending a turn.

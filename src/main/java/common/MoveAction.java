@@ -1,7 +1,5 @@
 package common;
 
-import server_store.StoreAction;
-
 /**
  * Represents a moveToSector action in the game
  * 

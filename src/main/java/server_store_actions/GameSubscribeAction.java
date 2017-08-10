@@ -1,7 +1,7 @@
 package server_store_actions;
 
 import common.PlayerToken;
-import server_store.StoreAction;
+import common.StoreAction;
 
 import java.util.UUID;
 

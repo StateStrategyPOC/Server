@@ -1,7 +1,5 @@
 package common;
 
-import server_store.StoreAction;
-
 /**
  * Represents the action of using a sector card in the game
  * 

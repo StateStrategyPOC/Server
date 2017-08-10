@@ -5,7 +5,7 @@ import common.ObjectCard;
 import common.Player;
 import decks.ObjectDeck;
 import server.Game;
-import server_store.StoreAction;
+import common.StoreAction;
 
 /**
  * Represents the effect of discarding an object card

@@ -4,7 +4,7 @@ import common.*;
 import decks.ObjectDeck;
 import decks.RescueDeck;
 import decks.SectorDeck;
-import server_store.StoreAction;
+import common.StoreAction;
 
 import java.util.ArrayList;
 import java.util.List;

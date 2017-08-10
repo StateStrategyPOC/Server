@@ -12,7 +12,7 @@ import server.Game;
 import server.HumanTurn;
 import server_store.ServerState;
 import server_store.StatePolicy;
-import server_store.StoreAction;
+import common.StoreAction;
 import server_store_actions.GameStartGameAction;
 
 import java.util.NoSuchElementException;

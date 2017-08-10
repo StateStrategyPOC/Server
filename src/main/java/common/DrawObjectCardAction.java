@@ -1,7 +1,5 @@
 package common;
 
-import server_store.StoreAction;
-
 /**
  * Represents the action of drawing an object card from the object card deck
  * 

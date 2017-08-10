@@ -7,10 +7,8 @@ import server.Game;
 import server.Helpers;
 import server.HumanTurn;
 import server_store.ServerState;
-import server_store.ServerStore;
 import server_store.StatePolicy;
-import server_store.StoreAction;
-import server_store_actions.GameActionAction;
+import common.StoreAction;
 import server_store_actions.GameMakeActionAction;
 
 import java.lang.reflect.InvocationTargetException;
@@ -32,7 +30,7 @@ public class GameMakeActionStatePolicy implements StatePolicy {
             game.setLastRRclientNotification(new RRClientNotification(false));
             return state;
         }
-        if (game.getNextActions().contains(gameAction.getActionIdentifier())){
+        if (!game.getNextActions().contains(gameAction.getActionIdentifier())){
             game.setLastRRclientNotification(new RRClientNotification(false));
             return state;
         }

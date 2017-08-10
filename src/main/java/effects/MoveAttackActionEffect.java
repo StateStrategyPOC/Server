@@ -2,7 +2,7 @@ package effects;
 
 import common.*;
 import server.Game;
-import server_store.StoreAction;
+import common.StoreAction;
 
 import java.util.ArrayList;
 import java.util.Iterator;

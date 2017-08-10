@@ -8,7 +8,7 @@ import server.Game;
 import server.Helpers;
 import server_store.ServerState;
 import server_store.StatePolicy;
-import server_store.StoreAction;
+import common.StoreAction;
 import server_store_actions.GameJoinGameAction;
 
 public class GameJoinGameStatePolicy implements StatePolicy {
