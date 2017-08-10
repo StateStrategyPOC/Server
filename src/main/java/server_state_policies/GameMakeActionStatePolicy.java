@@ -27,7 +27,9 @@ public class GameMakeActionStatePolicy implements StatePolicy {
             return state;
         }
         if (!game.getCurrentPlayer().getPlayerToken().equals(castedAction.getPlayerToken())){
-            game.setLastRRclientNotification(new RRClientNotification(false));
+            RRClientNotification notification = new RRClientNotification(false);
+            notification.setMessage("You cannot perform this action");
+            game.setLastRRclientNotification(notification);
             return state;
         }
         if (!game.getNextActions().contains(gameAction.getActionIdentifier())){
@@ -46,7 +48,9 @@ public class GameMakeActionStatePolicy implements StatePolicy {
             e.printStackTrace();
         }
         if (!gameActionResult) {
-            game.setLastRRclientNotification(new RRClientNotification(false));
+            RRClientNotification notification = new RRClientNotification(false);
+            notification.setMessage("You cannot perform this action");
+            game.setLastRRclientNotification(notification);
             return state;
         }
 

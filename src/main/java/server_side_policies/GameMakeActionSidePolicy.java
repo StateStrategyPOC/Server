@@ -25,6 +25,9 @@ public class GameMakeActionSidePolicy implements SidePolicy {
             if (castedAction.getAction().getClass().equals(EndTurnAction.class) && !game.getCurrentPlayer().getPlayerToken().equals(handler.getPlayerToken())) {
                 notification.setTurnNeedToStart(true);
             }
+            else {
+                notification.setTurnNeedToStart(false);
+            }
             handler.queueNotification(notification);
         }
         if (!game.isDidHumansWin() && !game.isDidAlienWin()) {
