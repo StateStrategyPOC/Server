@@ -21,13 +21,11 @@ public class GameMakeActionSidePolicy implements SidePolicy {
             return;
         }
         for (PubSubHandler handler : game.getPubSubHandlers()) {
-            handler.queueNotification(game.getLastPSclientNotification());
-            if (castedAction.getAction().getClass().equals(EndTurnAction.class) && game.getCurrentPlayer().getPlayerToken().equals(handler.getPlayerToken())) {
-                PSClientNotification notification = new PSClientNotification();
+            PSClientNotification notification = game.getLastPSclientNotification();
+            if (castedAction.getAction().getClass().equals(EndTurnAction.class) && !game.getCurrentPlayer().getPlayerToken().equals(handler.getPlayerToken())) {
                 notification.setTurnNeedToStart(true);
-                handler.queueNotification(notification);
             }
-
+            handler.queueNotification(notification);
         }
         if (!game.isDidHumansWin() && !game.isDidAlienWin()) {
             game.getCurrentTimer().schedule(new TurnTimeout(game), state.getTurnTimeout());

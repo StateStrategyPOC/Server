@@ -26,6 +26,7 @@ public class EndTurnEffect extends ActionEffect {
         game.getLastPSclientNotification().setMessage("\n[GLOBAL MESSAGE]: "
                 + game.getCurrentPlayer().getName()
                 + " has ended its turn.\n[GLOBAL MESSAGE]: ");
+        game.getLastPSclientNotification().setTurnNeedToStart(true);
         game.setPreviousPlayer(game.getCurrentPlayer());
         shiftCurrentPlayer(game);
         game.getLastPSclientNotification().setMessage(game.getLastPSclientNotification().getMessage() + game.getCurrentPlayer().getName() + " now is your turn");
