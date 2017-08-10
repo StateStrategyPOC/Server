@@ -20,11 +20,8 @@ public class GameMakeActionSidePolicy implements SidePolicy {
         Game game = Helpers.findGameById(castedAction.getPlayerToken().getGameId(),SERVER_STORE.getState().getGames());
 
         if (game == null){
-            SERVER_STORE.propagateAction(new ServerSetResponseAction(new RRClientNotification(false), castedAction.getHandlerId()));
             return;
         }
-        SERVER_STORE.propagateAction(new ServerSetResponseAction(game.getLastRRclientNotification(), castedAction.getHandlerId()));
-
         for (PubSubHandler handler : game.getPubSubHandlers()) {
             handler.queueNotification(game.getLastPSclientNotification());
 

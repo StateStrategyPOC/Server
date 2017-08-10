@@ -99,7 +99,6 @@ public class ReqRespHandler extends Thread implements Observer {
 
     private void resolveClientRequest(ActionOnTheWire request){
         if (request.getIdentifierMapper().equals(ServerMethodsNameProvider.getGames())){
-            this.SERVER_STORE.propagateAction(new GamesGetGamesAction(handlerId));
             ArrayList<GamePublicData> gamesList = new ArrayList<>();
             for (Game game : this.SERVER_STORE.getState().getGames()) {
                 gamesList.add(game.getGamePublicData());
@@ -170,7 +169,6 @@ public class ReqRespHandler extends Thread implements Observer {
         }
         else if (request.getIdentifierMapper().equals(ServerMethodsNameProvider.subscribe())){
             PlayerToken playerToken = (PlayerToken) request.getParameters().get(0);
-            this.SERVER_STORE.propagateAction(new GameSubscribeAction(playerToken,handlerId));
             Game game = Helpers.findGameById(playerToken.getGameId(),this.SERVER_STORE.getState().getGames());
             if (game == null){
                 this.sendRequest(new RRClientNotification(false),this.objectOutputStream);

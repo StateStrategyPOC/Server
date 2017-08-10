@@ -7,7 +7,7 @@ public class ServerGroupResolver extends Resolver {
     @Override
     protected void fillPoliciesMap() {
         this.policiesMap.put("@SERVER_GAME_JOIN_GAME",
-                new PolicyCouple(new GameJoinGameStatePolicy(), new GameJoinGameSidePolicy()));
+                new PolicyCouple(new GameJoinGameStatePolicy(),null));
         this.policiesMap.put("@SERVER_GAME_MAKE_ACTION",
                 new PolicyCouple(new GameMakeActionStatePolicy(), new GameMakeActionSidePolicy()));
         this.policiesMap.put("@SERVER_GAME_ON_DEMAND_START",
@@ -26,10 +26,6 @@ public class ServerGroupResolver extends Resolver {
                 new PolicyCouple(new GameTurnTimeoutStatePolicy(), new GameTurnTimeoutSidePolicy()));
         this.policiesMap.put("@SERVER_GAME_SET_PS",
                 new PolicyCouple(new GameSetPSHandlersStatePolicy(), new GameSetPSHandlersSidePolicy()));
-        this.policiesMap.put("@SERVER_GAMES_GET_GAMES",
-                new PolicyCouple(null, new GamesGetGamesSidePolicy()));
-        this.policiesMap.put("@SERVER_GAME_SUBSCRIBE",
-                new PolicyCouple(null, new GameSubscribeSidePolicy()));
         this.policiesMap.put("@SERVER_ADD_REQRESP_HANDLER",new PolicyCouple(new ServerAddReqRespStatePolicy(),null));
     }
 }

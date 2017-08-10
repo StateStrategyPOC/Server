@@ -21,7 +21,6 @@ public class GameOnDemandStartSidePolicy implements SidePolicy {
         Game game = Helpers.findGameById(castedAction.getPlayerToken().getGameId(), state.getGames());
         RRClientNotification rrClientNotification;
         if (game == null) {
-            SERVER_STORE.propagateAction(new ServerSetResponseAction(new RRClientNotification(false), castedAction.getHandlerId()));
             return;
         }
         if (game.getCurrentPlayer().getPlayerToken().equals(castedAction.getPlayerToken())) {
@@ -36,7 +35,6 @@ public class GameOnDemandStartSidePolicy implements SidePolicy {
         notification.setGameNeedToStart(true);
         notification.setGameMapName(game.getMapName());
         game.setLastRRclientNotification(rrClientNotification);
-        //SERVER_STORE.propagateAction(new ServerSetResponseAction(rrClientNotification, castedAction.getHandlerId()));
         for (PubSubHandler handler : game.getPubSubHandlers()){
             if (!handler.getPlayerToken().equals(game.getCurrentPlayer().getPlayerToken())){
                 handler.queueNotification(notification);
