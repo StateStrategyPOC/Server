@@ -1,5 +1,6 @@
 package server_state_policies;
 
+import common.RRClientNotification;
 import server.Game;
 import server.Helpers;
 import server_store.ServerState;
@@ -15,9 +16,7 @@ public class GamePostChatMsgStatePolicy implements StatePolicy {
         Game game = Helpers.findGameById(castedAction.getPlayerToken().getGameId(),state.getGames());
         if (game != null){
             game.setLastChatMsg(castedAction.getMessage());
-        }
-        else {
-
+            game.setLastRRclientNotification(new RRClientNotification(true));
         }
         return state;
     }

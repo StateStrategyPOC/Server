@@ -30,9 +30,6 @@ public class ServerGroupResolver extends Resolver {
                 new PolicyCouple(null, new GamesGetGamesSidePolicy()));
         this.policiesMap.put("@SERVER_GAME_SUBSCRIBE",
                 new PolicyCouple(null, new GameSubscribeSidePolicy()));
-        this.policiesMap.put("@SERVER_SET_RESPONSE",
-                new PolicyCouple(new BlankPolicy(), null));
-        this.policiesMap.put("@SERVER_TRANSFORM_CHANNEL",
-                new PolicyCouple(new BlankPolicy(), null));
+        this.policiesMap.put("@SERVER_ADD_REQRESP_HANDLER",new PolicyCouple(new ServerAddReqRespStatePolicy(),null));
     }
 }

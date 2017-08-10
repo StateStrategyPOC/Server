@@ -3,6 +3,7 @@ package server_side_policies;
 import common.RRClientNotification;
 import server.Game;
 import server.Helpers;
+import server.ReqRespHandler;
 import server_store.ServerState;
 import server_store.ServerStore;
 import server_store.SidePolicy;
@@ -16,11 +17,11 @@ public class GameJoinGameSidePolicy implements SidePolicy {
         GameJoinGameAction castedAction = (GameJoinGameAction) action;
         ServerStore SERVER_STORE = ServerStore.getInstance();
         Game game = Helpers.findGameById(castedAction.getGameId(),SERVER_STORE.getState().getGames());
-        if (game == null){
+        ReqRespHandler handler = Helpers.findReqRespHandlerById(castedAction.getHandlerId(),SERVER_STORE.getState().getReqRespHandlers());
+        if (game == null || handler == null){
             SERVER_STORE.propagateAction(new ServerSetResponseAction(new RRClientNotification(false), castedAction.getHandlerId()));
             return;
         }
-        SERVER_STORE.propagateAction(new ServerSetResponseAction(game.getLastRRclientNotification(),castedAction.getHandlerId()));
-
+        //SERVER_STORE.propagateAction(new ServerSetResponseAction(game.getLastRRclientNotification(),castedAction.getHandlerId()));
     }
 }

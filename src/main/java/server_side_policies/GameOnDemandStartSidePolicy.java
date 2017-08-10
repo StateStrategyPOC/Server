@@ -35,7 +35,8 @@ public class GameOnDemandStartSidePolicy implements SidePolicy {
         PSClientNotification notification = new PSClientNotification();
         notification.setGameNeedToStart(true);
         notification.setGameMapName(game.getMapName());
-        SERVER_STORE.propagateAction(new ServerSetResponseAction(rrClientNotification, castedAction.getHandlerId()));
+        game.setLastRRclientNotification(rrClientNotification);
+        //SERVER_STORE.propagateAction(new ServerSetResponseAction(rrClientNotification, castedAction.getHandlerId()));
         for (PubSubHandler handler : game.getPubSubHandlers()){
             if (!handler.getPlayerToken().equals(game.getCurrentPlayer().getPlayerToken())){
                 handler.queueNotification(notification);

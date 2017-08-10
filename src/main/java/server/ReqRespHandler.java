@@ -1,6 +1,7 @@
 package server;
 
 import common.ActionOnTheWire;
+import common.GamePublicData;
 import common.PlayerToken;
 import common.RRClientNotification;
 import server_store.ServerStore;
@@ -11,6 +12,7 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.net.Socket;
+import java.util.ArrayList;
 import java.util.Observable;
 import java.util.Observer;
 import java.util.UUID;
@@ -25,10 +27,10 @@ public class ReqRespHandler extends Thread implements Observer {
     private ObjectInputStream objectInputStream;
     private ObjectOutputStream objectOutputStream;
     private final ServerStore SERVER_STORE;
-    private final UUID id;
+    private final UUID handlerId;
 
     public ReqRespHandler(Socket socket) {
-        this.id = UUID.randomUUID();
+        this.handlerId = UUID.randomUUID();
         this.SERVER_STORE = ServerStore.getInstance();
         this.socket = socket;
         try {
@@ -64,14 +66,23 @@ public class ReqRespHandler extends Thread implements Observer {
         return request;
     }
 
-    private void sendRequest(RRClientNotification response, ObjectOutputStream outputStream) throws IOException {
-        outputStream.writeObject(response);
-        outputStream.flush();
+    private void sendRequest(RRClientNotification response, ObjectOutputStream outputStream)  {
+        try {
+            outputStream.writeObject(response);
+            outputStream.flush();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
-    private void closeConnection(Socket socket, ObjectOutputStream outputStream, ObjectInputStream inputStream) throws IOException {
-        outputStream.close();
-        inputStream.close();
-        socket.close();
+    private void closeConnection(Socket socket, ObjectOutputStream outputStream, ObjectInputStream inputStream){
+        try {
+            outputStream.close();
+            inputStream.close();
+            socket.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
     }
     @Override
     public void update(Observable o, Object arg) {
@@ -88,56 +99,108 @@ public class ReqRespHandler extends Thread implements Observer {
 
     private void resolveClientRequest(ActionOnTheWire request){
         if (request.getIdentifierMapper().equals(ServerMethodsNameProvider.getGames())){
-            this.SERVER_STORE.propagateAction(new GamesGetGamesAction(id));
+            this.SERVER_STORE.propagateAction(new GamesGetGamesAction(handlerId));
+            ArrayList<GamePublicData> gamesList = new ArrayList<>();
+            for (Game game : this.SERVER_STORE.getState().getGames()) {
+                gamesList.add(game.getGamePublicData());
+            }
+            this.sendRequest(new RRClientNotification(true,null,null,gamesList,null,null),this.objectOutputStream);
+            this.closeConnection(this.socket,this.objectOutputStream,this.objectInputStream);
         }
         else if (request.getIdentifierMapper().equals(ServerMethodsNameProvider.joinGame())){
             Integer gameId = (Integer) request.getParameters().get(0);
             String playerName = (String) request.getParameters().get(1);
-            this.SERVER_STORE.propagateAction(new GameJoinGameAction(gameId,playerName,id));
+            this.SERVER_STORE.propagateAction(new GameJoinGameAction(gameId,playerName,handlerId));
+            Game game = Helpers.findGameById(gameId,this.SERVER_STORE.getState().getGames());
+            if (game == null){
+                this.sendRequest(new RRClientNotification(false),this.objectOutputStream);
+                return;
+            }
+            this.sendRequest(game.getLastRRclientNotification(),this.objectOutputStream);
+            this.closeConnection(this.socket,this.objectOutputStream,this.objectInputStream);
+
         }
         else if (request.getIdentifierMapper().equals(ServerMethodsNameProvider.joinNewGame())){
             String gameMapName = (String) request.getParameters().get(0);
             String playerName = (String) request.getParameters().get(1);
             Game game = new Game(gameMapName);
             this.SERVER_STORE.propagateAction(new GamesAddGameAction(game));
-            this.SERVER_STORE.propagateAction(new GameJoinGameAction(game.getGamePublicData().getId(),playerName,id));
+            this.SERVER_STORE.propagateAction(new GameJoinGameAction(game.getGamePublicData().getId(),playerName,handlerId));
+            this.sendRequest(game.getLastRRclientNotification(),this.objectOutputStream);
+            this.closeConnection(this.socket,this.objectOutputStream,this.objectInputStream);
+
         }
         else if (request.getIdentifierMapper().equals(ServerMethodsNameProvider.makeAction())){
             StoreAction action = (StoreAction) request.getParameters().get(0);
             PlayerToken playerToken = (PlayerToken) request.getParameters().get(1);
-            this.SERVER_STORE.propagateAction(new GameMakeActionAction(playerToken,action,id));
+            this.SERVER_STORE.propagateAction(new GameMakeActionAction(playerToken,action,handlerId));
+            Game game = Helpers.findGameById(playerToken.getGameId(),this.SERVER_STORE.getState().getGames());
+            if (game == null){
+                this.sendRequest(new RRClientNotification(false),this.objectOutputStream);
+                this.closeConnection(this.socket,this.objectOutputStream,this.objectInputStream);
+                return;
+            }
+            this.sendRequest(game.getLastRRclientNotification(),this.objectOutputStream);
+            this.closeConnection(this.socket,this.objectOutputStream,this.objectInputStream);
         }
         else if (request.getIdentifierMapper().equals(ServerMethodsNameProvider.onDemandGameStart())){
             PlayerToken playerToken = (PlayerToken) request.getParameters().get(0);
-            this.SERVER_STORE.propagateAction(new GameOnDemandStartAction(playerToken,id));
+            this.SERVER_STORE.propagateAction(new GameOnDemandStartAction(playerToken,handlerId));
+            Game game = Helpers.findGameById(playerToken.getGameId(),this.SERVER_STORE.getState().getGames());
+            if (game == null){
+                this.sendRequest(new RRClientNotification(false),this.objectOutputStream);
+                this.closeConnection(this.socket,this.objectOutputStream,this.objectInputStream);
+                return;
+            }
+            this.sendRequest(game.getLastRRclientNotification(),this.objectOutputStream);
+            this.closeConnection(this.socket,this.objectOutputStream,this.objectInputStream);
         }
         else if (request.getIdentifierMapper().equals(ServerMethodsNameProvider.publishChatMsg())){
             String message = (String) request.getParameters().get(0);
             PlayerToken playerToken = (PlayerToken) request.getParameters().get(1);
-            this.SERVER_STORE.propagateAction(new GamePostMsgAction(message,playerToken,id));
+            this.SERVER_STORE.propagateAction(new GamePostMsgAction(message,playerToken,handlerId));
+            Game game = Helpers.findGameById(playerToken.getGameId(),this.SERVER_STORE.getState().getGames());
+            if (game == null){
+                this.sendRequest(new RRClientNotification(false),this.objectOutputStream);
+                this.closeConnection(this.socket,this.objectOutputStream,this.objectInputStream);
+                return;
+            }
+            this.sendRequest(game.getLastRRclientNotification(),this.objectOutputStream);
+            this.closeConnection(this.socket,this.objectOutputStream,this.objectInputStream);
         }
         else if (request.getIdentifierMapper().equals(ServerMethodsNameProvider.subscribe())){
             PlayerToken playerToken = (PlayerToken) request.getParameters().get(0);
-            this.SERVER_STORE.propagateAction(new GameSubscribeAction(playerToken,id));
+            this.SERVER_STORE.propagateAction(new GameSubscribeAction(playerToken,handlerId));
+            Game game = Helpers.findGameById(playerToken.getGameId(),this.SERVER_STORE.getState().getGames());
+            if (game == null){
+                this.sendRequest(new RRClientNotification(false),this.objectOutputStream);
+                return;
+            }
+            this.sendRequest(game.getLastRRclientNotification(),this.objectOutputStream);
+            if (game.getPlayers().size() == 8) {
+                SERVER_STORE.propagateAction(new GameStartGameAction(game));
+            } else if (game.getPlayers().size() == 2) {
+                SERVER_STORE.propagateAction(new GameStartableGameAction(game, true));
+            }
         }
     }
 
     private void transformChannel(StoreAction propagatedAction) {
         ServerTransformChannelAction castedAction = (ServerTransformChannelAction) propagatedAction;
-        if (castedAction.getHandlerId().equals(this.id)){
+        if (castedAction.getHandlerId().equals(this.handlerId)){
             this.SERVER_STORE.propagateAction(new GameSetPSHandlersAction(castedAction.getGame(),castedAction.getPlayerToken(),this.socket,this.objectOutputStream));
         }
     }
 
     private void setResponse(StoreAction propagatedAction){
         ServerSetResponseAction castedAction = (ServerSetResponseAction) propagatedAction;
-        if (castedAction.getHandlerId().equals(this.id)){
-            try {
-                this.sendRequest(castedAction.getResponse(),this.objectOutputStream);
-                this.closeConnection(this.socket, this.objectOutputStream,this.objectInputStream);
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
+        if (castedAction.getHandlerId().equals(this.handlerId)){
+            this.sendRequest(castedAction.getResponse(),this.objectOutputStream);
+            this.closeConnection(this.socket, this.objectOutputStream,this.objectInputStream);
         }
+    }
+
+    public UUID getHandlerId() {
+        return handlerId;
     }
 }

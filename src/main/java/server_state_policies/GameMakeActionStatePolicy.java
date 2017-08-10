@@ -43,6 +43,7 @@ public class GameMakeActionStatePolicy implements StatePolicy {
             Method executeMethod = GameActionMapper.getInstance().getEffect(gameAction.getClass()).getMethod("executeEffect", Game.class, StoreAction.class);
             gameActionResult = (boolean) executeMethod.invoke(null,game, castedAction.getAction());
             game.setLastActionResult(gameActionResult);
+            game.getLastRRclientNotification().setActionResult(gameActionResult);
         } catch (NoSuchMethodException | IllegalAccessException | InvocationTargetException e) {
             e.printStackTrace();
         }
