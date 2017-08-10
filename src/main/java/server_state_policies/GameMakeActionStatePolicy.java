@@ -22,7 +22,7 @@ public class GameMakeActionStatePolicy implements StatePolicy {
     @Override
     public ServerState apply(ServerState state, StoreAction action) {
         GameMakeActionAction castedAction = (GameMakeActionAction) action;
-        StoreAction gameAction = castedAction.getAction();
+        MoveAction gameAction = new MoveAction(((MoveAction) castedAction.getAction()).getTargetSector());
         Game game = Helpers.findGameById(castedAction.getPlayerToken().getGameId(), state.getGames());
         boolean gameActionResult = false;
         if (game == null){
@@ -36,6 +36,8 @@ public class GameMakeActionStatePolicy implements StatePolicy {
             game.setLastRRclientNotification(new RRClientNotification(false));
             return state;
         }
+        game.setLastRRclientNotification(new RRClientNotification());
+        game.setLastPSclientNotification(new PSClientNotification());
         // Executes the action's associated logic and get the result
         try {
             Method executeMethod = GameActionMapper.getInstance().getEffect(gameAction.getActionIdentifier()).getMethod("executeEffect", Game.class, StoreAction.class);
@@ -68,7 +70,6 @@ public class GameMakeActionStatePolicy implements StatePolicy {
         game.setDidAlienWin(checkWinConditions(PlayerType.ALIEN, game));
         game.getCurrentTimer().cancel();
         game.setCurrentTimer(new Timer());
-        game.getLastRRclientNotification().setActionResult(true);
         if (game.isDidHumansWin()) {
             game.getLastPSclientNotification()
                     .setMessage(game.getLastPSclientNotification().getMessage()

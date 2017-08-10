@@ -6,8 +6,8 @@ import java.io.Serializable;
  * Created by giorgiopea on 14/03/17.
  */
 public abstract class StoreAction implements Serializable {
-    protected final String actionIdentifier;
-    protected final String actionGroupIdentifier;
+    protected String actionIdentifier;
+    protected String actionGroupIdentifier;
 
     public StoreAction(String actionIdentifier, String actionGroupIdentifier) {
         this.actionIdentifier = actionIdentifier;
