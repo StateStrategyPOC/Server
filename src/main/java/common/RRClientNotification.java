@@ -78,7 +78,15 @@ public class RRClientNotification extends ClientNotification {
         this.gameMapName = null;
         this.actionResult = true;
     }
-
+	public RRClientNotification(String gameMapName){
+		super("");
+		this.actionResult = true;
+		this.gameMapName = gameMapName;
+		this.drawedCards = new ArrayList<>();
+		this.lightedSectors = new ArrayList<>();
+		this.playerToken = null;
+		this.availableGames = null;
+	}
 	public PlayerToken getPlayerToken() {
 		return playerToken;
 	}

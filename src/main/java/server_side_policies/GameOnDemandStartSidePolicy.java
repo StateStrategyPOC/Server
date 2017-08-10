@@ -26,7 +26,7 @@ public class GameOnDemandStartSidePolicy implements SidePolicy {
         }
         if (game.getCurrentPlayer().getPlayerToken().equals(castedAction.getPlayerToken())) {
             SERVER_STORE.propagateAction(new GameStartGameAction(game));
-            rrClientNotification = new RRClientNotification(true);
+            rrClientNotification = new RRClientNotification(game.getMapName());
 
         } else {
             rrClientNotification = new RRClientNotification(false);
