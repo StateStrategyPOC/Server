@@ -21,7 +21,7 @@ import java.util.UUID;
  *
  * Manages a connection with the client in a request response fashion.
  */
-public class ReqRespHandler extends Thread implements Observer {
+public class ReqRespHandler extends Thread {
 
     private final Socket socket;
     private ObjectInputStream objectInputStream;
@@ -41,7 +41,6 @@ public class ReqRespHandler extends Thread implements Observer {
         } catch (IOException e) {
             e.printStackTrace();
         }
-        this.SERVER_STORE.observeState(this);
     }
     @Override
     public void run() {
@@ -62,8 +61,7 @@ public class ReqRespHandler extends Thread implements Observer {
 
 
     private ActionOnTheWire getRequest(ObjectInputStream inputStream) throws IOException, ClassNotFoundException {
-        ActionOnTheWire request = (ActionOnTheWire) inputStream.readObject();
-        return request;
+        return (ActionOnTheWire) inputStream.readObject();
     }
 
     private void sendRequest(RRClientNotification response, ObjectOutputStream outputStream)  {
@@ -84,19 +82,6 @@ public class ReqRespHandler extends Thread implements Observer {
         }
 
     }
-    @Override
-    public void update(Observable o, Object arg) {
-        StoreAction propagatedAction = (StoreAction) arg;
-        switch(propagatedAction.getActionIdentifier()){
-            case "@SERVER_SET_RESPONSE":
-                this.setResponse(propagatedAction);
-                break;
-            case "@SERVER_TRANSFORM_CHANNEL":
-                this.transformChannel(propagatedAction);
-                break;
-        }
-    }
-
     private void resolveClientRequest(ActionOnTheWire request){
         if (request.getIdentifierMapper().equals(ServerMethodsNameProvider.getGames())){
             ArrayList<GamePublicData> gamesList = new ArrayList<>();
@@ -174,7 +159,9 @@ public class ReqRespHandler extends Thread implements Observer {
                 this.sendRequest(new RRClientNotification(false),this.objectOutputStream);
                 return;
             }
-            this.sendRequest(game.getLastRRclientNotification(),this.objectOutputStream);
+            PubSubHandler handler = new PubSubHandler(socket,objectOutputStream,playerToken);
+            game.getPubSubHandlers().add(handler);
+            ConnectionListener.getInstance().registerPubSubHandler(handler);
             if (game.getPlayers().size() == 8) {
                 SERVER_STORE.propagateAction(new GameStartGameAction(game));
             } else if (game.getPlayers().size() == 2) {
