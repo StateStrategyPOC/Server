@@ -13,7 +13,7 @@ import server.Game;
  * @author Andrea Sessa
  * @author Giorgio Pea
  */
-class LocalNoiseSectorCardEffect extends SectorCardEffect {
+public class LocalNoiseSectorCardEffect extends SectorCardEffect {
 
 	public static boolean executeEffect(Game game, SectorCard card) {
 		// The local noise effect could be seen as a global noise effect with a

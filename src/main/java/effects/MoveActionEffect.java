@@ -13,7 +13,7 @@ import server_store.StoreAction;
  * @see ActionEffect
  * @see MoveAction
  */
-class MoveActionEffect extends ActionEffect {
+public class MoveActionEffect extends ActionEffect {
 
 
     private static boolean verifyMoveLegality(Sector source, Sector target, PlayerType playerType){

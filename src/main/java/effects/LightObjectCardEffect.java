@@ -18,7 +18,7 @@ import java.util.List;
  * @author Giorgio Pea
  * @version 1.1
  */
-class LightObjectCardEffect extends ObjectCardEffect {
+public class LightObjectCardEffect extends ObjectCardEffect {
 	public static boolean executeEffect(Game game, ObjectCard objectCard) {
 		LightsObjectCard castedObjectCard = (LightsObjectCard) objectCard;
 		Sector targetSector = castedObjectCard.getTarget();

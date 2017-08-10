@@ -22,7 +22,7 @@ public class GameMakeActionStatePolicy implements StatePolicy {
     @Override
     public ServerState apply(ServerState state, StoreAction action) {
         GameMakeActionAction castedAction = (GameMakeActionAction) action;
-        MoveAction gameAction = new MoveAction(((MoveAction) castedAction.getAction()).getTargetSector());
+        StoreAction gameAction = castedAction.getAction();
         Game game = Helpers.findGameById(castedAction.getPlayerToken().getGameId(), state.getGames());
         boolean gameActionResult = false;
         if (game == null){
@@ -40,7 +40,7 @@ public class GameMakeActionStatePolicy implements StatePolicy {
         game.setLastPSclientNotification(new PSClientNotification());
         // Executes the action's associated logic and get the result
         try {
-            Method executeMethod = GameActionMapper.getInstance().getEffect(gameAction.getActionIdentifier()).getMethod("executeEffect", Game.class, StoreAction.class);
+            Method executeMethod = GameActionMapper.getInstance().getEffect(gameAction.getClass()).getMethod("executeEffect", Game.class, StoreAction.class);
             gameActionResult = (boolean) executeMethod.invoke(null,game, castedAction.getAction());
             game.setLastActionResult(gameActionResult);
         } catch (NoSuchMethodException | IllegalAccessException | InvocationTargetException e) {

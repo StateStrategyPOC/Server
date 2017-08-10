@@ -19,7 +19,7 @@ import java.util.List;
  * @see ActionEffect
  * @see MoveAttackAction
  */
-class MoveAttackActionEffect extends ActionEffect {
+public class MoveAttackActionEffect extends ActionEffect {
     private static boolean verifyMoveLegality(Sector source, Sector target, PlayerType playerType){
         if (source.equals(target)){
             return false;

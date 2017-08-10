@@ -10,5 +10,5 @@ import common.ObjectCard;
  * @author Giorgio Pea
  * @version 1.0
  */
-abstract class ObjectCardEffect {
+public abstract class ObjectCardEffect {
 }

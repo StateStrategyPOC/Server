@@ -1,6 +1,7 @@
 package effects;
 
-import common.Action;
+import common.*;
+import server_store.StoreAction;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -21,7 +22,7 @@ public class GameActionMapper {
 
 	private static final GameActionMapper instance = new GameActionMapper();
 
-    private final Map<String, Class<? extends ActionEffect>> fromActionToActionEffect;
+    private final Map<Class<? extends StoreAction>, Class<? extends ActionEffect>> fromActionToActionEffect;
 
     public static GameActionMapper getInstance(){
         return instance;
@@ -39,24 +40,24 @@ public class GameActionMapper {
 		// Mapper init
 		fromActionToActionEffect = new HashMap<>();
 		// Mapper filling
-		fromActionToActionEffect.put("@GAMEACTION_MOVE", MoveActionEffect.class);
-		fromActionToActionEffect.put("@GAMEACTION_DRAW_SECTOR_CARD",
+		fromActionToActionEffect.put(MoveAction.class, MoveActionEffect.class);
+		fromActionToActionEffect.put(DrawSectorCardAction.class,
 				DrawSectorCardEffect.class);
-		fromActionToActionEffect.put("@GAMEACTION_DRAW_OBJ_CARD",
+		fromActionToActionEffect.put(DrawObjectCardAction.class,
 				DrawObjectCardEffect.class);
-		fromActionToActionEffect.put("@GAMEACTION_DISCARD_OBJ_CARD",
+		fromActionToActionEffect.put(DiscardAction.class,
 				DiscardObjCardEffect.class);
 		fromActionToActionEffect
-				.put("@GAMEACTION_USE_OBJ_CARD", UseObjCardEffect.class);
-		fromActionToActionEffect.put("@GAMEACTION_MOVE_ATTACK",
+				.put(UseObjAction.class, UseObjCardEffect.class);
+		fromActionToActionEffect.put(MoveAttackAction.class,
 				MoveAttackActionEffect.class);
-		fromActionToActionEffect.put("@GAMEACTION_END_TURN", EndTurnEffect.class);
-		fromActionToActionEffect.put("@GAMEACTION_USE_SECTOR_CARD",
+		fromActionToActionEffect.put(EndTurnAction.class, EndTurnEffect.class);
+		fromActionToActionEffect.put(UseSectorCardAction.class,
 				UseSectorCardEffect.class);
 	}
 
 
-	public Class<? extends ActionEffect> getEffect(String actionType){
+	public Class<? extends ActionEffect> getEffect(Class<? extends StoreAction> actionType){
 		return fromActionToActionEffect.get(actionType);
 	}
 

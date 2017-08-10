@@ -15,7 +15,7 @@ import server.Game;
  * @author Giorgio Pea
  * @version 1.0
  */
-class AttackObjCardEffect extends ObjectCardEffect {
+public class AttackObjCardEffect extends ObjectCardEffect {
 	public static boolean executeEffect(Game game, ObjectCard objectCard) {
 		Sector sectorToAttack = ((AttackObjectCard) objectCard).getAttackTarget();
 		// Executing an attack object card action effect is like executing a

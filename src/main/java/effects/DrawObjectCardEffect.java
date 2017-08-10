@@ -13,7 +13,7 @@ import server.Game;
  * @author Giorgio Pea
  * @version 1.1
  */
-class DrawObjectCardEffect extends ActionEffect {
+public class DrawObjectCardEffect extends ActionEffect {
 
 
 	public static boolean executeEffect(Game game) {

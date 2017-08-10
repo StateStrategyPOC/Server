@@ -14,7 +14,7 @@ import server.Game;
  * @author Giorgio Pea
  * @version 1.0
  */
-class SuppressorEffect extends ObjectCardEffect {
+public class SuppressorEffect extends ObjectCardEffect {
 
 	public static boolean executeEffect(Game game, ObjectCard objectCard) {
 		Player currentPlayer = game.getCurrentPlayer();

@@ -17,7 +17,7 @@ import server.Game;
  * @author Giorgio Pea
  * @version 1.0
  */
-class DrawSectorCardEffect extends ActionEffect {
+public class DrawSectorCardEffect extends ActionEffect {
 	/**
 	 * Implements the abstract method defined in ActionEffect according to DrawActionFromSector
 	 * @param game A reference to Decks,map,...

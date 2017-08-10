@@ -10,5 +10,5 @@ import common.Action;
  * @author Giorgio Pea
  * @version 1.0
  */
-abstract class ActionEffect {
+public abstract class ActionEffect {
 }

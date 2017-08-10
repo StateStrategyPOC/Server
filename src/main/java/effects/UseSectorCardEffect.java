@@ -17,7 +17,7 @@ import java.lang.reflect.Method;
  * @author Giorgio Pea
  * @version 1.0
  */
-class UseSectorCardEffect extends ActionEffect {
+public class UseSectorCardEffect extends ActionEffect {
 
 	public static boolean executeEffect(Game game, StoreAction action) {
 		UseSectorCardAction castedAction = (UseSectorCardAction) action;
