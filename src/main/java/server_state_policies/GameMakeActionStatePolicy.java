@@ -50,7 +50,6 @@ public class GameMakeActionStatePolicy implements StatePolicy {
             game.getLastRRclientNotification().setMessage("You cannot perform this action");
             return state;
         }
-        game.setLastAction(castedAction.getAction());
         if (!game.getLastAction().getActionIdentifier().equals("@GAMEACTION_END_TURN")) {
             if (game.getCurrentPlayer().getPlayerToken().getPlayerType().equals(PlayerType.HUMAN)) {
                 game.setNextActions(HumanTurn.nextAction(game.getLastAction(), game.getCurrentPlayer()));

@@ -64,6 +64,7 @@ public class MoveActionEffect extends ActionEffect {
                 // If the target sector is a dangerous sector continue the
                 // execution
                 // of the action
+                game.setLastAction(action);
                 if (targetSector.getSectorType() == SectorType.DANGEROUS
                         && !currentPlayer.isSedated()) {
                     game.setLastAction(new DrawSectorCardAction());
