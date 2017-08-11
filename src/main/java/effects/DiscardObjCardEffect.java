@@ -21,7 +21,7 @@ public class DiscardObjCardEffect extends ActionEffect {
 		DiscardAction castedAction = (DiscardAction) action;
 		Player currentPlayer = game.getCurrentPlayer();
 		ObjectDeck objectDeck = game.getObjectDeck();
-		ObjectCard discardedCard = castedAction.payload;
+		ObjectCard discardedCard = castedAction.cardToDiscard;
 		currentPlayer.getPrivateDeck().removeCard(discardedCard);
 		objectDeck.addToDiscard(discardedCard);
 		objectDeck.refill();

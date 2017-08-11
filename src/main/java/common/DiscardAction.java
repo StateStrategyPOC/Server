@@ -10,10 +10,14 @@ package common;
  */
 public class DiscardAction extends StoreAction {
 
-    public final ObjectCard payload;
+    public final ObjectCard cardToDiscard;
 
     public DiscardAction(ObjectCard objectCard) {
         super("@GAMEACTION_DISCARD_OBJ_CARD","@COMMON_GROUP");
-        this.payload = objectCard;
+        this.cardToDiscard = objectCard;
+    }
+
+    public ObjectCard getCardToDiscard() {
+        return cardToDiscard;
     }
 }

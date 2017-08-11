@@ -22,6 +22,9 @@ public class ObjectCardsMapper {
 	private static ObjectCardsMapper instance;
 
 	public static ObjectCardsMapper getInstance(){
+		if (instance == null){
+			instance = new ObjectCardsMapper();
+		}
 		return instance;
 	}
 
