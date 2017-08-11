@@ -21,6 +21,9 @@ public class GameMakeActionSidePolicy implements SidePolicy {
         if (game == null){
             return;
         }
+        if (!game.getLastRRclientNotification().getActionResult()){
+            return;
+        }
         for (PubSubHandler handler : game.getPubSubHandlers()) {
             if (castedAction.getAction().getActionIdentifier().equals("@GAMEACTION_END_TURN") && handler.getPlayerToken().equals(game.getCurrentPlayer().getPlayerToken())){
                     PSClientNotification notification = new PSClientNotification();

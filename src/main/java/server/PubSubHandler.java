@@ -6,6 +6,8 @@ import common.PlayerToken;
 import java.io.IOException;
 import java.io.ObjectOutputStream;
 import java.net.Socket;
+import java.util.Queue;
+import java.util.concurrent.ArrayBlockingQueue;
 import java.util.concurrent.ConcurrentLinkedQueue;
 import java.util.concurrent.LinkedBlockingQueue;
 
@@ -17,7 +19,7 @@ public class PubSubHandler extends Thread {
     // The socket associated to the handler
     private final Socket socket;
     // A queue of messages to send to the subscriber
-    private final ConcurrentLinkedQueue<PSClientNotification> buffer;
+    private final Queue<PSClientNotification> buffer;
     private final PlayerToken playerToken;
     // The object output stream used to perform the remote method call on the
     // subscriber
@@ -39,7 +41,7 @@ public class PubSubHandler extends Thread {
     public PubSubHandler(Socket socket, ObjectOutputStream outputStream, PlayerToken playerToken)  {
         this.socket = socket;
         this.playerToken = playerToken;
-        this.buffer = new ConcurrentLinkedQueue<>();
+        this.buffer = new ArrayBlockingQueue<>(10);
         this.objectOutputStream = outputStream;
         this.runningFlag = true;
     }
