@@ -19,4 +19,12 @@ public class GameOnDemandStartAction extends StoreAction {
         return playerToken;
     }
 
+    @Override
+    public String toString() {
+        return "GameOnDemandStartAction{" +
+                "playerToken=" + playerToken +
+                ", actionIdentifier='" + actionIdentifier + '\'' +
+                ", actionGroupIdentifier='" + actionGroupIdentifier + '\'' +
+                '}';
+    }
 }

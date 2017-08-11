@@ -26,4 +26,13 @@ public class GameJoinGameAction extends StoreAction {
         return playerName;
     }
 
+    @Override
+    public String toString() {
+        return "GameJoinGameAction{" +
+                "gameId=" + gameId +
+                ", playerName='" + playerName + '\'' +
+                ", actionIdentifier='" + actionIdentifier + '\'' +
+                ", actionGroupIdentifier='" + actionGroupIdentifier + '\'' +
+                '}';
+    }
 }

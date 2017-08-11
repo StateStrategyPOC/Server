@@ -28,4 +28,13 @@ public class GamePostMsgAction extends StoreAction {
         return message;
     }
 
+    @Override
+    public String toString() {
+        return "GamePostMsgAction{" +
+                "playerToken=" + playerToken +
+                ", message='" + message + '\'' +
+                ", actionIdentifier='" + actionIdentifier + '\'' +
+                ", actionGroupIdentifier='" + actionGroupIdentifier + '\'' +
+                '}';
+    }
 }

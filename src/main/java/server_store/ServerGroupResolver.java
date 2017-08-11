@@ -17,15 +17,14 @@ public class ServerGroupResolver extends Resolver {
         this.policiesMap.put("@SERVER_GAMES_ADD_GAME",
                 new PolicyCouple(new GamesAddGameStatePolicy(), null));
         this.policiesMap.put("@SERVER_GAMES_END_GAME",
-                new PolicyCouple(new GamesEndGameStatePolicy(), new GamesEndGameSidePolicy()));
+                new PolicyCouple(new GamesEndGameStatePolicy(),null));
         this.policiesMap.put("@SERVER_GAME_STARTABLE_GAME",
-                new PolicyCouple(new GameStartableGameStatePolicy(), new GameStartableGameSidePolicy()));
+                new PolicyCouple(null, new GameStartableGameSidePolicy()));
         this.policiesMap.put("@SERVER_GAME_START_GAME",
                 new PolicyCouple(new GameStartGameStatePolicy(), new GameStartGameSidePolicy()));
         this.policiesMap.put("@SERVER_GAME_TURNTIMEOUT_EXPIRED",
                 new PolicyCouple(new GameTurnTimeoutStatePolicy(), new GameTurnTimeoutSidePolicy()));
         this.policiesMap.put("@SERVER_GAME_SET_PS",
                 new PolicyCouple(new GameSetPSHandlersStatePolicy(), new GameSetPSHandlersSidePolicy()));
-        this.policiesMap.put("@SERVER_ADD_REQRESP_HANDLER",new PolicyCouple(new ServerAddReqRespStatePolicy(),null));
     }
 }

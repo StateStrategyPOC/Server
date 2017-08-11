@@ -18,4 +18,13 @@ public class GamesAddGameAction extends StoreAction {
     public Game getPayload() {
         return payload;
     }
+
+    @Override
+    public String toString() {
+        return "GamesAddGameAction{" +
+                "payload=" + payload +
+                ", actionIdentifier='" + actionIdentifier + '\'' +
+                ", actionGroupIdentifier='" + actionGroupIdentifier + '\'' +
+                '}';
+    }
 }

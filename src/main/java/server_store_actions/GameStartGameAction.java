@@ -18,4 +18,13 @@ public class GameStartGameAction extends StoreAction {
     public Game getGame() {
         return game;
     }
+
+    @Override
+    public String toString() {
+        return "GameStartGameAction{" +
+                "game=" + game +
+                ", actionIdentifier='" + actionIdentifier + '\'' +
+                ", actionGroupIdentifier='" + actionGroupIdentifier + '\'' +
+                '}';
+    }
 }

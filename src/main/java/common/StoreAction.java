@@ -21,4 +21,5 @@ public abstract class StoreAction implements Serializable {
     public String getActionGroupIdentifier() {
         return actionGroupIdentifier;
     }
+
 }

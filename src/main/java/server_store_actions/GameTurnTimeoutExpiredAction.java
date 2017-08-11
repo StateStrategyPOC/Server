@@ -18,4 +18,13 @@ public class GameTurnTimeoutExpiredAction extends StoreAction {
     public Game getGame() {
         return game;
     }
+
+    @Override
+    public String toString() {
+        return "GameTurnTimeoutExpiredAction{" +
+                "game=" + game +
+                ", actionIdentifier='" + actionIdentifier + '\'' +
+                ", actionGroupIdentifier='" + actionGroupIdentifier + '\'' +
+                '}';
+    }
 }

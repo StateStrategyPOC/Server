@@ -18,4 +18,12 @@ public class GameSubscribeAction extends StoreAction {
         return playerToken;
     }
 
+    @Override
+    public String toString() {
+        return "GameSubscribeAction{" +
+                "playerToken=" + playerToken +
+                ", actionIdentifier='" + actionIdentifier + '\'' +
+                ", actionGroupIdentifier='" + actionGroupIdentifier + '\'' +
+                '}';
+    }
 }

@@ -37,4 +37,16 @@ public class GameSetPSHandlersAction extends StoreAction {
     public ObjectOutputStream getOutputStream() {
         return outputStream;
     }
+
+    @Override
+    public String toString() {
+        return "GameSetPSHandlersAction{" +
+                "game=" + game +
+                ", socket=" + socket +
+                ", outputStream=" + outputStream +
+                ", playerToken=" + playerToken +
+                ", actionIdentifier='" + actionIdentifier + '\'' +
+                ", actionGroupIdentifier='" + actionGroupIdentifier + '\'' +
+                '}';
+    }
 }

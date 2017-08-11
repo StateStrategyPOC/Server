@@ -23,4 +23,14 @@ public class GameStartableGameAction extends StoreAction {
     public boolean isStartable() {
         return isStartable;
     }
+
+    @Override
+    public String toString() {
+        return "GameStartableGameAction{" +
+                "game=" + game +
+                ", isStartable=" + isStartable +
+                ", actionIdentifier='" + actionIdentifier + '\'' +
+                ", actionGroupIdentifier='" + actionGroupIdentifier + '\'' +
+                '}';
+    }
 }
