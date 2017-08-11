@@ -21,7 +21,6 @@ public class GamePostChatMsgSidePolicy implements SidePolicy {
         if (game == null){
             return;
         }
-        notification.setGameId(castedAction.getPlayerToken().getGameId());
         for (PubSubHandler handler : game.getPubSubHandlers()){
             handler.queueNotification(notification);
         }

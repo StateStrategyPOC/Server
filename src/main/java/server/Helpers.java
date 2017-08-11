@@ -24,13 +24,4 @@ public class Helpers {
         }
         return null;
     }
-    public static ReqRespHandler findReqRespHandlerById(UUID handlerId, List<ReqRespHandler> handlers){
-        for (ReqRespHandler handler : handlers){
-            if (handler.getHandlerId().equals(handlerId)){
-                return handler;
-            }
-        }
-        return null;
-    }
-
 }

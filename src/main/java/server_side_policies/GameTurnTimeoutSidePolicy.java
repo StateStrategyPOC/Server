@@ -15,18 +15,20 @@ public class GameTurnTimeoutSidePolicy implements SidePolicy {
     public void apply(ServerState state, StoreAction action) {
         GameTurnTimeoutExpiredAction castedAction = (GameTurnTimeoutExpiredAction) action;
         Game game = castedAction.getGame();
-        PSClientNotification notification = game.getLastPSclientNotification();
         //Notification sending
         for (PubSubHandler handler : game.getPubSubHandlers()) {
-
             if (handler.getPlayerToken().equals(game.getCurrentPlayer().getPlayerToken())) {
+                PSClientNotification notification = new PSClientNotification();
                 notification.setTurnNeedToStart(true);
+                notification.setMessage(game.getLastPSclientNotification().getMessage());
+                handler.queueNotification(notification);
             }
             else if (handler.getPlayerToken().equals(game.getPreviousPlayer().getPlayerToken())) {
+                PSClientNotification notification = new PSClientNotification();
                 notification.setTurnNeedToEnd(true);
+                notification.setMessage(game.getLastPSclientNotification().getMessage());
+                handler.queueNotification(notification);
             }
-            handler.queueNotification(notification);
-
         }
     }
 }
