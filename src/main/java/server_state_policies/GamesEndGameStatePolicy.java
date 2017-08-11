@@ -13,6 +13,7 @@ public class GamesEndGameStatePolicy implements StatePolicy {
         for (PubSubHandler handler : castedAction.getGame().getPubSubHandlers()){
             handler.setRunningFlag(false);
         }
+        castedAction.getGame().getCurrentTimer().cancel();
         state.getGames().remove(castedAction.getGame());
         return state;
     }

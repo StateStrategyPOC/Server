@@ -15,12 +15,11 @@ public class GameStartGameSidePolicy implements SidePolicy {
             PSClientNotification notification = new PSClientNotification();
             notification.setGameNeedToStart(true);
             notification.setGameMapName(castedAction.getGame().getMapName());
-            pubSubHandler.queueNotification(notification);
             if (pubSubHandler.getPlayerToken().equals(castedAction.getGame().getCurrentPlayer().getPlayerToken())){
-                notification = new PSClientNotification();
                 notification.setTurnNeedToStart(true);
-                pubSubHandler.queueNotification(notification);
             }
+            pubSubHandler.queueNotification(notification);
+
         }
     }
 }

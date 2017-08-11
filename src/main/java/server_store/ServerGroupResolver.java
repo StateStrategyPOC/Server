@@ -22,7 +22,7 @@ public class ServerGroupResolver extends Resolver {
                 new PolicyCouple(new GameStartableGameStatePolicy(), new GameStartableGameSidePolicy()));
         this.policiesMap.put("@SERVER_GAME_START_GAME",
                 new PolicyCouple(new GameStartGameStatePolicy(), new GameStartGameSidePolicy()));
-        this.policiesMap.put("@@SERVER_GAME_TURNTIMEOUT_EXPIRED",
+        this.policiesMap.put("@SERVER_GAME_TURNTIMEOUT_EXPIRED",
                 new PolicyCouple(new GameTurnTimeoutStatePolicy(), new GameTurnTimeoutSidePolicy()));
         this.policiesMap.put("@SERVER_GAME_SET_PS",
                 new PolicyCouple(new GameSetPSHandlersStatePolicy(), new GameSetPSHandlersSidePolicy()));
