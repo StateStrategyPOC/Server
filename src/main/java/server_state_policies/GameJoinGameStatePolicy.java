@@ -15,11 +15,10 @@ public class GameJoinGameStatePolicy implements StatePolicy {
     @Override
     public ServerState apply(ServerState state, StoreAction action) {
         GameJoinGameAction castedAction = (GameJoinGameAction) action;
-        PlayerToken playerToken;
         Game game = Helpers.findGameById(castedAction.getGameId(),state.getGames());
         if (game != null){
             PlayerType playerType = assignTypeToPlayer(game.getPlayers().size() + 1);
-            playerToken = new PlayerToken(playerType, castedAction.getGameId());
+            PlayerToken playerToken = new PlayerToken(playerType, castedAction.getGameId());
             Player player = new Player(castedAction.getPlayerName());
             player.setPlayerToken(playerToken);
             game.getPlayers().add(player);

@@ -93,7 +93,7 @@ public class ReqRespHandler extends Thread {
         else if (request.getIdentifierMapper().equals(ServerMethodsNameProvider.joinGame())){
             Integer gameId = (Integer) request.getParameters().get(0);
             String playerName = (String) request.getParameters().get(1);
-            this.SERVER_STORE.propagateAction(new GameJoinGameAction(gameId,playerName,handlerId));
+            this.SERVER_STORE.propagateAction(new GameJoinGameAction(gameId,playerName));
             Game game = Helpers.findGameById(gameId,this.SERVER_STORE.getState().getGames());
             if (game == null){
                 this.sendRequest(new RRClientNotification(false),this.objectOutputStream);
@@ -108,7 +108,7 @@ public class ReqRespHandler extends Thread {
             String playerName = (String) request.getParameters().get(1);
             Game game = new Game(gameMapName);
             this.SERVER_STORE.propagateAction(new GamesAddGameAction(game));
-            this.SERVER_STORE.propagateAction(new GameJoinGameAction(game.getGamePublicData().getId(),playerName,handlerId));
+            this.SERVER_STORE.propagateAction(new GameJoinGameAction(game.getGamePublicData().getId(),playerName));
             this.sendRequest(game.getLastRRclientNotification(),this.objectOutputStream);
             this.closeConnection(this.socket,this.objectOutputStream,this.objectInputStream);
 
@@ -116,7 +116,7 @@ public class ReqRespHandler extends Thread {
         else if (request.getIdentifierMapper().equals(ServerMethodsNameProvider.makeAction())){
             StoreAction action = (StoreAction) request.getParameters().get(0);
             PlayerToken playerToken = (PlayerToken) request.getParameters().get(1);
-            this.SERVER_STORE.propagateAction(new GameMakeActionAction(playerToken,action,handlerId));
+            this.SERVER_STORE.propagateAction(new GameMakeActionAction(playerToken,action));
             Game game = Helpers.findGameById(playerToken.getGameId(),this.SERVER_STORE.getState().getGames());
             if (game == null){
                 this.sendRequest(new RRClientNotification(false),this.objectOutputStream);
@@ -128,7 +128,7 @@ public class ReqRespHandler extends Thread {
         }
         else if (request.getIdentifierMapper().equals(ServerMethodsNameProvider.onDemandGameStart())){
             PlayerToken playerToken = (PlayerToken) request.getParameters().get(0);
-            this.SERVER_STORE.propagateAction(new GameOnDemandStartAction(playerToken,handlerId));
+            this.SERVER_STORE.propagateAction(new GameOnDemandStartAction(playerToken));
             Game game = Helpers.findGameById(playerToken.getGameId(),this.SERVER_STORE.getState().getGames());
             if (game == null){
                 this.sendRequest(new RRClientNotification(false),this.objectOutputStream);
@@ -141,7 +141,7 @@ public class ReqRespHandler extends Thread {
         else if (request.getIdentifierMapper().equals(ServerMethodsNameProvider.publishChatMsg())){
             String message = (String) request.getParameters().get(0);
             PlayerToken playerToken = (PlayerToken) request.getParameters().get(1);
-            this.SERVER_STORE.propagateAction(new GamePostMsgAction(message,playerToken,handlerId));
+            this.SERVER_STORE.propagateAction(new GamePostMsgAction(message,playerToken));
             Game game = Helpers.findGameById(playerToken.getGameId(),this.SERVER_STORE.getState().getGames());
             if (game == null){
                 this.sendRequest(new RRClientNotification(false),this.objectOutputStream);
@@ -167,24 +167,5 @@ public class ReqRespHandler extends Thread {
                 SERVER_STORE.propagateAction(new GameStartableGameAction(game, true));
             }
         }
-    }
-
-    private void transformChannel(StoreAction propagatedAction) {
-        ServerTransformChannelAction castedAction = (ServerTransformChannelAction) propagatedAction;
-        if (castedAction.getHandlerId().equals(this.handlerId)){
-            this.SERVER_STORE.propagateAction(new GameSetPSHandlersAction(castedAction.getGame(),castedAction.getPlayerToken(),this.socket,this.objectOutputStream));
-        }
-    }
-
-    private void setResponse(StoreAction propagatedAction){
-        ServerSetResponseAction castedAction = (ServerSetResponseAction) propagatedAction;
-        if (castedAction.getHandlerId().equals(this.handlerId)){
-            this.sendRequest(castedAction.getResponse(),this.objectOutputStream);
-            this.closeConnection(this.socket, this.objectOutputStream,this.objectInputStream);
-        }
-    }
-
-    public UUID getHandlerId() {
-        return handlerId;
     }
 }

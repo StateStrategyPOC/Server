@@ -9,19 +9,14 @@ import java.util.UUID;
 public class GameOnDemandStartAction extends StoreAction {
 
     private final PlayerToken playerToken;
-    private final UUID handlerId;
 
-    public GameOnDemandStartAction(PlayerToken playerToken, UUID handlerId) {
+    public GameOnDemandStartAction(PlayerToken playerToken) {
         super("@SERVER_GAME_ON_DEMAND_START", "@SERVER_GROUP");
         this.playerToken = playerToken;
-        this.handlerId = handlerId;
     }
 
     public PlayerToken getPlayerToken() {
         return playerToken;
     }
 
-    public UUID getHandlerId() {
-        return handlerId;
-    }
 }

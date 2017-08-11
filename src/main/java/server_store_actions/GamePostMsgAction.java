@@ -13,13 +13,11 @@ public class GamePostMsgAction extends StoreAction {
 
     private final PlayerToken playerToken;
     private final String message;
-    private final UUID handlerId;
 
-    public GamePostMsgAction(String message, PlayerToken playerToken, UUID handlerId) {
+    public GamePostMsgAction(String message, PlayerToken playerToken) {
         super("@SERVER_GAME_POST_MSG","@SERVER_GROUP");
         this.playerToken = playerToken;
         this.message = message;
-        this.handlerId = handlerId;
     }
 
     public PlayerToken getPlayerToken() {
@@ -30,7 +28,4 @@ public class GamePostMsgAction extends StoreAction {
         return message;
     }
 
-    public UUID getHandlerId() {
-        return handlerId;
-    }
 }

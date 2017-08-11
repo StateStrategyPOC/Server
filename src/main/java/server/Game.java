@@ -33,11 +33,8 @@ public class Game {
     private RRClientNotification lastRRclientNotification;
     private PSClientNotification lastPSclientNotification;
     private Timer currentTimer;
-    private boolean lastActionResult;
     private boolean didAlienWin;
     private boolean didHumansWin;
-    private boolean startableGame;
-    private String lastChatMsg;
     private final List<PubSubHandler> pubSubHandlers;
 
     public Game(String gameMapName) {
@@ -51,27 +48,13 @@ public class Game {
         this.lastPSclientNotification = null;
         this.lastRRclientNotification = null;
         this.currentTimer = null;
-        this.lastActionResult = true;
         this.didHumansWin = false;
         this.didHumansWin = false;
-        this.lastChatMsg = "";
         this.pubSubHandlers = new ArrayList<>();
-    }
-
-    public boolean isStartableGame() {
-        return startableGame;
-    }
-
-    public void setStartableGame(boolean startableGame) {
-        this.startableGame = startableGame;
     }
 
     public List<Player> getPlayers() {
         return players;
-    }
-
-    public void setPlayers(List<Player> players) {
-        this.players = players;
     }
 
     public ObjectDeck getObjectDeck() {
@@ -126,16 +109,8 @@ public class Game {
         return gamePublicData;
     }
 
-    public void setGamePublicData(GamePublicData gamePublicData) {
-        this.gamePublicData = gamePublicData;
-    }
-
     public String getMapName() {
         return mapName;
-    }
-
-    public void setMapName(String mapName) {
-        this.mapName = mapName;
     }
 
     public GameMap getGameMap() {
@@ -186,14 +161,6 @@ public class Game {
         this.currentTimer = currentTimer;
     }
 
-    public boolean isLastActionResult() {
-        return lastActionResult;
-    }
-
-    public void setLastActionResult(boolean lastActionResult) {
-        this.lastActionResult = lastActionResult;
-    }
-
     public boolean isDidAlienWin() {
         return didAlienWin;
     }
@@ -208,14 +175,6 @@ public class Game {
 
     public void setDidHumansWin(boolean didHumansWin) {
         this.didHumansWin = didHumansWin;
-    }
-
-    public void setLastChatMsg(String message) {
-        this.lastChatMsg = message;
-    }
-
-    public String getLastChatMsg() {
-        return lastChatMsg;
     }
 
     public List<PubSubHandler> getPubSubHandlers() {

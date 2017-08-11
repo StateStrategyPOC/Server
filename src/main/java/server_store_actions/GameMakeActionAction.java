@@ -12,13 +12,11 @@ public class GameMakeActionAction extends StoreAction {
 
     private final StoreAction action;
     private final PlayerToken playerToken;
-    private final UUID handlerId;
 
-    public GameMakeActionAction(PlayerToken playerToken, StoreAction action, UUID handlerId) {
+    public GameMakeActionAction(PlayerToken playerToken, StoreAction action) {
         super("@SERVER_GAME_MAKE_ACTION","@SERVER_GROUP");
         this.playerToken = playerToken;
         this.action = action;
-        this.handlerId = handlerId;
     }
 
     public StoreAction getAction() {
@@ -29,7 +27,4 @@ public class GameMakeActionAction extends StoreAction {
         return playerToken;
     }
 
-    public UUID getHandlerId() {
-        return handlerId;
-    }
 }

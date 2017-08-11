@@ -11,13 +11,11 @@ public class GameJoinGameAction extends StoreAction {
 
     private final int gameId;
     private final String playerName;
-    private final UUID handlerId;
 
-    public GameJoinGameAction(int gameId, String playerName, UUID handlerId) {
+    public GameJoinGameAction(int gameId, String playerName) {
         super("@SERVER_GAME_JOIN_GAME","@SERVER_GROUP");
         this.gameId = gameId;
         this.playerName = playerName;
-        this.handlerId = handlerId;
     }
 
     public int getGameId() {
@@ -28,7 +26,4 @@ public class GameJoinGameAction extends StoreAction {
         return playerName;
     }
 
-    public UUID getHandlerId() {
-        return handlerId;
-    }
 }

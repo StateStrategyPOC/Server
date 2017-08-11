@@ -51,13 +51,13 @@ public class StoreLogger {
     }
     public void logPreStatePropagation(StoreAction action, ServerState state){
         Date date = new Date();
-        this.logger.log(Level.OFF, "@@BEGIN_ITEM@@");
-        this.logger.log(Level.OFF, "@@PRE_TIMESTAMP@@");
-        this.logger.log(Level.OFF, date.getTime()+"");
-        this.logger.log(Level.OFF, "@@PRE_STATE@@");
-        this.logger.log(Level.OFF, state.toString());
-        this.logger.log(Level.OFF, "@@ACTION@@");
-        this.logger.log(Level.OFF, action.toString());
+        this.logger.log(Level.INFO, "@@BEGIN_ITEM@@");
+        this.logger.log(Level.INFO, "@@PRE_TIMESTAMP@@");
+        this.logger.log(Level.INFO, date.getTime()+"");
+        this.logger.log(Level.INFO, "@@PRE_STATE@@");
+        this.logger.log(Level.INFO, state.toString());
+        this.logger.log(Level.INFO, "@@ACTION@@");
+        this.logger.log(Level.INFO, action.toString());
     }
     public void logPostStatePropagation(ServerState state){
         Date date = new Date();

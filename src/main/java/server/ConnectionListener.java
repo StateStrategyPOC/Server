@@ -1,7 +1,6 @@
 package server;
 
 import server_store.ServerStore;
-import server_store_actions.ServerAddReqRespHandlerAction;
 
 import java.io.IOException;
 import java.net.ServerSocket;
@@ -42,7 +41,7 @@ public class ConnectionListener{
         while(this.SERVER_STORE.getState().isServerListening()){
             socket = serverSocket.accept();
             ReqRespHandler reqRespHandler = new ReqRespHandler(socket);
-            this.SERVER_STORE.propagateAction(new ServerAddReqRespHandlerAction(reqRespHandler));
+            //this.SERVER_STORE.propagateAction(new ServerAddReqRespHandlerAction(reqRespHandler));
             this.reqRespThreadPool.submit(reqRespHandler);
         }
     }
