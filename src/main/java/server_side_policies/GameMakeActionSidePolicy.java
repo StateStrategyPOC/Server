@@ -21,19 +21,19 @@ public class GameMakeActionSidePolicy implements SidePolicy {
             return;
         }
         for (PubSubHandler handler : game.getPubSubHandlers()) {
-            PSClientNotification notification = game.getLastPSclientNotification();
-            if (castedAction.getAction().getActionIdentifier().equals("@GAMEACTION_END_TURN")) {
-                if (handler.getPlayerToken().equals(game.getCurrentPlayer().getPlayerToken())){
+            if (castedAction.getAction().getActionIdentifier().equals("@GAMEACTION_END_TURN") && handler.getPlayerToken().equals(game.getCurrentPlayer().getPlayerToken())){
+                    PSClientNotification notification = new PSClientNotification();
+                    notification.setMessage(game.getLastPSclientNotification().getMessage());
                     notification.setTurnNeedToStart(true);
-                }
-                else {
-                    notification.setTurnNeedToStart(false);
-                }
+                    handler.queueNotification(notification);
             }
-            handler.queueNotification(notification);
+            else {
+                handler.queueNotification(game.getLastPSclientNotification());
+            }
+
         }
         if (!game.isDidHumansWin() && !game.isDidAlienWin()) {
-            game.getCurrentTimer().schedule(new TurnTimeout(game), state.getTurnTimeout());
+            //game.getCurrentTimer().schedule(new TurnTimeout(game), state.getTurnTimeout());
         } else {
             SERVER_STORE.propagateAction(new GamesEndGameAction(game));
         }
