@@ -66,8 +66,10 @@ public class MoveActionEffect extends ActionEffect {
                 // of the action
                 if (targetSector.getSectorType() == SectorType.DANGEROUS
                         && !currentPlayer.isSedated()) {
+                    game.setLastAction(new DrawSectorCardAction());
                     DrawSectorCardEffect.executeEffect(game, new DrawSectorCardAction());
                 } else if (targetSector.getSectorType() == SectorType.OPEN_RESCUE) {
+                    game.setLastAction(new DrawRescueCardAction());
                     DrawRescueCardEffect.executeEffect(game);
                 }
                 game.getCurrentPlayer().setHasMoved(true);

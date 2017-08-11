@@ -45,6 +45,7 @@ public class DrawSectorCardEffect extends ActionEffect {
 			DrawObjectCardEffect.executeEffect(game);
 		}
 		if (!(sectorCard instanceof GlobalNoiseSectorCard)) {
+			game.setLastAction(new UseSectorCardAction(sectorCard));
 			UseSectorCardEffect.executeEffect(game,new UseSectorCardAction(sectorCard));
 		}
 		return true;
