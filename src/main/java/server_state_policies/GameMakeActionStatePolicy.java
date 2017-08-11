@@ -48,9 +48,7 @@ public class GameMakeActionStatePolicy implements StatePolicy {
             e.printStackTrace();
         }
         if (!gameActionResult) {
-            RRClientNotification notification = new RRClientNotification(false);
-            notification.setMessage("You cannot perform this action");
-            game.setLastRRclientNotification(notification);
+            game.getLastRRclientNotification().setMessage("You cannot perform this action");
             return state;
         }
 

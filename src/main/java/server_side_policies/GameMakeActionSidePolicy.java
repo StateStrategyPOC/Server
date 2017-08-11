@@ -22,7 +22,7 @@ public class GameMakeActionSidePolicy implements SidePolicy {
         }
         for (PubSubHandler handler : game.getPubSubHandlers()) {
             PSClientNotification notification = game.getLastPSclientNotification();
-            if (castedAction.getAction().getClass().equals(EndTurnAction.class) && !game.getCurrentPlayer().getPlayerToken().equals(handler.getPlayerToken())) {
+            if (castedAction.getAction().getClass().equals(EndTurnAction.class) && game.getCurrentPlayer().getPlayerToken().equals(handler.getPlayerToken())) {
                 notification.setTurnNeedToStart(true);
             }
             else {

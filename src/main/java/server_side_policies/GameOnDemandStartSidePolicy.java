@@ -23,20 +23,12 @@ public class GameOnDemandStartSidePolicy implements SidePolicy {
         }
         if (game.getCurrentPlayer().getPlayerToken().equals(castedAction.getPlayerToken())) {
             SERVER_STORE.propagateAction(new GameStartGameAction(game));
-            rrClientNotification = new RRClientNotification(game.getMapName());
+            rrClientNotification = new RRClientNotification(true);
 
         } else {
             rrClientNotification = new RRClientNotification(false);
 
         }
-        PSClientNotification notification = new PSClientNotification();
-        notification.setGameNeedToStart(true);
-        notification.setGameMapName(game.getMapName());
         game.setLastRRclientNotification(rrClientNotification);
-        for (PubSubHandler handler : game.getPubSubHandlers()){
-            if (!handler.getPlayerToken().equals(game.getCurrentPlayer().getPlayerToken())){
-                handler.queueNotification(notification);
-            }
-        }
     }
 }
