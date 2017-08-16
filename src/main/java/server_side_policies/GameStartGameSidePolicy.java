@@ -1,6 +1,6 @@
 package server_side_policies;
 
-import common.PSClientNotification;
+import common.PSNotification;
 import server.PubSubHandler;
 import server_store.ServerState;
 import server_store.SidePolicy;
@@ -12,11 +12,12 @@ public class GameStartGameSidePolicy implements SidePolicy {
     public void apply(ServerState state, StoreAction action) {
         GameStartGameAction castedAction = (GameStartGameAction) action;
         for (PubSubHandler pubSubHandler : castedAction.getGame().getPubSubHandlers()){
-            PSClientNotification notification = new PSClientNotification();
-            notification.setGameNeedToStart(true);
-            notification.setGameMapName(castedAction.getGame().getMapName());
+            PSNotification notification = new PSNotification(null, null, null,
+                    false, false, null, true, false, false, false, castedAction.getGame().getMapName());
+
             if (pubSubHandler.getPlayerToken().equals(castedAction.getGame().getCurrentPlayer().getPlayerToken())){
-                notification.setTurnNeedToStart(true);
+                notification = new PSNotification(null, null, null,
+                        false, false, null, true, true, false, false, castedAction.getGame().getMapName());
                 pubSubHandler.queueNotification(notification);
             }
             else {

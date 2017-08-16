@@ -31,7 +31,7 @@ public class Game {
     private StoreAction lastAction;
     private List<String> nextActions;
     private RRNotification lastRRclientNotification;
-    private PSClientNotification lastPSclientNotification;
+    private PSNotification lastPSclientNotification;
     private Timer currentTimer;
     private boolean didAlienWin;
     private boolean didHumansWin;
@@ -145,11 +145,11 @@ public class Game {
         this.lastRRclientNotification = lastRRclientNotification;
     }
 
-    public PSClientNotification getLastPSclientNotification() {
+    public PSNotification getLastPSclientNotification() {
         return lastPSclientNotification;
     }
 
-    public void setLastPSclientNotification(PSClientNotification lastPSclientNotification) {
+    public void setLastPSclientNotification(PSNotification lastPSclientNotification) {
         this.lastPSclientNotification = lastPSclientNotification;
     }
 

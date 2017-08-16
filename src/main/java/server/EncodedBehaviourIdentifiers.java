@@ -4,7 +4,7 @@ package server;
  * Created by giorgiopea on 25/04/17.
  *
  */
-public class ServerMethodsNameProvider {
+public class EncodedBehaviourIdentifiers {
 
 
     public static String subscribe(){

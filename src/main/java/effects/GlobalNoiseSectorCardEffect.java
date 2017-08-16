@@ -1,9 +1,6 @@
 package effects;
 
-import common.GlobalNoiseSectorCard;
-import common.RRNotification;
-import common.Sector;
-import common.SectorCard;
+import common.*;
 import server.Game;
 
 /**
@@ -23,10 +20,11 @@ public class GlobalNoiseSectorCardEffect extends SectorCardEffect {
 		RRNotification lastNotification = game.getLastRRclientNotification();
 		game.setLastRRclientNotification(new RRNotification(lastNotification.getActionResult(),"You've indicated the sector: "
 				+ target.getCoordinate().toString(),lastNotification.getDrawnCards(),lastNotification.getLightedSectors(),lastNotification.getAvailableGames(),lastNotification.getPlayerToken(),lastNotification.getGameMapName()));
-		game.getLastPSclientNotification().setMessage("[GLOBAL MESSAGE]: "
-				+ game.getLastPSclientNotification().getMessage() + name
-				+ " has made noise in sector "
-				+ target.getCoordinate().toString());
+		PSNotification lastPNotification = game.getLastPSclientNotification();
+		String lastMessage = lastPNotification.getMessage();
+		game.setLastPSclientNotification(new PSNotification("[GLOBAL MESSAGE]: "+lastMessage+ " has made noise in sector "
+				+ target.getCoordinate().toString(),lastPNotification.getDeadPlayers(),lastPNotification.getAttackedPlayers(),lastPNotification.isHumanWin(),lastPNotification.isAlienWin(),lastPNotification.getEscapedPlayer(),lastPNotification.isGameNeedsToStart(),lastPNotification.isTurnNeedsToStart(),lastPNotification.isGameCanBeStarted(),lastPNotification.isTurnNeedsToEnd(),lastPNotification.getGameMapName()));
+
 		return true;
 	}
 }

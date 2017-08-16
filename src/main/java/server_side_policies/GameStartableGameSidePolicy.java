@@ -1,6 +1,6 @@
 package server_side_policies;
 
-import common.PSClientNotification;
+import common.PSNotification;
 import server.Helpers;
 import server.PubSubHandler;
 import server_store.ServerState;
@@ -17,8 +17,9 @@ public class GameStartableGameSidePolicy implements SidePolicy {
             if (handler == null){
                 return;
             }
-            PSClientNotification notification = new PSClientNotification();
-            notification.setGameCanBeStarted(true);
+            PSNotification notification = new PSNotification(null, null,null,
+                    false,false,null,false,false,true,false, null);
+
             handler.queueNotification(notification);
         }
     }

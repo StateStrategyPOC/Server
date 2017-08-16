@@ -26,8 +26,10 @@ public class DiscardObjCardEffect extends ActionEffect {
         RRNotification lastNotification = game.getLastRRclientNotification();
         game.setLastRRclientNotification(new RRNotification(lastNotification.getActionResult(), "You have discarded a "
                 + discardedCard.toString() + " object card", lastNotification.getDrawnCards(), lastNotification.getLightedSectors(), lastNotification.getAvailableGames(), lastNotification.getPlayerToken(), lastNotification.getGameMapName()));
-        game.getLastPSclientNotification().setMessage("[GLOBAL MESSAGE]: "
-                + currentPlayer.getName() + " has discarded an object card\n");
+        PSNotification lastPNotification = game.getLastPSclientNotification();
+        game.setLastPSclientNotification(new PSNotification("[GLOBAL MESSAGE]: "
+                + currentPlayer.getName() + " has discarded an object card\n",lastPNotification.getDeadPlayers(),lastPNotification.getAttackedPlayers(),lastPNotification.isHumanWin(),lastPNotification.isAlienWin(),lastPNotification.getEscapedPlayer(),lastPNotification.isGameNeedsToStart(),lastPNotification.isTurnNeedsToStart(),lastPNotification.isGameCanBeStarted(),lastPNotification.isTurnNeedsToEnd(),lastPNotification.getGameMapName()));
+
         //
         game.setLastAction(castedAction);
         return true;

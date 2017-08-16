@@ -1,6 +1,6 @@
 package server_side_policies;
 
-import common.PSClientNotification;
+import common.PSNotification;
 import server.Game;
 import server.PubSubHandler;
 import server_store.ServerState;
@@ -18,15 +18,19 @@ public class GameTurnTimeoutSidePolicy implements SidePolicy {
         //Notification sending
         for (PubSubHandler handler : game.getPubSubHandlers()) {
             if (handler.getPlayerToken().equals(game.getCurrentPlayer().getPlayerToken())) {
-                PSClientNotification notification = new PSClientNotification();
-                notification.setTurnNeedToStart(true);
-                notification.setMessage(game.getLastPSclientNotification().getMessage());
+
+
+
+                PSNotification notification = new PSNotification(game.getLastPSclientNotification().getMessage(),
+                        null,null,false,false,null,
+                false,true,false,false,null);
                 handler.queueNotification(notification);
             }
             else if (handler.getPlayerToken().equals(game.getPreviousPlayer().getPlayerToken())) {
-                PSClientNotification notification = new PSClientNotification();
-                notification.setTurnNeedToEnd(true);
-                notification.setMessage(game.getLastPSclientNotification().getMessage());
+                PSNotification notification = new PSNotification(game.getLastPSclientNotification().getMessage(),
+                        null,null,false,false,null,
+                        false,false,false,true,null);
+
                 handler.queueNotification(notification);
             }
         }

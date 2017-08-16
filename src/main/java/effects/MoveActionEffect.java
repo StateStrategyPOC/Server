@@ -60,8 +60,10 @@ public class MoveActionEffect extends ActionEffect {
                 RRNotification lastNotification = game.getLastRRclientNotification();
                 game.setLastRRclientNotification(new RRNotification(lastNotification.getActionResult(),"You have moved to sector "
                         + targetSector.getCoordinate().toString(),lastNotification.getDrawnCards(),lastNotification.getLightedSectors(),lastNotification.getAvailableGames(),lastNotification.getPlayerToken(),lastNotification.getGameMapName()));
-                game.getLastPSclientNotification().setMessage("[GLOBAL MESSAGE]: "
-                        + currentPlayer.getName() + " has moved.");
+                PSNotification lastPNotification = game.getLastPSclientNotification();
+                game.setLastPSclientNotification(new PSNotification("[GLOBAL MESSAGE]: "
+                        + currentPlayer.getName() + " has moved.",lastPNotification.getDeadPlayers(),lastPNotification.getAttackedPlayers(),lastPNotification.isHumanWin(),lastPNotification.isAlienWin(),lastPNotification.getEscapedPlayer(),lastPNotification.isGameNeedsToStart(),lastPNotification.isTurnNeedsToStart(),lastPNotification.isGameCanBeStarted(),lastPNotification.isTurnNeedsToEnd(),lastPNotification.getGameMapName()));
+
                 // If the target sector is a dangerous sector continue the
                 // execution
                 // of the action

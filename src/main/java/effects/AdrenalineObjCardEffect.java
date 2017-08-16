@@ -2,6 +2,7 @@ package effects;
 
 
 import common.ObjectCard;
+import common.PSNotification;
 import common.Player;
 import common.RRNotification;
 import server.Game;
@@ -22,9 +23,10 @@ public class AdrenalineObjCardEffect extends ObjectCardEffect {
 		// Notifications setting
         RRNotification lastNotification = game.getLastRRclientNotification();
         game.setLastRRclientNotification(new RRNotification(lastNotification.getActionResult(),"You will moveToSector by two sector this turn\n",lastNotification.getDrawnCards(),lastNotification.getLightedSectors(),lastNotification.getAvailableGames(),lastNotification.getPlayerToken(),lastNotification.getGameMapName()));
-		game.getLastPSclientNotification().setMessage("[GLOBAL MESSAGE]: "
-				+ currentPlayer.getName()
-				+ " has used an adrenaline object card\n");
+        PSNotification lastPNotification = game.getLastPSclientNotification();
+        game.setLastPSclientNotification(new PSNotification("[GLOBAL MESSAGE]: "
+                + currentPlayer.getName()
+                + " has used an adrenaline object card\n",lastPNotification.getDeadPlayers(),lastPNotification.getAttackedPlayers(),lastPNotification.isHumanWin(),lastPNotification.isAlienWin(),lastPNotification.getEscapedPlayer(),lastPNotification.isGameNeedsToStart(),lastPNotification.isTurnNeedsToStart(),lastPNotification.isGameCanBeStarted(),lastPNotification.isTurnNeedsToEnd(),lastPNotification.getGameMapName()));
 		currentPlayer.setAdrenalined(true);
 		return true;
 	}

@@ -1,6 +1,6 @@
 package server;
 
-import common.PSClientNotification;
+import common.PSNotification;
 import common.PlayerToken;
 
 import java.io.IOException;
@@ -8,8 +8,6 @@ import java.io.ObjectOutputStream;
 import java.net.Socket;
 import java.util.Queue;
 import java.util.concurrent.ArrayBlockingQueue;
-import java.util.concurrent.ConcurrentLinkedQueue;
-import java.util.concurrent.LinkedBlockingQueue;
 
 /**
  * Manages a persistent connection with a client in the logic of the publisher/subscriber pattern
@@ -19,7 +17,7 @@ public class PubSubHandler extends Thread {
     // The socket associated to the handler
     private final Socket socket;
     // A queue of messages to send to the subscriber
-    private final Queue<PSClientNotification> buffer;
+    private final Queue<PSNotification> buffer;
     private final PlayerToken playerToken;
     // The object output stream used to perform the remote method call on the
     // subscriber
@@ -57,7 +55,7 @@ public class PubSubHandler extends Thread {
      *            The remote method call to be performed on the subscriber
      * @throws IOException Networking problem.
      */
-    private void perform(PSClientNotification remoteMethodCall) throws IOException {
+    private void perform(PSNotification remoteMethodCall) throws IOException {
         this.objectOutputStream.writeObject(remoteMethodCall);
         this.objectOutputStream.flush();
     }
@@ -70,7 +68,7 @@ public class PubSubHandler extends Thread {
      */
     public void run() {
         while (this.runningFlag) {
-            PSClientNotification remoteMethodCall = buffer.poll();
+            PSNotification remoteMethodCall = buffer.poll();
             if (remoteMethodCall != null){
                 try {
                     this.perform(remoteMethodCall);
@@ -111,8 +109,8 @@ public class PubSubHandler extends Thread {
         return playerToken;
     }
 
-    public void queueNotification(PSClientNotification psClientNotification) {
-        buffer.add(psClientNotification);
+    public void queueNotification(PSNotification psNotification) {
+        buffer.add(psNotification);
         synchronized (buffer) {
             buffer.notify();
         }

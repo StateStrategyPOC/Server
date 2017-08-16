@@ -25,9 +25,9 @@ public class TeleportObjCardEffect extends ObjectCardEffect {
 		humanSector.addPlayer(curr);
 		RRNotification lastNotification = game.getLastRRclientNotification();
 		game.setLastRRclientNotification(new RRNotification(lastNotification.getActionResult(),"You've teleported to the human sector",lastNotification.getDrawnCards(),lastNotification.getLightedSectors(),lastNotification.getAvailableGames(),lastNotification.getPlayerToken(),lastNotification.getGameMapName()));
-		game.getLastPSclientNotification()
-				.setMessage(game.getLastPSclientNotification().getMessage()
-						+ "\n[GLOBAL MESSAGE]: He/She will be teleported to the human sector");
+		PSNotification lastPNotification = game.getLastPSclientNotification();
+		String lastMessage = lastPNotification.getMessage();
+		game.setLastPSclientNotification(new PSNotification(lastMessage+ "\n[GLOBAL MESSAGE]: He/She will be teleported to the human sector",lastPNotification.getDeadPlayers(),lastPNotification.getAttackedPlayers(),lastPNotification.isHumanWin(),lastPNotification.isAlienWin(),lastPNotification.getEscapedPlayer(),lastPNotification.isGameNeedsToStart(),lastPNotification.isTurnNeedsToStart(),lastPNotification.isGameCanBeStarted(),lastPNotification.isTurnNeedsToEnd(),lastPNotification.getGameMapName()));
 		return true;
 	}
 }

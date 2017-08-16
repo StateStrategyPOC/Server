@@ -1,6 +1,7 @@
 package effects;
 
 import common.LocalNoiseSectorCard;
+import common.PSNotification;
 import common.Sector;
 import common.SectorCard;
 import server.Game;
@@ -22,10 +23,12 @@ public class LocalNoiseSectorCardEffect extends SectorCardEffect {
 		// Notify all the player
 		String name = game.getCurrentPlayer().getName();
 		Sector target = game.getCurrentPlayer().getCurrentSector();
-		game.getLastPSclientNotification().setMessage(game.getLastPSclientNotification().getMessage()
-				+ "\n[GLOBAL MESSAGE]: " + name
+		PSNotification lastPNotification = game.getLastPSclientNotification();
+		String lastMessage = lastPNotification.getMessage();
+		game.setLastPSclientNotification(new PSNotification(lastMessage+ "\n[GLOBAL MESSAGE]: " + name
 				+ " has made noise in sector "
-				+ target.getCoordinate().toString());
+				+ target.getCoordinate().toString(),lastPNotification.getDeadPlayers(),lastPNotification.getAttackedPlayers(),lastPNotification.isHumanWin(),lastPNotification.isAlienWin(),lastPNotification.getEscapedPlayer(),lastPNotification.isGameNeedsToStart(),lastPNotification.isTurnNeedsToStart(),lastPNotification.isGameCanBeStarted(),lastPNotification.isTurnNeedsToEnd(),lastPNotification.getGameMapName()));
+
 		return true;
 	}
 }

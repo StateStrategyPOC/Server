@@ -1,6 +1,7 @@
 package effects;
 
 
+import common.PSNotification;
 import common.RRNotification;
 import common.SectorCard;
 import common.SilenceSectorCard;
@@ -22,9 +23,10 @@ public class SilenceSectorCardEffect extends SectorCardEffect {
 	public static boolean executeEffect(Game game, SectorCard sectorCard) {
 		RRNotification lastNotification = game.getLastRRclientNotification();
 		game.setLastRRclientNotification(new RRNotification(lastNotification.getActionResult(),"You've said SILENCE",lastNotification.getDrawnCards(),lastNotification.getLightedSectors(),lastNotification.getAvailableGames(),lastNotification.getPlayerToken(),lastNotification.getGameMapName()));
-		game.getLastPSclientNotification().setMessage(game.getLastPSclientNotification().getMessage()
-				+ "\n[GLOBAL MESSAGE]: " + game.getCurrentPlayer().getName()
-				+ " says SILENCE!");
+		PSNotification lastPNotification = game.getLastPSclientNotification();
+		String lastMessage = lastPNotification.getMessage();
+		game.setLastPSclientNotification(new PSNotification(lastMessage+ "\n[GLOBAL MESSAGE]: " + game.getCurrentPlayer().getName()
+				+ " says SILENCE!",lastPNotification.getDeadPlayers(),lastPNotification.getAttackedPlayers(),lastPNotification.isHumanWin(),lastPNotification.isAlienWin(),lastPNotification.getEscapedPlayer(),lastPNotification.isGameNeedsToStart(),lastPNotification.isTurnNeedsToStart(),lastPNotification.isGameCanBeStarted(),lastPNotification.isTurnNeedsToEnd(),lastPNotification.getGameMapName()));
 		return true;
 	}
 

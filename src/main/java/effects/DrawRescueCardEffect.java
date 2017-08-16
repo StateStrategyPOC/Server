@@ -18,22 +18,25 @@ import java.util.ArrayList;
 public class DrawRescueCardEffect extends ActionEffect {
 	public static boolean executeEffect(Game game) {
 		RescueCard card = (RescueCard) game.getRescueDeck().popCard();
-		if (card.getType() == RescueType.GREEN) {
+		String message = "";
+        PSNotification lastPNotification = game.getLastPSclientNotification();
+        String lastMessage = lastPNotification.getMessage();
+
+        if (card.getType() == RescueType.GREEN) {
 			game.getCurrentPlayer().setPlayerState(PlayerState.ESCAPED);
 			game.getCurrentPlayer().getCurrentSector()
 					.setSectorType(SectorType.CLOSED_RESCUE);
-			game.getLastPSclientNotification().setMessage(game.getLastPSclientNotification().getMessage()
-					+ "\n[GLOBAL MESSAGE]: "
+			message = "\n[GLOBAL MESSAGE]: "
 					+ game.getCurrentPlayer().getName()
-					+ " has escaped from aliens!");
+					+ " has escaped from aliens!";
 			RRNotification lastNotification = game.getLastRRclientNotification();
 			ArrayList<Card> drawnCards = lastNotification.getDrawnCards();
 			drawnCards.add(card);
 			game.setLastRRclientNotification(new RRNotification(lastNotification.getActionResult(),lastNotification.getMessage(),
 					drawnCards,lastNotification.getLightedSectors(),lastNotification.getAvailableGames(),lastNotification.getPlayerToken(),lastNotification.getGameMapName()));
-			game.getLastPSclientNotification().setEscapedPlayer(game.getCurrentPlayer().getPlayerToken());
+            game.setLastPSclientNotification(new PSNotification(lastMessage+message,lastPNotification.getDeadPlayers(),lastPNotification.getAttackedPlayers(),lastPNotification.isHumanWin(),lastPNotification.isAlienWin(),game.getCurrentPlayer().getPlayerToken(),lastPNotification.isGameNeedsToStart(),lastPNotification.isTurnNeedsToStart(),lastPNotification.isGameCanBeStarted(),lastPNotification.isTurnNeedsToEnd(),lastPNotification.getGameMapName()));
+
 			EndTurnEffect.executeEffect(game, new EndTurnAction());
-			return true;
 		} else {
 			RRNotification lastNotification = game.getLastRRclientNotification();
 			ArrayList<Card> drawnCards = lastNotification.getDrawnCards();
@@ -41,13 +44,13 @@ public class DrawRescueCardEffect extends ActionEffect {
 			game.setLastRRclientNotification(new RRNotification(lastNotification.getActionResult(),lastNotification.getMessage(),
 					drawnCards,lastNotification.getLightedSectors(),lastNotification.getAvailableGames(),lastNotification.getPlayerToken(),lastNotification.getGameMapName()));			game.getCurrentPlayer().getCurrentSector()
 					.setSectorType(SectorType.CLOSED_RESCUE);
-			game.getLastPSclientNotification().setMessage(game.getLastPSclientNotification().getMessage()
-					+ "\n[GLOBAL MESSAGE]: "
+            message = "\n[GLOBAL MESSAGE]: "
 					+ game.getCurrentPlayer().getName()
-					+ " has not escaped from aliens");
-			return false;
-		}
+					+ " has not escaped from aliens";
+            game.setLastPSclientNotification(new PSNotification(lastMessage+message,lastPNotification.getDeadPlayers(),lastPNotification.getAttackedPlayers(),lastPNotification.isHumanWin(),lastPNotification.isAlienWin(),lastPNotification.getEscapedPlayer(),lastPNotification.isGameNeedsToStart(),lastPNotification.isTurnNeedsToStart(),lastPNotification.isGameCanBeStarted(),lastPNotification.isTurnNeedsToEnd(),lastPNotification.getGameMapName()));
 
+        }
+        return true;
 	}
 
 }

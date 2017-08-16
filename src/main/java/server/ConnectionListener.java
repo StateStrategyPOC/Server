@@ -35,13 +35,12 @@ public class ConnectionListener{
      *
      * @throws IOException Networking problem.
      */
-    public void init() throws IOException {
+    public void listen() throws IOException {
         ServerSocket serverSocket = new ServerSocket(this.SERVER_STORE.getState().getTcpPort());
         Socket socket;
         while(this.SERVER_STORE.getState().isServerListening()){
             socket = serverSocket.accept();
             ReqRespHandler reqRespHandler = new ReqRespHandler(socket);
-            //this.SERVER_STORE.propagateAction(new ServerAddReqRespHandlerAction(reqRespHandler));
             this.reqRespThreadPool.submit(reqRespHandler);
         }
     }

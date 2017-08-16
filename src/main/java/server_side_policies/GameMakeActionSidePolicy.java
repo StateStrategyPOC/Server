@@ -1,6 +1,6 @@
 package server_side_policies;
 
-import common.PSClientNotification;
+import common.PSNotification;
 import common.StoreAction;
 import server.Game;
 import server.Helpers;
@@ -26,9 +26,7 @@ public class GameMakeActionSidePolicy implements SidePolicy {
         }
         for (PubSubHandler handler : game.getPubSubHandlers()) {
             if (castedAction.getAction().getActionIdentifier().equals("@GAMEACTION_END_TURN") && handler.getPlayerToken().equals(game.getCurrentPlayer().getPlayerToken())){
-                    PSClientNotification notification = new PSClientNotification();
-                    notification.setMessage(game.getLastPSclientNotification().getMessage());
-                    notification.setTurnNeedToStart(true);
+                    PSNotification notification = new PSNotification(game.getLastPSclientNotification().getMessage(), null, null, false, false, null, false, true, false, false, null);
                     handler.queueNotification(notification);
             }
             else {

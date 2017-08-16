@@ -37,7 +37,7 @@ public class GameActionMapper {
 	 * action-effect object
 	 */
 	private GameActionMapper() {
-		// Mapper init
+		// Mapper listen
 		fromActionToActionEffect = new HashMap<>();
 		// Mapper filling
 		fromActionToActionEffect.put(MoveAction.class, MoveActionEffect.class);

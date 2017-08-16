@@ -35,7 +35,6 @@ public class GameMakeActionStatePolicy implements StatePolicy {
             game.setLastRRclientNotification(notification);
             return state;
         }
-        game.setLastPSclientNotification(new PSClientNotification());
         // Executes the action's associated logic and get the result
         try {
             Method executeMethod = GameActionMapper.getInstance().getEffect(gameAction.getClass()).getMethod("executeEffect", Game.class, StoreAction.class);
@@ -69,21 +68,41 @@ public class GameMakeActionStatePolicy implements StatePolicy {
         game.setDidAlienWin(checkWinConditions(PlayerType.ALIEN, game));
         //game.getCurrentTimer().cancel();
         //game.setCurrentTimer(new Timer());
+        PSNotification lastNotification;
         if (game.isDidHumansWin()) {
-            game.getLastPSclientNotification()
-                    .setMessage(game.getLastPSclientNotification().getMessage()
-                            + "\n[GLOBAL MESSAGE]: The game has ended, HUMANS WIN!");
+            lastNotification = game.getLastPSclientNotification();
+            game.setLastPSclientNotification(new PSNotification(
+                    lastNotification.getMessage()+"\n[GLOBAL MESSAGE]: The game has ended, HUMANS WIN!",
+                    lastNotification.getDeadPlayers(),
+                    lastNotification.getAttackedPlayers(),
+                    true,
+                    false,
+                    lastNotification.getEscapedPlayer(),
+                    lastNotification.isGameNeedsToStart(),
+                    lastNotification.isTurnNeedsToStart(),
+                    lastNotification.isGameCanBeStarted(),
+                    lastNotification.isTurnNeedsToEnd(),
+                    lastNotification.getGameMapName()
+            ));
         }
         if (game.isDidAlienWin()) {
-            game.getLastPSclientNotification()
-                    .setMessage(game.getLastPSclientNotification().getMessage()
-                            + "\n[GLOBAL MESSAGE]: The game has ended, ALIENS WIN!");
+            lastNotification = game.getLastPSclientNotification();
+            game.setLastPSclientNotification(new PSNotification(
+                    lastNotification.getMessage()+"\n[GLOBAL MESSAGE]: The game has ended, ALIENS WIN!",
+                    lastNotification.getDeadPlayers(),
+                    lastNotification.getAttackedPlayers(),
+                    lastNotification.isHumanWin(),
+                    true,
+                    lastNotification.getEscapedPlayer(),
+                    lastNotification.isGameNeedsToStart(),
+                    lastNotification.isTurnNeedsToStart(),
+                    lastNotification.isGameCanBeStarted(),
+                    lastNotification.isTurnNeedsToEnd(),
+                    lastNotification.getGameMapName()
+            ));
 
         }
-        if (game.isDidAlienWin() || game.isDidHumansWin()) {
-            game.getLastPSclientNotification().setAlienWins(game.isDidAlienWin());
-            game.getLastPSclientNotification().setHumanWins(game.isDidHumansWin());
-        }
+
 
        return state;
     }

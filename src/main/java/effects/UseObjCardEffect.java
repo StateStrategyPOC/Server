@@ -46,7 +46,7 @@ public class UseObjCardEffect extends ActionEffect {
         if (beforeMoveCards.size() == 0 && afterMoveCards.size() == 0) {
             produceUtilsDataStructure();
         }
-        PSClientNotification psNotification = new PSClientNotification();
+        //PSNotification psNotification = new PSNotification(message, deadPlayers, attackedPlayers, humanWins, alienWins, escapedPlayer, gameNeedToStart, gameId, turnNeedToStart, gameCanBeStarted, turnNeedToEnd, gameMapName);
         // Checks if the card can be played before moveToSector or after moveToSector
         if (!game.getCurrentPlayer().isHasMoved()) {
             if (!beforeMoveCards.contains(castedAction.getObjectCard().getClass()))
@@ -60,10 +60,9 @@ public class UseObjCardEffect extends ActionEffect {
             RRNotification lastNotification = game.getLastRRclientNotification();
             game.setLastRRclientNotification(new RRNotification(lastNotification.getActionResult(),"You have used a "
                     + castedAction.getObjectCard().toString(),lastNotification.getDrawnCards(),lastNotification.getLightedSectors(),lastNotification.getAvailableGames(),lastNotification.getPlayerToken(),lastNotification.getGameMapName()));
-
-            psNotification.setMessage("[GLOBAL MESSAGE]: "
-                    + game.getCurrentPlayer().getName() + " has used a "
-                    + castedAction.getObjectCard().toString());
+            String message = "[GLOBAL MESSAGE]: "+ game.getCurrentPlayer().getName() + " has used a "
+                    + castedAction.getObjectCard().toString();
+            PSNotification psNotification = new PSNotification(message, null,null,false,false,null,false,false,false,false,null);
             game.getObjectDeck().addToDiscard(castedAction.getObjectCard());
             game.getCurrentPlayer().getPrivateDeck()
                     .removeCard(castedAction.getObjectCard());

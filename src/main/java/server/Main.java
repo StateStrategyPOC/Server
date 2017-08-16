@@ -10,7 +10,7 @@ public class Main {
 
     public static void main(String[] args) {
         try {
-            ConnectionListener.getInstance().init();
+            ConnectionListener.getInstance().listen();
         } catch (IOException e) {
             e.printStackTrace();
         }
