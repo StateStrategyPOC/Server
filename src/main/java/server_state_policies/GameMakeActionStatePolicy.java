@@ -14,7 +14,6 @@ import server_store_actions.GameMakeActionAction;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.List;
-import java.util.Timer;
 
 public class GameMakeActionStatePolicy implements StatePolicy {
     @Override
@@ -27,27 +26,28 @@ public class GameMakeActionStatePolicy implements StatePolicy {
             return state;
         }
         if (!game.getCurrentPlayer().getPlayerToken().equals(castedAction.getPlayerToken())){
-            RRClientNotification notification = new RRClientNotification(false);
-            notification.setMessage("You cannot perform this action");
+            RRNotification notification = new RRNotification(false, "You cannot perform this action",null,null,null,null,null);
             game.setLastRRclientNotification(notification);
             return state;
         }
         if (!game.getNextActions().contains(gameAction.getActionIdentifier())){
-            game.setLastRRclientNotification(new RRClientNotification(false));
+            RRNotification notification = new RRNotification(false, "You cannot perform this action",null,null,null,null,null);
+            game.setLastRRclientNotification(notification);
             return state;
         }
-        game.setLastRRclientNotification(new RRClientNotification());
         game.setLastPSclientNotification(new PSClientNotification());
         // Executes the action's associated logic and get the result
         try {
             Method executeMethod = GameActionMapper.getInstance().getEffect(gameAction.getClass()).getMethod("executeEffect", Game.class, StoreAction.class);
             gameActionResult = (boolean) executeMethod.invoke(null,game, castedAction.getAction());
-            game.getLastRRclientNotification().setActionResult(gameActionResult);
+            RRNotification lastNotification = game.getLastRRclientNotification();
+            game.setLastRRclientNotification(new RRNotification(gameActionResult,lastNotification.getMessage(),lastNotification.getDrawnCards(),lastNotification.getLightedSectors(),lastNotification.getAvailableGames(),lastNotification.getPlayerToken(),lastNotification.getGameMapName()));
         } catch (NoSuchMethodException | IllegalAccessException | InvocationTargetException e) {
             e.printStackTrace();
         }
         if (!gameActionResult) {
-            game.getLastRRclientNotification().setMessage("You cannot perform this action");
+            RRNotification notification = new RRNotification(false, "You cannot perform this action",null,null,null,null,null);
+            game.setLastRRclientNotification(notification);
             return state;
         }
         if (!game.getLastAction().getActionIdentifier().equals("@GAMEACTION_END_TURN")) {

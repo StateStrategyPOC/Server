@@ -1,11 +1,10 @@
 package effects;
 
-import common.DrawSectorCardAction;
-import common.GlobalNoiseSectorCard;
-import common.SectorCard;
-import common.UseSectorCardAction;
+import common.*;
 import decks.SectorDeck;
 import server.Game;
+
+import java.util.ArrayList;
 
 /**
  * This class represents the effect associated to a draw action from the sector
@@ -28,7 +27,11 @@ public class DrawSectorCardEffect extends ActionEffect {
 		// Draws a new card from the deck
 		SectorCard sectorCard = (SectorCard) sectorDeck.popCard();
 		// Notify the client
-		game.getLastRRclientNotification().addCard(sectorCard);
+		RRNotification lastNotification = game.getLastRRclientNotification();
+		ArrayList<Card> drawnCards = lastNotification.getDrawnCards();
+		drawnCards.add(sectorCard);
+		game.setLastRRclientNotification(new RRNotification(lastNotification.getActionResult(),lastNotification.getMessage(),
+				drawnCards,lastNotification.getLightedSectors(),lastNotification.getAvailableGames(),lastNotification.getPlayerToken(),lastNotification.getGameMapName()));
 
 		game.getLastPSclientNotification().setMessage(game.getLastPSclientNotification().getMessage()
 				+ "\n[GLOBAL MESSAGE]: " + game.getCurrentPlayer().getName()

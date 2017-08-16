@@ -3,7 +3,6 @@ package server_side_policies;
 import common.*;
 import server.Game;
 import server.Helpers;
-import server.PubSubHandler;
 import server_store.ServerState;
 import server_store.ServerStore;
 import server_store.SidePolicy;
@@ -17,18 +16,18 @@ public class GameOnDemandStartSidePolicy implements SidePolicy {
         GameOnDemandStartAction castedAction = (GameOnDemandStartAction) action;
         ServerStore SERVER_STORE = ServerStore.getInstance();
         Game game = Helpers.findGameById(castedAction.getPlayerToken().getGameId(), state.getGames());
-        RRClientNotification rrClientNotification;
+        RRNotification rrNotification;
         if (game == null) {
             return;
         }
         if (game.getCurrentPlayer().getPlayerToken().equals(castedAction.getPlayerToken())) {
             SERVER_STORE.propagateAction(new GameStartGameAction(game));
-            rrClientNotification = new RRClientNotification(true);
+            rrNotification = new RRNotification(true,null,null,null,null,null,null);
 
         } else {
-            rrClientNotification = new RRClientNotification(false);
+            rrNotification = new RRNotification(false,null,null,null,null,null,null);
 
         }
-        game.setLastRRclientNotification(rrClientNotification);
+        game.setLastRRclientNotification(rrNotification);
     }
 }

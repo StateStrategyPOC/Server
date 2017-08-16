@@ -30,7 +30,7 @@ public class Game {
     private GameMap gameMap;
     private StoreAction lastAction;
     private List<String> nextActions;
-    private RRClientNotification lastRRclientNotification;
+    private RRNotification lastRRclientNotification;
     private PSClientNotification lastPSclientNotification;
     private Timer currentTimer;
     private boolean didAlienWin;
@@ -137,11 +137,11 @@ public class Game {
         this.nextActions = nextActions;
     }
 
-    public RRClientNotification getLastRRclientNotification() {
+    public RRNotification getLastRRclientNotification() {
         return lastRRclientNotification;
     }
 
-    public void setLastRRclientNotification(RRClientNotification lastRRclientNotification) {
+    public void setLastRRclientNotification(RRNotification lastRRclientNotification) {
         this.lastRRclientNotification = lastRRclientNotification;
     }
 

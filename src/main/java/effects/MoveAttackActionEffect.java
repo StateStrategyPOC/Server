@@ -97,7 +97,9 @@ public class MoveAttackActionEffect extends ActionEffect {
                     rrMessage.append("You have attacked sector ").append(targetSector.getCoordinate().toString()).append(" but it contained no players.");
                     psMessage.append("[GLOBAL MESSAGE]: ").append(currentPlayer.getName()).append(" has attacked sector ").append(targetSector.getCoordinate().toString()).append(" but it contained no players.");
                 }
-                game.getLastRRclientNotification().setMessage(rrMessage.toString());
+                RRNotification lastNotification = game.getLastRRclientNotification();
+                game.setLastRRclientNotification(new RRNotification(lastNotification.getActionResult(),rrMessage.toString(),lastNotification.getDrawnCards(),lastNotification.getLightedSectors(),lastNotification.getAvailableGames(),lastNotification.getPlayerToken(),lastNotification.getGameMapName()));
+
                 game.getLastPSclientNotification().setMessage(psMessage.toString());
                 for (Player player : deadPlayers){
                     targetSector.removePlayer(player);

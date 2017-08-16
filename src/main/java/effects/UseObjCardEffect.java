@@ -46,7 +46,6 @@ public class UseObjCardEffect extends ActionEffect {
         if (beforeMoveCards.size() == 0 && afterMoveCards.size() == 0) {
             produceUtilsDataStructure();
         }
-        RRClientNotification clientNotification = new RRClientNotification();
         PSClientNotification psNotification = new PSClientNotification();
         // Checks if the card can be played before moveToSector or after moveToSector
         if (!game.getCurrentPlayer().isHasMoved()) {
@@ -58,8 +57,10 @@ public class UseObjCardEffect extends ActionEffect {
         }
 
         try {
-            clientNotification.setMessage("You have used a "
-                    + castedAction.getObjectCard().toString());
+            RRNotification lastNotification = game.getLastRRclientNotification();
+            game.setLastRRclientNotification(new RRNotification(lastNotification.getActionResult(),"You have used a "
+                    + castedAction.getObjectCard().toString(),lastNotification.getDrawnCards(),lastNotification.getLightedSectors(),lastNotification.getAvailableGames(),lastNotification.getPlayerToken(),lastNotification.getGameMapName()));
+
             psNotification.setMessage("[GLOBAL MESSAGE]: "
                     + game.getCurrentPlayer().getName() + " has used a "
                     + castedAction.getObjectCard().toString());
@@ -67,7 +68,6 @@ public class UseObjCardEffect extends ActionEffect {
             game.getCurrentPlayer().getPrivateDeck()
                     .removeCard(castedAction.getObjectCard());
             game.setLastAction(action);
-            game.setLastRRclientNotification(clientNotification);
             game.setLastPSclientNotification(psNotification);
             Method executeMethod = ObjectCardsMapper.getInstance().getEffect(castedAction.getObjectCard()).getMethod("executeEffect", Game.class, ObjectCard.class);
             return (boolean) executeMethod.invoke(null,game, castedAction.getObjectCard());

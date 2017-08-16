@@ -3,7 +3,7 @@ package server;
 import common.ActionOnTheWire;
 import common.GamePublicData;
 import common.PlayerToken;
-import common.RRClientNotification;
+import common.RRNotification;
 import server_store.ServerStore;
 import common.StoreAction;
 import server_store_actions.*;
@@ -63,7 +63,7 @@ public class ReqRespHandler extends Thread {
         return action;
     }
 
-    private void sendRequest(RRClientNotification response, ObjectOutputStream outputStream)  {
+    private void sendRequest(RRNotification response, ObjectOutputStream outputStream)  {
         try {
             outputStream.writeObject(response);
             outputStream.flush();
@@ -82,28 +82,28 @@ public class ReqRespHandler extends Thread {
 
     }
     private void resolveClientRequest(ActionOnTheWire request){
-        if (request.getIdentifierMapper().equals(ServerMethodsNameProvider.getGames())){
+        if (request.getActionIdentifier().equals(ServerMethodsNameProvider.getGames())){
             ArrayList<GamePublicData> gamesList = new ArrayList<>();
             for (Game game : this.SERVER_STORE.getState().getGames()) {
                 gamesList.add(game.getGamePublicData());
             }
-            this.sendRequest(new RRClientNotification(true,null,null,gamesList,null,null),this.objectOutputStream);
+            this.sendRequest(new RRNotification(true, message, null,null,gamesList,null,null),this.objectOutputStream);
             this.closeConnection(this.socket,this.objectOutputStream,this.objectInputStream);
         }
-        else if (request.getIdentifierMapper().equals(ServerMethodsNameProvider.joinGame())){
+        else if (request.getActionIdentifier().equals(ServerMethodsNameProvider.joinGame())){
             Integer gameId = (Integer) request.getParameters().get(0);
             String playerName = (String) request.getParameters().get(1);
             this.SERVER_STORE.propagateAction(new GameJoinGameAction(gameId,playerName));
             Game game = Helpers.findGameById(gameId,this.SERVER_STORE.getState().getGames());
             if (game == null){
-                this.sendRequest(new RRClientNotification(false),this.objectOutputStream);
+                this.sendRequest(new RRNotification(false),this.objectOutputStream);
                 return;
             }
             this.sendRequest(game.getLastRRclientNotification(),this.objectOutputStream);
             this.closeConnection(this.socket,this.objectOutputStream,this.objectInputStream);
 
         }
-        else if (request.getIdentifierMapper().equals(ServerMethodsNameProvider.joinNewGame())){
+        else if (request.getActionIdentifier().equals(ServerMethodsNameProvider.joinNewGame())){
             String gameMapName = (String) request.getParameters().get(0);
             String playerName = (String) request.getParameters().get(1);
             Game game = new Game(gameMapName);
@@ -113,49 +113,49 @@ public class ReqRespHandler extends Thread {
             this.closeConnection(this.socket,this.objectOutputStream,this.objectInputStream);
 
         }
-        else if (request.getIdentifierMapper().equals(ServerMethodsNameProvider.makeAction())){
+        else if (request.getActionIdentifier().equals(ServerMethodsNameProvider.makeAction())){
             StoreAction action = (StoreAction) request.getParameters().get(0);
             PlayerToken playerToken = (PlayerToken) request.getParameters().get(1);
             this.SERVER_STORE.propagateAction(new GameMakeActionAction(playerToken,action));
             Game game = Helpers.findGameById(playerToken.getGameId(),this.SERVER_STORE.getState().getGames());
             if (game == null){
-                this.sendRequest(new RRClientNotification(false),this.objectOutputStream);
+                this.sendRequest(new RRNotification(false),this.objectOutputStream);
                 this.closeConnection(this.socket,this.objectOutputStream,this.objectInputStream);
                 return;
             }
             this.sendRequest(game.getLastRRclientNotification(),this.objectOutputStream);
             this.closeConnection(this.socket,this.objectOutputStream,this.objectInputStream);
         }
-        else if (request.getIdentifierMapper().equals(ServerMethodsNameProvider.onDemandGameStart())){
+        else if (request.getActionIdentifier().equals(ServerMethodsNameProvider.onDemandGameStart())){
             PlayerToken playerToken = (PlayerToken) request.getParameters().get(0);
             this.SERVER_STORE.propagateAction(new GameOnDemandStartAction(playerToken));
             Game game = Helpers.findGameById(playerToken.getGameId(),this.SERVER_STORE.getState().getGames());
             if (game == null){
-                this.sendRequest(new RRClientNotification(false),this.objectOutputStream);
+                this.sendRequest(new RRNotification(false),this.objectOutputStream);
                 this.closeConnection(this.socket,this.objectOutputStream,this.objectInputStream);
                 return;
             }
             //this.sendRequest(game.getLastRRclientNotification(),this.objectOutputStream);
             this.closeConnection(this.socket,this.objectOutputStream,this.objectInputStream);
         }
-        else if (request.getIdentifierMapper().equals(ServerMethodsNameProvider.publishChatMsg())){
+        else if (request.getActionIdentifier().equals(ServerMethodsNameProvider.publishChatMsg())){
             String message = (String) request.getParameters().get(0);
             PlayerToken playerToken = (PlayerToken) request.getParameters().get(1);
             this.SERVER_STORE.propagateAction(new GamePostMsgAction(message,playerToken));
             Game game = Helpers.findGameById(playerToken.getGameId(),this.SERVER_STORE.getState().getGames());
             if (game == null){
-                this.sendRequest(new RRClientNotification(false),this.objectOutputStream);
+                this.sendRequest(new RRNotification(false),this.objectOutputStream);
                 this.closeConnection(this.socket,this.objectOutputStream,this.objectInputStream);
                 return;
             }
             this.sendRequest(game.getLastRRclientNotification(),this.objectOutputStream);
             this.closeConnection(this.socket,this.objectOutputStream,this.objectInputStream);
         }
-        else if (request.getIdentifierMapper().equals(ServerMethodsNameProvider.subscribe())){
+        else if (request.getActionIdentifier().equals(ServerMethodsNameProvider.subscribe())){
             PlayerToken playerToken = (PlayerToken) request.getParameters().get(0);
             Game game = Helpers.findGameById(playerToken.getGameId(),this.SERVER_STORE.getState().getGames());
             if (game == null){
-                this.sendRequest(new RRClientNotification(false),this.objectOutputStream);
+                this.sendRequest(new RRNotification(false),this.objectOutputStream);
                 return;
             }
             PubSubHandler handler = new PubSubHandler(socket,objectOutputStream,playerToken);

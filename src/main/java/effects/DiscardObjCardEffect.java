@@ -1,37 +1,35 @@
 package effects;
 
-import common.DiscardAction;
-import common.ObjectCard;
-import common.Player;
+import common.*;
 import decks.ObjectDeck;
 import server.Game;
-import common.StoreAction;
 
 /**
  * Represents the effect of discarding an object card
- * 
- * @see ActionEffect
- * @see DiscardAction
+ *
  * @author Andrea Sessa
  * @author Giorgio Pea
  * @version 1.2
+ * @see ActionEffect
+ * @see DiscardAction
  */
 public class DiscardObjCardEffect extends ActionEffect {
-	public static boolean executeEffect(Game game, StoreAction action) {
-		DiscardAction castedAction = (DiscardAction) action;
-		Player currentPlayer = game.getCurrentPlayer();
-		ObjectDeck objectDeck = game.getObjectDeck();
-		ObjectCard discardedCard = castedAction.cardToDiscard;
-		currentPlayer.getPrivateDeck().removeCard(discardedCard);
-		objectDeck.addToDiscard(discardedCard);
-		objectDeck.refill();
-		// Notifications setting
-		game.getLastRRclientNotification().setMessage("You have discarded a "
-				+ discardedCard.toString() + " object card");
-		game.getLastPSclientNotification().setMessage("[GLOBAL MESSAGE]: "
-				+ currentPlayer.getName() + " has discarded an object card\n");
-		//
-		game.setLastAction(castedAction);
-		return true;
-	}
+    public static boolean executeEffect(Game game, StoreAction action) {
+        DiscardAction castedAction = (DiscardAction) action;
+        Player currentPlayer = game.getCurrentPlayer();
+        ObjectDeck objectDeck = game.getObjectDeck();
+        ObjectCard discardedCard = castedAction.cardToDiscard;
+        currentPlayer.getPrivateDeck().removeCard(discardedCard);
+        objectDeck.addToDiscard(discardedCard);
+        objectDeck.refill();
+        // Notifications setting
+        RRNotification lastNotification = game.getLastRRclientNotification();
+        game.setLastRRclientNotification(new RRNotification(lastNotification.getActionResult(), "You have discarded a "
+                + discardedCard.toString() + " object card", lastNotification.getDrawnCards(), lastNotification.getLightedSectors(), lastNotification.getAvailableGames(), lastNotification.getPlayerToken(), lastNotification.getGameMapName()));
+        game.getLastPSclientNotification().setMessage("[GLOBAL MESSAGE]: "
+                + currentPlayer.getName() + " has discarded an object card\n");
+        //
+        game.setLastAction(castedAction);
+        return true;
+    }
 }

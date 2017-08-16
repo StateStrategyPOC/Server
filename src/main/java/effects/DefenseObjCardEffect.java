@@ -2,6 +2,7 @@ package effects;
 
 import common.DefenseObjectCard;
 import common.ObjectCard;
+import common.RRNotification;
 import server.Game;
 
 /**
@@ -16,7 +17,8 @@ import server.Game;
 public class DefenseObjCardEffect extends ObjectCardEffect {
 
 	public static boolean executeEffect(Game game, ObjectCard card) {
-		game.getLastRRclientNotification().setMessage("You've defended from an attack");
+		RRNotification lastNotification = game.getLastRRclientNotification();
+		game.setLastRRclientNotification(new RRNotification(lastNotification.getActionResult(),"You've defended from an attack",lastNotification.getDrawnCards(),lastNotification.getLightedSectors(),lastNotification.getAvailableGames(),lastNotification.getPlayerToken(),lastNotification.getGameMapName()));
 		return true;
 	}
 }

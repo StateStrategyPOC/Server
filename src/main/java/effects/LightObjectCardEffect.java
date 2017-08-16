@@ -1,9 +1,6 @@
 package effects;
 
-import common.LightsObjectCard;
-import common.ObjectCard;
-import common.Player;
-import common.Sector;
+import common.*;
 import server.Game;
 
 import java.util.ArrayList;
@@ -48,7 +45,10 @@ public class LightObjectCardEffect extends ObjectCardEffect {
 		if ( msg.toString().equals("")){
             msg = new StringBuilder("none");
         }
-        game.getLastRRclientNotification().setMessage(game.getLastRRclientNotification().getMessage()+". Players spotted: "+msg);
+        RRNotification lastNotification = game.getLastRRclientNotification();
+		String message = lastNotification.getMessage();
+		message += ". Players spotted: "+msg;
+		game.setLastRRclientNotification(new RRNotification(lastNotification.getActionResult(),message,lastNotification.getDrawnCards(),lastNotification.getLightedSectors(),lastNotification.getAvailableGames(),lastNotification.getPlayerToken(),lastNotification.getGameMapName()));
 		game.getLastPSclientNotification().setMessage(game.getLastPSclientNotification().getMessage() + globalMessage+msg);
 		return true;
 	}

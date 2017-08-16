@@ -3,6 +3,8 @@ package effects;
 import common.*;
 import server.Game;
 
+import java.util.ArrayList;
+
 /**
  * Represents the effect associated to the action of drawing a rescue card from
  * the deck containing rescue cards
@@ -24,13 +26,20 @@ public class DrawRescueCardEffect extends ActionEffect {
 					+ "\n[GLOBAL MESSAGE]: "
 					+ game.getCurrentPlayer().getName()
 					+ " has escaped from aliens!");
-			game.getLastRRclientNotification().addCard(card);
+			RRNotification lastNotification = game.getLastRRclientNotification();
+			ArrayList<Card> drawnCards = lastNotification.getDrawnCards();
+			drawnCards.add(card);
+			game.setLastRRclientNotification(new RRNotification(lastNotification.getActionResult(),lastNotification.getMessage(),
+					drawnCards,lastNotification.getLightedSectors(),lastNotification.getAvailableGames(),lastNotification.getPlayerToken(),lastNotification.getGameMapName()));
 			game.getLastPSclientNotification().setEscapedPlayer(game.getCurrentPlayer().getPlayerToken());
 			EndTurnEffect.executeEffect(game, new EndTurnAction());
 			return true;
 		} else {
-			game.getLastRRclientNotification().addCard(card);
-			game.getCurrentPlayer().getCurrentSector()
+			RRNotification lastNotification = game.getLastRRclientNotification();
+			ArrayList<Card> drawnCards = lastNotification.getDrawnCards();
+			drawnCards.add(card);
+			game.setLastRRclientNotification(new RRNotification(lastNotification.getActionResult(),lastNotification.getMessage(),
+					drawnCards,lastNotification.getLightedSectors(),lastNotification.getAvailableGames(),lastNotification.getPlayerToken(),lastNotification.getGameMapName()));			game.getCurrentPlayer().getCurrentSector()
 					.setSectorType(SectorType.CLOSED_RESCUE);
 			game.getLastPSclientNotification().setMessage(game.getLastPSclientNotification().getMessage()
 					+ "\n[GLOBAL MESSAGE]: "

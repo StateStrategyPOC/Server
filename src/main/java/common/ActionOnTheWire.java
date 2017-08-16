@@ -5,16 +5,16 @@ import java.util.ArrayList;
 
 public class ActionOnTheWire implements Serializable {
 
-    private final String identifierMapper;
+    private final String actionIdentifier;
     private final ArrayList<Object> parameters;
 
-    public ActionOnTheWire(String identifierMapper, ArrayList<Object> parameters) {
-        this.identifierMapper = identifierMapper;
+    public ActionOnTheWire(String actionIdentifier, ArrayList<Object> parameters) {
+        this.actionIdentifier = actionIdentifier;
         this.parameters = parameters;
     }
 
-    public String getIdentifierMapper() {
-        return identifierMapper;
+    public String getActionIdentifier() {
+        return actionIdentifier;
     }
 
     public ArrayList<Object> getParameters() {

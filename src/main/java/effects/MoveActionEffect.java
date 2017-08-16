@@ -57,8 +57,9 @@ public class MoveActionEffect extends ActionEffect {
                 sourceSector.removePlayer(currentPlayer);
                 currentPlayer.setCurrentSector(targetSector);
                 targetSector.addPlayer(currentPlayer);
-                game.getLastRRclientNotification().setMessage("You have moved to sector "
-                        + targetSector.getCoordinate().toString());
+                RRNotification lastNotification = game.getLastRRclientNotification();
+                game.setLastRRclientNotification(new RRNotification(lastNotification.getActionResult(),"You have moved to sector "
+                        + targetSector.getCoordinate().toString(),lastNotification.getDrawnCards(),lastNotification.getLightedSectors(),lastNotification.getAvailableGames(),lastNotification.getPlayerToken(),lastNotification.getGameMapName()));
                 game.getLastPSclientNotification().setMessage("[GLOBAL MESSAGE]: "
                         + currentPlayer.getName() + " has moved.");
                 // If the target sector is a dangerous sector continue the

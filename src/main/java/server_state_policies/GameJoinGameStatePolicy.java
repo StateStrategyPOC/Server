@@ -3,7 +3,7 @@ package server_state_policies;
 import common.Player;
 import common.PlayerToken;
 import common.PlayerType;
-import common.RRClientNotification;
+import common.RRNotification;
 import server.Game;
 import server.Helpers;
 import server_store.ServerState;
@@ -26,7 +26,7 @@ public class GameJoinGameStatePolicy implements StatePolicy {
             if (game.getCurrentPlayer() == null) {
                 game.setCurrentPlayer(player);
             }
-            game.setLastRRclientNotification(new RRClientNotification(playerToken));
+            game.setLastRRclientNotification(new RRNotification(true,null,null,null,null,playerToken,null));
         }
         return state;
     }
