@@ -1,11 +1,10 @@
 package common;
 
-import java.io.Serializable;
 
 /**
  * Represents a generic Sector Card in the game
  */
-public abstract class SectorCard implements Serializable {
+public abstract class SectorCard extends Card {
 
 	// Indicates if the Sector Card is associated with an Object Card
 	protected final boolean hasObject;

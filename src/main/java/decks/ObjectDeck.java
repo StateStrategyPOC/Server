@@ -1,5 +1,6 @@
 package decks;
 
+import common.Card;
 import common.ObjectCard;
 
 import java.util.Collections;
@@ -12,6 +13,7 @@ public class ObjectDeck extends Deck {
 
 	// The discard deck associated with the object deck
 	private final DiscardDeck discardDeck;
+
 
 	/**
 	 * Constructs a deck containing object cards from a set of cards and a

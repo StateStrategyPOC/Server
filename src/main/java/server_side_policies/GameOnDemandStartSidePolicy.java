@@ -22,10 +22,10 @@ public class GameOnDemandStartSidePolicy implements SidePolicy {
         }
         if (game.getCurrentPlayer().getPlayerToken().equals(castedAction.getPlayerToken())) {
             SERVER_STORE.propagateAction(new GameStartGameAction(game));
-            rrNotification = new RRNotification(true,null,null, null, null,null,null,null);
+            rrNotification = new RRNotification(true,null,null, null, drawnRescueCard, null,null,null,null);
 
         } else {
-            rrNotification = new RRNotification(false,null,null,null, null,null,null,null);
+            rrNotification = new RRNotification(false,null,null,null, drawnRescueCard, null,null,null,null);
 
         }
         game.setLastRRclientNotification(rrNotification);

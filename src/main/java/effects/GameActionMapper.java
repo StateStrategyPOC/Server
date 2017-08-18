@@ -11,12 +11,7 @@ import java.util.Map;
  * been defined due to the fact that the client exchanges with the server plain
  * action objects that don't embed any logic, so an association has to be made
  * between these objects and their logic/effects.
- * 
- * @see Action
- * @see ActionEffect
- * @author Andrea Sessa
- * @author Giorgio Pea
- * @version 1.0
+ *
  */
 public class GameActionMapper {
 

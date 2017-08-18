@@ -8,13 +8,7 @@ import common.SilenceSectorCard;
 import server.Game;
 
 /**
- * Represents the effect of silence sector card
- * 
- * @see SectorCardEffect
- * @see SilenceSectorCard
- * @author Andrea Sessa
- * @author Giorgio Pea
- * @version 1.0
+ * Represents the effect of a Silence Sector Card
  *
  */
 public class SilenceSectorCardEffect extends SectorCardEffect {
@@ -22,7 +16,7 @@ public class SilenceSectorCardEffect extends SectorCardEffect {
 
 	public static boolean executeEffect(Game game, SectorCard sectorCard) {
 		RRNotification lastNotification = game.getLastRRclientNotification();
-		game.setLastRRclientNotification(new RRNotification(lastNotification.getActionResult(),"You've said SILENCE",lastNotification.getDrawnCards(), drawnSectorCard, drawnObjectCard, lastNotification.getLightedSectors(),lastNotification.getAvailableGames(),lastNotification.getPlayerToken(),lastNotification.getGameMapName()));
+		game.setLastRRclientNotification(new RRNotification(lastNotification.getActionResult(),"You've said SILENCE",lastNotification.getDrawnSectorCard(), lastNotification.getDrawnObjectCard(),lastNotification.getDrawnRescueCard(), lastNotification.getLightedSectors(),lastNotification.getAvailableGames(),lastNotification.getPlayerToken(),lastNotification.getGameMapName()));
 		PSNotification lastPNotification = game.getLastPSclientNotification();
 		String lastMessage = lastPNotification.getMessage();
 		game.setLastPSclientNotification(new PSNotification(lastMessage+ "\n[GLOBAL MESSAGE]: " + game.getCurrentPlayer().getName()

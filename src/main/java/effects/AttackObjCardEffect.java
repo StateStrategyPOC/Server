@@ -7,13 +7,8 @@ import common.Sector;
 import server.Game;
 
 /**
- * Represents the effect of the attack object card
- * 
- * @see ObjectCardEffect
- * @see AttackObjectCard
- * @author Andrea Sessa
- * @author Giorgio Pea
- * @version 1.0
+ * Represents the effect of the Attack Object Card
+ *
  */
 public class AttackObjCardEffect extends ObjectCardEffect {
 	public static boolean executeEffect(Game game, ObjectCard objectCard) {

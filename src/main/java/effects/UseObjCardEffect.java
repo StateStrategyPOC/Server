@@ -10,23 +10,13 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * This class represents the effect associated to a use object action
+ * Represents the effect associated with the in game action of using an Object Card
  *
- * @author Andrea Sessa
- * @author Giorgio Pea
- * @version 1.0
- * @see ActionEffect
- * @see UseObjAction
  */
-public class UseObjCardEffect {
-    /**
-     * Initializes the effect wrapping inside an UseObjAction
-     *
-     * @param objectCard
-     * The action that needs to be enriched with its effect
-     */
-    private static final List<Class<? extends Card>> beforeMoveCards = new ArrayList<>();
-    private static final List<Class<? extends Card>> afterMoveCards = new ArrayList<>();
+public class UseObjCardEffect extends ActionEffect {
+
+    private static final List<Class<? extends ObjectCard>> beforeMoveCards = new ArrayList<>();
+    private static final List<Class<? extends ObjectCard>> afterMoveCards = new ArrayList<>();
 
     private static void produceUtilsDataStructure() {
         beforeMoveCards.add(AdrenalineObjectCard.class);
@@ -59,7 +49,7 @@ public class UseObjCardEffect {
         try {
             RRNotification lastNotification = game.getLastRRclientNotification();
             game.setLastRRclientNotification(new RRNotification(lastNotification.getActionResult(),"You have used a "
-                    + castedAction.getObjectCard().toString(),lastNotification.getDrawnCards(), drawnSectorCard, drawnObjectCard, lastNotification.getLightedSectors(),lastNotification.getAvailableGames(),lastNotification.getPlayerToken(),lastNotification.getGameMapName()));
+                    + castedAction.getObjectCard().toString(),lastNotification.getDrawnSectorCard(),lastNotification.getDrawnObjectCard(),lastNotification.getDrawnRescueCard(), lastNotification.getLightedSectors(),lastNotification.getAvailableGames(),lastNotification.getPlayerToken(),lastNotification.getGameMapName()));
             String message = "[GLOBAL MESSAGE]: "+ game.getCurrentPlayer().getName() + " has used a "
                     + castedAction.getObjectCard().toString();
             PSNotification psNotification = new PSNotification(message, null,null,false,false,null,false,false,false,false,null);

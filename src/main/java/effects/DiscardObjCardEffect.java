@@ -5,27 +5,22 @@ import decks.ObjectDeck;
 import server.Game;
 
 /**
- * Represents the effect of discarding an object card
+ * Represents the effect of the in game action of discarding an Object Card
  *
- * @author Andrea Sessa
- * @author Giorgio Pea
- * @version 1.2
- * @see ActionEffect
- * @see DiscardAction
  */
-public class DiscardObjCardEffect {
+public class DiscardObjCardEffect extends ActionEffect {
     public static boolean executeEffect(Game game, StoreAction action) {
         DiscardAction castedAction = (DiscardAction) action;
         Player currentPlayer = game.getCurrentPlayer();
         ObjectDeck objectDeck = game.getObjectDeck();
-        ObjectCard discardedCard = castedAction.cardToDiscard;
+        ObjectCard discardedCard = castedAction.getCardToDiscard();
         currentPlayer.getPrivateDeck().removeCard(discardedCard);
         objectDeck.addToDiscard(discardedCard);
         objectDeck.refill();
         // Notifications setting
         RRNotification lastNotification = game.getLastRRclientNotification();
         game.setLastRRclientNotification(new RRNotification(lastNotification.getActionResult(), "You have discarded a "
-                + discardedCard.toString() + " object card", lastNotification.getDrawnCards(), drawnSectorCard, drawnObjectCard, lastNotification.getLightedSectors(), lastNotification.getAvailableGames(), lastNotification.getPlayerToken(), lastNotification.getGameMapName()));
+                + discardedCard.toString() + " object card", lastNotification.getDrawnSectorCard(),lastNotification.getDrawnObjectCard(), lastNotification.getDrawnRescueCard(), lastNotification.getLightedSectors(), lastNotification.getAvailableGames(), lastNotification.getPlayerToken(), lastNotification.getGameMapName()));
         PSNotification lastPNotification = game.getLastPSclientNotification();
         game.setLastPSclientNotification(new PSNotification("[GLOBAL MESSAGE]: "
                 + currentPlayer.getName() + " has discarded an object card\n",lastPNotification.getDeadPlayers(),lastPNotification.getAttackedPlayers(),lastPNotification.isHumanWin(),lastPNotification.isAlienWin(),lastPNotification.getEscapedPlayer(),lastPNotification.isGameNeedsToStart(),lastPNotification.isTurnNeedsToStart(),lastPNotification.isGameCanBeStarted(),lastPNotification.isTurnNeedsToEnd(),lastPNotification.getGameMapName()));

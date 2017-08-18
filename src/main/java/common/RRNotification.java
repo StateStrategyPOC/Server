@@ -1,6 +1,5 @@
 package common;
 
-import javax.smartcardio.Card;
 import java.io.Serializable;
 import java.util.ArrayList;
 
@@ -15,6 +14,7 @@ public class RRNotification implements Serializable {
     //Sector Cards or Object Cards drawn as a result of an in game action
     private final SectorCard drawnSectorCard;
     private final ObjectCard drawnObjectCard;
+    private final RescueCard drawnRescueCard;
     //Sectors whose resident Players are revealed as a result of a LightsObjectCard
     private final ArrayList<Sector> lightedSectors;
     private final ArrayList<GamePublicData> availableGames;
@@ -22,11 +22,12 @@ public class RRNotification implements Serializable {
     private final String gameMapName;
 
     public RRNotification(boolean actionResult,
-                          String message, SectorCard drawnSectorCard, ObjectCard drawnObjectCard, ArrayList<Sector> lightedSectors, ArrayList<GamePublicData> availableGames, PlayerToken playerToken, String gameMapName) {
+                          String message, SectorCard drawnSectorCard, ObjectCard drawnObjectCard, RescueCard drawnRescueCard, ArrayList<Sector> lightedSectors, ArrayList<GamePublicData> availableGames, PlayerToken playerToken, String gameMapName) {
         this.actionResult = actionResult;
         this.message = message;
         this.drawnSectorCard = drawnSectorCard;
         this.drawnObjectCard = drawnObjectCard;
+        this.drawnRescueCard = drawnRescueCard;
         this.lightedSectors = lightedSectors;
         this.availableGames = availableGames;
         this.playerToken = playerToken;
@@ -71,5 +72,9 @@ public class RRNotification implements Serializable {
 
     public ArrayList<GamePublicData> getAvailableGames() {
         return availableGames;
+    }
+
+    public RescueCard getDrawnRescueCard() {
+        return drawnRescueCard;
     }
 }

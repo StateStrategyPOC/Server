@@ -4,13 +4,8 @@ import common.*;
 import server.Game;
 
 /**
- * Represents the effect associated with a global noise sector card
- * 
- * @see SectorCardEffect
- * @see GlobalNoiseSectorCard
- * @author Andrea Sessa
- * @author Giorgio Pea
- * @version 1.0
+ * Represents the effect associated with a Global Noise Sector Card
+ *
  */
 public class GlobalNoiseSectorCardEffect extends SectorCardEffect {
 	public static boolean executeEffect(Game game, SectorCard sectorCard) {
@@ -19,7 +14,7 @@ public class GlobalNoiseSectorCardEffect extends SectorCardEffect {
 		Sector target = ((GlobalNoiseSectorCard) sectorCard).getSector();
 		RRNotification lastNotification = game.getLastRRclientNotification();
 		game.setLastRRclientNotification(new RRNotification(lastNotification.getActionResult(),"You've indicated the sector: "
-				+ target.getCoordinate().toString(),lastNotification.getDrawnCards(), drawnSectorCard, drawnObjectCard, lastNotification.getLightedSectors(),lastNotification.getAvailableGames(),lastNotification.getPlayerToken(),lastNotification.getGameMapName()));
+				+ target.getCoordinate().toString(),lastNotification.getDrawnSectorCard(),lastNotification.getDrawnObjectCard(),lastNotification.getDrawnRescueCard(), lastNotification.getLightedSectors(),lastNotification.getAvailableGames(),lastNotification.getPlayerToken(),lastNotification.getGameMapName()));
 		PSNotification lastPNotification = game.getLastPSclientNotification();
 		String lastMessage = lastPNotification.getMessage();
 		game.setLastPSclientNotification(new PSNotification("[GLOBAL MESSAGE]: "+lastMessage+ " has made noise in sector "

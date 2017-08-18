@@ -7,13 +7,8 @@ import common.StoreAction;
 /**
  * Represents the effect of the moving a player
  *
- * @author Andrea Sessa
- * @author Giorgio Pea
- * @version 1.1
- * @see ActionEffect
- * @see MoveAction
  */
-public class MoveActionEffect {
+public class MoveActionEffect extends ActionEffect {
 
 
     private static boolean verifyMoveLegality(Sector source, Sector target, PlayerType playerType){
@@ -59,7 +54,7 @@ public class MoveActionEffect {
                 targetSector.addPlayer(currentPlayer);
                 RRNotification lastNotification = game.getLastRRclientNotification();
                 game.setLastRRclientNotification(new RRNotification(lastNotification.getActionResult(),"You have moved to sector "
-                        + targetSector.getCoordinate().toString(),lastNotification.getDrawnCards(), drawnSectorCard, drawnObjectCard, lastNotification.getLightedSectors(),lastNotification.getAvailableGames(),lastNotification.getPlayerToken(),lastNotification.getGameMapName()));
+                        + targetSector.getCoordinate().toString(),lastNotification.getDrawnSectorCard(),lastNotification.getDrawnObjectCard(),lastNotification.getDrawnRescueCard(), lastNotification.getLightedSectors(),lastNotification.getAvailableGames(),lastNotification.getPlayerToken(),lastNotification.getGameMapName()));
                 PSNotification lastPNotification = game.getLastPSclientNotification();
                 game.setLastPSclientNotification(new PSNotification("[GLOBAL MESSAGE]: "
                         + currentPlayer.getName() + " has moved.",lastPNotification.getDeadPlayers(),lastPNotification.getAttackedPlayers(),lastPNotification.isHumanWin(),lastPNotification.isAlienWin(),lastPNotification.getEscapedPlayer(),lastPNotification.isGameNeedsToStart(),lastPNotification.isTurnNeedsToStart(),lastPNotification.isGameCanBeStarted(),lastPNotification.isTurnNeedsToEnd(),lastPNotification.getGameMapName()));

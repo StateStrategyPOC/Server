@@ -13,13 +13,8 @@ import java.util.List;
  * the player has arrived. It is important that after the move the current
  * player doesn't draw any cards
  *
- * @author Andrea Sessa
- * @author Giorgio Pea
- * @version 1.0
- * @see ActionEffect
- * @see MoveAttackAction
  */
-public class MoveAttackActionEffect {
+public class MoveAttackActionEffect extends ActionEffect {
     private static boolean verifyMoveLegality(Sector source, Sector target, PlayerType playerType){
         if (source.equals(target)){
             return false;
@@ -105,7 +100,7 @@ public class MoveAttackActionEffect {
                     psMessage.append("[GLOBAL MESSAGE]: ").append(currentPlayer.getName()).append(" has attacked sector ").append(targetSector.getCoordinate().toString()).append(" but it contained no players.");
                 }
                 RRNotification lastNotification = game.getLastRRclientNotification();
-                game.setLastRRclientNotification(new RRNotification(lastNotification.getActionResult(),rrMessage.toString(),lastNotification.getDrawnCards(), drawnSectorCard, drawnObjectCard, lastNotification.getLightedSectors(),lastNotification.getAvailableGames(),lastNotification.getPlayerToken(),lastNotification.getGameMapName()));
+                game.setLastRRclientNotification(new RRNotification(lastNotification.getActionResult(),rrMessage.toString(),lastNotification.getDrawnSectorCard(),lastNotification.getDrawnObjectCard(),lastNotification.getDrawnRescueCard(), lastNotification.getLightedSectors(),lastNotification.getAvailableGames(),lastNotification.getPlayerToken(),lastNotification.getGameMapName()));
 
                 lastPNotification = game.getLastPSclientNotification();
                 game.setLastPSclientNotification(new PSNotification(psMessage.toString(),lastPNotification.getDeadPlayers(),lastPNotification.getAttackedPlayers(),lastPNotification.isHumanWin(),lastPNotification.isAlienWin(),lastPNotification.getEscapedPlayer(),lastPNotification.isGameNeedsToStart(),lastPNotification.isTurnNeedsToStart(),lastPNotification.isGameCanBeStarted(),lastPNotification.isTurnNeedsToEnd(),lastPNotification.getGameMapName()));

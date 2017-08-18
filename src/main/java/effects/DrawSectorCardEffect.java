@@ -7,16 +7,9 @@ import server.Game;
 import java.util.ArrayList;
 
 /**
- * This class represents the effect associated to a draw action from the sector
- * cards deck
- *
- * @author Andrea Sessa
- * @author Giorgio Pea
- * @version 1.0
- * @see ActionEffect
- * @see DrawSectorCardAction
+ * Represents the effect associated to the in game action of drawing a Sector Card
  */
-public class DrawSectorCardEffect {
+public class DrawSectorCardEffect extends ActionEffect {
     /**
      * Implements the abstract method defined in ActionEffect according to DrawActionFromSector
      *
@@ -29,10 +22,8 @@ public class DrawSectorCardEffect {
         SectorCard sectorCard = (SectorCard) sectorDeck.popCard();
         // Notify the client
         RRNotification lastNotification = game.getLastRRclientNotification();
-        ArrayList<Card> drawnCards = lastNotification.getDrawnCards();
-        drawnCards.add(sectorCard);
         game.setLastRRclientNotification(new RRNotification(lastNotification.getActionResult(), lastNotification.getMessage(),
-                drawnCards, drawnSectorCard, drawnObjectCard, lastNotification.getLightedSectors(), lastNotification.getAvailableGames(), lastNotification.getPlayerToken(), lastNotification.getGameMapName()));
+                sectorCard, lastNotification.getDrawnObjectCard(), lastNotification.getDrawnRescueCard(), lastNotification.getLightedSectors(), lastNotification.getAvailableGames(), lastNotification.getPlayerToken(), lastNotification.getGameMapName()));
         PSNotification lastPNotification = game.getLastPSclientNotification();
         String lastMessage = lastNotification.getMessage();
         game.setLastPSclientNotification(new PSNotification(lastMessage + "\n[GLOBAL MESSAGE]: " + game.getCurrentPlayer().getName()
@@ -45,7 +36,7 @@ public class DrawSectorCardEffect {
 
         // Now i need to execute the effect of the sector card
 
-        if (sectorCard.hasObjectAssociated()) {
+        if (sectorCard.isHasObject()) {
             DrawObjectCardEffect.executeEffect(game);
         }
         if (!(sectorCard instanceof GlobalNoiseSectorCard)) {

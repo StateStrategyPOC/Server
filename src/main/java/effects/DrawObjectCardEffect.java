@@ -6,18 +6,11 @@ import common.PSNotification;
 import common.RRNotification;
 import server.Game;
 
-import java.util.ArrayList;
-
 /**
- * Represents the effect of drawing an object card from the deck containing
- * object cards
- * 
- * @see ActionEffect
- * @author Andrea Sessa
- * @author Giorgio Pea
- * @version 1.1
+ * Represents the effect of the in game action of drawing an Object Card
+ *
  */
-public class DrawObjectCardEffect {
+public class DrawObjectCardEffect extends ActionEffect {
 
 
 	public static boolean executeEffect(Game game) {
@@ -29,10 +22,8 @@ public class DrawObjectCardEffect {
 			message = "\n[GLOBAL MESSAGE]: No more object cards";
 		} else {
 			RRNotification lastNotification = game.getLastRRclientNotification();
-			ArrayList<Card> drawnCards = lastNotification.getDrawnCards();
-			drawnCards.add(objectCard);
 			game.setLastRRclientNotification(new RRNotification(lastNotification.getActionResult(),lastNotification.getMessage(),
-					drawnCards, drawnSectorCard, drawnObjectCard, lastNotification.getLightedSectors(),lastNotification.getAvailableGames(),lastNotification.getPlayerToken(),lastNotification.getGameMapName()));
+					lastNotification.getDrawnSectorCard(), objectCard, lastNotification.getDrawnRescueCard(), lastNotification.getLightedSectors(),lastNotification.getAvailableGames(),lastNotification.getPlayerToken(),lastNotification.getGameMapName()));
 			game.getCurrentPlayer().getPrivateDeck().addCard(objectCard);
 			message = "\n[GLOBAL MESSAGE]: "
 					+ game.getCurrentPlayer().getName()

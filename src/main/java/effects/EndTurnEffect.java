@@ -4,16 +4,11 @@ import common.*;
 import server.Game;
 
 /**
- * Represents the effect associated to the action of ending a turn.
+ * Represents the effect associated to the in game action of ending a turn.
  *
- * @author Andrea Sessa
- * @author Giorgio Pea
- * @version 1.1
- * @see ActionEffect
- * @see EndTurnAction
  */
 
-public class EndTurnEffect {
+public class EndTurnEffect extends ActionEffect {
 
 
     public static boolean executeEffect(Game game, StoreAction action) {
@@ -22,7 +17,7 @@ public class EndTurnEffect {
         game.getCurrentPlayer().setHasMoved(false);
         RRNotification lastNotification = game.getLastRRclientNotification();
         game.setLastRRclientNotification(new RRNotification(lastNotification.getActionResult(),"\nYou have ended your turn",
-                lastNotification.getDrawnCards(), drawnSectorCard, drawnObjectCard, lastNotification.getLightedSectors(),lastNotification.getAvailableGames(),lastNotification.getPlayerToken(),lastNotification.getGameMapName()));
+                lastNotification.getDrawnSectorCard(),lastNotification.getDrawnObjectCard(),lastNotification.getDrawnRescueCard(), lastNotification.getLightedSectors(),lastNotification.getAvailableGames(),lastNotification.getPlayerToken(),lastNotification.getGameMapName()));
         String message = "\n[GLOBAL MESSAGE]: "
                 + game.getCurrentPlayer().getName()
                 + " has ended its turn.\n[GLOBAL MESSAGE]: ";

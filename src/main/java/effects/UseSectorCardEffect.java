@@ -9,15 +9,10 @@ import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 
 /**
- * Represents the effect of using a sector card
- * 
- * @see ActionEffect
- * @see UseSectorCardAction
- * @author Andrea Sessa
- * @author Giorgio Pea
- * @version 1.0
+ * Represents the effect associated to the in game action of using a Sector Card
+ *
  */
-public class UseSectorCardEffect {
+public class UseSectorCardEffect extends ActionEffect {
 
 	public static boolean executeEffect(Game game, StoreAction action) {
 		UseSectorCardAction castedAction = (UseSectorCardAction) action;

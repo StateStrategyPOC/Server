@@ -8,13 +8,8 @@ import common.RRNotification;
 import server.Game;
 
 /**
- * Represents the effect of the adrenaline object card
- * 
- * @see ObjectCardEffect
- * @see AdrenalineObjCardEffect
- * @author Andrea Sessa
- * @author Giorgio Pea
- * @version 1.0
+ * Represents the effect of the Adrenaline Object Card
+ *
  */
 public class AdrenalineObjCardEffect extends ObjectCardEffect {
 
@@ -22,7 +17,7 @@ public class AdrenalineObjCardEffect extends ObjectCardEffect {
 		Player currentPlayer = game.getCurrentPlayer();
 		// Notifications setting
         RRNotification lastNotification = game.getLastRRclientNotification();
-        game.setLastRRclientNotification(new RRNotification(lastNotification.getActionResult(),"You will moveToSector by two sector this turn\n",null,null, lastNotification.getLightedSectors(),lastNotification.getAvailableGames(),lastNotification.getPlayerToken(),lastNotification.getGameMapName()));
+        game.setLastRRclientNotification(new RRNotification(lastNotification.getActionResult(),"You will moveToSector by two sector this turn\n",lastNotification.getDrawnSectorCard(),lastNotification.getDrawnObjectCard(), lastNotification.getDrawnRescueCard(), lastNotification.getLightedSectors(),lastNotification.getAvailableGames(),lastNotification.getPlayerToken(),lastNotification.getGameMapName()));
         PSNotification lastPNotification = game.getLastPSclientNotification();
         game.setLastPSclientNotification(new PSNotification("[GLOBAL MESSAGE]: "
                 + currentPlayer.getName()

@@ -1,18 +1,13 @@
 package effects;
 
-import common.LocalNoiseSectorCard;
 import common.PSNotification;
 import common.Sector;
 import common.SectorCard;
 import server.Game;
 
 /**
- * Represents the effect associated with a local noise sector card
- * 
- * @see SectorCardEffect
- * @see LocalNoiseSectorCard
- * @author Andrea Sessa
- * @author Giorgio Pea
+ * Represents the effect associated with a Local Noise Sector Card
+ *
  */
 public class LocalNoiseSectorCardEffect extends SectorCardEffect {
 

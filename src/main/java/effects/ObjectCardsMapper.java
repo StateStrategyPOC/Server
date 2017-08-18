@@ -10,12 +10,7 @@ import java.util.Map;
  * has been defined due to the fact that the client exchanges with the server
  * plain object cards that don't embed any logic, so an association has to be
  * made between these objects and their logic/effects.
- * 
- * @see ObjectCard
- * @see ObjectCardEffect
- * @author Andrea Sessa
- * @author Giorgio Pea
- * @version 1.0
+ *
  */
 public class ObjectCardsMapper {
 	private final Map<Class<? extends ObjectCard>, Class<? extends ObjectCardEffect>> fromObjectCardToObjectCardEffect;
@@ -41,7 +36,7 @@ public class ObjectCardsMapper {
 		fromObjectCardToObjectCardEffect.put(AttackObjectCard.class,
 				AttackObjCardEffect.class);
 		fromObjectCardToObjectCardEffect.put(LightsObjectCard.class,
-				LightObjectCardEffect.class);
+				LightsObjectCardEffect.class);
 		fromObjectCardToObjectCardEffect.put(SuppressorObjectCard.class,
 				SuppressorEffect.class);
 		fromObjectCardToObjectCardEffect.put(AdrenalineObjectCard.class,
@@ -56,8 +51,6 @@ public class ObjectCardsMapper {
 	 * @param objectCard
 	 *            the object card for which retrieve the effect
 	 * @return the effect associated with the object card
-	 * @throws InstantiationException
-	 * @throws IllegalAccessException
 	 */
 	public Class<? extends ObjectCardEffect> getEffect(ObjectCard objectCard) {
 		return this.fromObjectCardToObjectCardEffect.get(objectCard.getClass());
