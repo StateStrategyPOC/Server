@@ -1,11 +1,8 @@
 package common;
 
 /**
- * Represent the status of a player
- * 
- * @author Andrea Sessa
- * @author Giorgio Pea
- * @version 1.0
+ * Represent the status of a {@link common.Player}
+ *
  */
 public enum PlayerState {
 

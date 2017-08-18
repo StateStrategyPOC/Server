@@ -33,7 +33,7 @@ public class DrawRescueCardEffect extends ActionEffect {
 			ArrayList<Card> drawnCards = lastNotification.getDrawnCards();
 			drawnCards.add(card);
 			game.setLastRRclientNotification(new RRNotification(lastNotification.getActionResult(),lastNotification.getMessage(),
-					drawnCards,lastNotification.getLightedSectors(),lastNotification.getAvailableGames(),lastNotification.getPlayerToken(),lastNotification.getGameMapName()));
+					drawnCards, drawnSectorCard, drawnObjectCard, lastNotification.getLightedSectors(),lastNotification.getAvailableGames(),lastNotification.getPlayerToken(),lastNotification.getGameMapName()));
             game.setLastPSclientNotification(new PSNotification(lastMessage+message,lastPNotification.getDeadPlayers(),lastPNotification.getAttackedPlayers(),lastPNotification.isHumanWin(),lastPNotification.isAlienWin(),game.getCurrentPlayer().getPlayerToken(),lastPNotification.isGameNeedsToStart(),lastPNotification.isTurnNeedsToStart(),lastPNotification.isGameCanBeStarted(),lastPNotification.isTurnNeedsToEnd(),lastPNotification.getGameMapName()));
 
 			EndTurnEffect.executeEffect(game, new EndTurnAction());
@@ -42,7 +42,7 @@ public class DrawRescueCardEffect extends ActionEffect {
 			ArrayList<Card> drawnCards = lastNotification.getDrawnCards();
 			drawnCards.add(card);
 			game.setLastRRclientNotification(new RRNotification(lastNotification.getActionResult(),lastNotification.getMessage(),
-					drawnCards,lastNotification.getLightedSectors(),lastNotification.getAvailableGames(),lastNotification.getPlayerToken(),lastNotification.getGameMapName()));			game.getCurrentPlayer().getCurrentSector()
+					drawnCards, drawnSectorCard, drawnObjectCard, lastNotification.getLightedSectors(),lastNotification.getAvailableGames(),lastNotification.getPlayerToken(),lastNotification.getGameMapName()));			game.getCurrentPlayer().getCurrentSector()
 					.setSectorType(SectorType.CLOSED_RESCUE);
             message = "\n[GLOBAL MESSAGE]: "
 					+ game.getCurrentPlayer().getName()

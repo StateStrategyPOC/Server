@@ -1,7 +1,7 @@
 package common;
 
 /**
- * Represent the type of a rescue card
+ * Represent the type of a Rescue Card
  *
  */
 public enum RescueType {

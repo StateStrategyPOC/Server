@@ -1,12 +1,8 @@
 package common;
 
 /**
- * Represents a moveToSector action combined with an attack
- * 
- * @author Andrea Sessa
- * @author Giorgio Pea
- * @version 1.0
- * @see Action
+ * Represents the in game action of moving to a Sector and attack whoever is in there
+ *
  */
 public class MoveAttackAction extends StoreAction {
 

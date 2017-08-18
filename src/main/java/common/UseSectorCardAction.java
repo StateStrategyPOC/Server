@@ -1,11 +1,8 @@
 package common;
 
 /**
- * Represents the action of using a sector card in the game
- * 
- * @author Andrea Sessa
- * @author Giorgio Pea
- * @version 1.0
+ * Represents the in game action of using a Sector Card
+ *
  */
 public class UseSectorCardAction extends StoreAction {
 

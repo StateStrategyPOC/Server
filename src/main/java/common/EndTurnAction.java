@@ -1,11 +1,8 @@
 package common;
 
 /**
- * Represents the action of ending a turn in the game
- * 
- * @author Andrea Sessa
- * @author Giorgio Pea
- * @version 1.0
+ * Represents the in game action of ending a turn
+ *
  */
 public class EndTurnAction extends StoreAction {
 

@@ -6,28 +6,17 @@ import java.util.List;
 
 /**
  * Represents a private deck of object cards owned by a player
- * 
- * @author Andrea Sessa
- * @author Giorgio Pea
- * @version 1.0
+ *
  */
 public class PrivateDeck implements Serializable {
 	// The set of object cards contained in the private deck
 	private final List<ObjectCard> content;
 
-	/**
-	 * Constructs a private deck of object cards owned by a player. This private
-	 * deck is constructed with no cards.
-	 */
+
 	public PrivateDeck() {
 		this.content = new ArrayList<>();
 	}
 
-	/**
-	 * Gets all the cards in the private deck.
-	 * 
-	 * @return the set of cards contained in the private deck
-	 */
 	public List<ObjectCard> getContent() {
 		return content;
 	}

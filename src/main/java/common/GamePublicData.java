@@ -4,10 +4,7 @@ import java.io.Serializable;
 
 /**
  * Represents a container of public data concerning a game
- * 
- * @author Andrea Sessa
- * @author Giorgio Pea
- * @version 1.0
+ *
  */
 public class GamePublicData implements Serializable {
 	// A field automatically created for serialization purposes
@@ -21,16 +18,6 @@ public class GamePublicData implements Serializable {
 	// Status of the game
 	private GameStatus status;
 
-	/**
-	 * Constructs a container of public data concerning a game from: the id of
-	 * the game , the name of the game, a number of zero players and a status of
-	 * "OPEN"
-	 * 
-	 * @param id
-	 *            the id of the game this container refers to
-	 * @param name
-	 *            the name of the game this container refers to
-	 */
 	public GamePublicData(int id, String name) {
 		this.id = id;
 		this.name = name;
@@ -45,30 +32,16 @@ public class GamePublicData implements Serializable {
 		this.numberOfPlayers++;
 	}
 
-	/**
-	 * Gets the id of the game this container refers to
-	 * 
-	 * @return the id of the game this container refers to
-	 */
 	public int getId() {
 		return id;
 	}
 
-	/**
-	 * Gets the status of the game this container refers to
-	 * 
-	 * @return the status of the game this container refers to
-	 */
+
 	public GameStatus getStatus() {
 		return status;
 	}
 
-	/**
-	 * Sets the status of the game this container refers to
-	 * 
-	 * @param status
-	 *            the new status of the game this container refers to
-	 */
+
 	public void setStatus(GameStatus status) {
 		this.status = status;
 	}

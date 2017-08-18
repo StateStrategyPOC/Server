@@ -1,11 +1,8 @@
 package common;
 
 /**
- * Represents a suppressor object card in the game
- * 
- * @author Andrea Sessa
- * @author Giorgio Pea
- * @version 1.0
+ * Represents a Suppressor Object Card in the game
+ *
  */
 public class SuppressorObjectCard extends ObjectCard {
 	@Override

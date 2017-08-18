@@ -26,7 +26,7 @@ public class GameJoinGameStatePolicy implements StatePolicy {
             if (game.getCurrentPlayer() == null) {
                 game.setCurrentPlayer(player);
             }
-            game.setLastRRclientNotification(new RRNotification(true,null,null,null,null,playerToken,null));
+            game.setLastRRclientNotification(new RRNotification(true,null,null, drawnSectorCard, drawnObjectCard, null,null,playerToken,null));
         }
         return state;
     }

@@ -1,10 +1,8 @@
 package common;
 
 /**
- * Represents a teleport object card
- * 
- * @author Andrea Sessa
- * @author Giorgio Pea This class represents a teleport object card
+ * Represents a Teleport Object Card
+ *
  */
 public class TeleportObjectCard extends ObjectCard {
 

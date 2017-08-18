@@ -47,7 +47,7 @@ public class LightObjectCardEffect extends ObjectCardEffect {
         RRNotification lastNotification = game.getLastRRclientNotification();
         String message = lastNotification.getMessage();
         message += ". Players spotted: " + msg;
-        game.setLastRRclientNotification(new RRNotification(lastNotification.getActionResult(), message, lastNotification.getDrawnCards(), lastNotification.getLightedSectors(), lastNotification.getAvailableGames(), lastNotification.getPlayerToken(), lastNotification.getGameMapName()));
+        game.setLastRRclientNotification(new RRNotification(lastNotification.getActionResult(), message, lastNotification.getDrawnCards(), drawnSectorCard, drawnObjectCard, lastNotification.getLightedSectors(), lastNotification.getAvailableGames(), lastNotification.getPlayerToken(), lastNotification.getGameMapName()));
         PSNotification lastPNotification = game.getLastPSclientNotification();
         String lastMessage = lastPNotification.getMessage();
         game.setLastPSclientNotification(new PSNotification(lastMessage + globalMessage + msg, lastPNotification.getDeadPlayers(), lastPNotification.getAttackedPlayers(), lastPNotification.isHumanWin(), lastPNotification.isAlienWin(), lastPNotification.getEscapedPlayer(), lastPNotification.isGameNeedsToStart(), lastPNotification.isTurnNeedsToStart(), lastPNotification.isGameCanBeStarted(), lastPNotification.isTurnNeedsToEnd(), lastPNotification.getGameMapName()));

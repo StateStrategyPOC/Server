@@ -1,11 +1,8 @@
 package common;
 
 /**
- * Represents the action of drawing an object card from the object card deck
- * 
- * @author Andrea Sessa
- * @author Giorgio Pea
- * @version 1.0
+ * Represents the action of drawing an Object Card from the Object Card deck
+ *
  */
 public class DrawObjectCardAction extends StoreAction {
 

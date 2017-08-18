@@ -33,10 +33,9 @@ public class Player implements Serializable {
 
     public void setPlayerToken(PlayerToken playerToken) {
         this.playerToken = playerToken;
-        if (this.playerToken.getPlayerType().equals(PlayerType.HUMAN)){
+        if (this.playerToken.getPlayerType().equals(PlayerType.HUMAN)) {
             this.speed = 1;
-        }
-        else {
+        } else {
             this.speed = 2;
         }
     }

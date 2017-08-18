@@ -18,7 +18,7 @@ public class DefenseObjCardEffect extends ObjectCardEffect {
 
 	public static boolean executeEffect(Game game, ObjectCard card) {
 		RRNotification lastNotification = game.getLastRRclientNotification();
-		game.setLastRRclientNotification(new RRNotification(lastNotification.getActionResult(),"You've defended from an attack",lastNotification.getDrawnCards(),lastNotification.getLightedSectors(),lastNotification.getAvailableGames(),lastNotification.getPlayerToken(),lastNotification.getGameMapName()));
+		game.setLastRRclientNotification(new RRNotification(lastNotification.getActionResult(),"You've defended from an attack",lastNotification.getDrawnCards(), drawnSectorCard, drawnObjectCard, lastNotification.getLightedSectors(),lastNotification.getAvailableGames(),lastNotification.getPlayerToken(),lastNotification.getGameMapName()));
 		return true;
 	}
 }

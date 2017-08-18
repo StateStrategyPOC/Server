@@ -9,8 +9,6 @@ import java.util.List;
  *
  */
 public class Sector implements Serializable {
-	private static final long serialVersionUID = 1L;
-
 	// The coordinate of the sector
 	private final Coordinate coordinate;
 	// The sector type(Safe, Dangerous,...)
@@ -70,46 +68,25 @@ public class Sector implements Serializable {
 		}
 	}
 
-	/**
-	 * Gets the sector's coordinate
-	 * 
-	 * @return the sector's coordinate
-	 */
+
 	public Coordinate getCoordinate() {
 		return coordinate;
 	}
 
-	/**
-	 * Gets the sector's type
-	 * 
-	 * @return the sector's type
-	 */
 	public SectorType getSectorType() {
 		return this.sectorType;
 	}
 
-	/**
-	 * Sets the sector's type
-	 * 
-	 * @param sectorType
-	 *            the new sector's type to be set
-	 */
 	public void setSectorType(SectorType sectorType) {
 		this.sectorType = sectorType;
 	}
 
-	/**
-	 * Gets the sector's legality
-	 * 
-	 * @return the sector's legality
-	 */
+
 	public SectorLegality getSectorLegality() {
 		return this.legality;
 	}
 
-	/**
-	 * @return The set of the players in the sector
-	 */
+
 	public List<Player> getPlayers() {
 		return this.players;
 	}

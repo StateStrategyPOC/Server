@@ -1,7 +1,5 @@
 package decks;
 
-import common.Card;
-
 import java.util.List;
 
 /**

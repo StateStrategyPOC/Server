@@ -1,7 +1,6 @@
 package effects;
 
 
-import common.Card;
 import common.ObjectCard;
 import common.PSNotification;
 import common.RRNotification;
@@ -33,7 +32,7 @@ public class DrawObjectCardEffect extends ActionEffect {
 			ArrayList<Card> drawnCards = lastNotification.getDrawnCards();
 			drawnCards.add(objectCard);
 			game.setLastRRclientNotification(new RRNotification(lastNotification.getActionResult(),lastNotification.getMessage(),
-					drawnCards,lastNotification.getLightedSectors(),lastNotification.getAvailableGames(),lastNotification.getPlayerToken(),lastNotification.getGameMapName()));
+					drawnCards, drawnSectorCard, drawnObjectCard, lastNotification.getLightedSectors(),lastNotification.getAvailableGames(),lastNotification.getPlayerToken(),lastNotification.getGameMapName()));
 			game.getCurrentPlayer().getPrivateDeck().addCard(objectCard);
 			message = "\n[GLOBAL MESSAGE]: "
 					+ game.getCurrentPlayer().getName()

@@ -3,8 +3,6 @@ package effects;
 import common.*;
 import server.Game;
 
-import java.util.ArrayList;
-
 /**
  * Represents the effect associated to the action of ending a turn.
  *
@@ -24,7 +22,7 @@ public class EndTurnEffect extends ActionEffect {
         game.getCurrentPlayer().setHasMoved(false);
         RRNotification lastNotification = game.getLastRRclientNotification();
         game.setLastRRclientNotification(new RRNotification(lastNotification.getActionResult(),"\nYou have ended your turn",
-                lastNotification.getDrawnCards(),lastNotification.getLightedSectors(),lastNotification.getAvailableGames(),lastNotification.getPlayerToken(),lastNotification.getGameMapName()));
+                lastNotification.getDrawnCards(), drawnSectorCard, drawnObjectCard, lastNotification.getLightedSectors(),lastNotification.getAvailableGames(),lastNotification.getPlayerToken(),lastNotification.getGameMapName()));
         String message = "\n[GLOBAL MESSAGE]: "
                 + game.getCurrentPlayer().getName()
                 + " has ended its turn.\n[GLOBAL MESSAGE]: ";

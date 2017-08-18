@@ -1,16 +1,12 @@
 package common;
 
 /**
- * Represents the action of discarding an object card in the game
- * 
- * @see Action
- * @author Andrea Sessa
- * @author Giorgio Pea
- * @version 1.0
+ * Represents the in game action of discarding an Object Card
+ *
  */
 public class DiscardAction extends StoreAction {
 
-    public final ObjectCard cardToDiscard;
+    private final ObjectCard cardToDiscard;
 
     public DiscardAction(ObjectCard objectCard) {
         super("@GAMEACTION_DISCARD_OBJ_CARD","@COMMON_GROUP");

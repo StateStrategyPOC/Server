@@ -32,7 +32,7 @@ public class DrawSectorCardEffect extends ActionEffect {
         ArrayList<Card> drawnCards = lastNotification.getDrawnCards();
         drawnCards.add(sectorCard);
         game.setLastRRclientNotification(new RRNotification(lastNotification.getActionResult(), lastNotification.getMessage(),
-                drawnCards, lastNotification.getLightedSectors(), lastNotification.getAvailableGames(), lastNotification.getPlayerToken(), lastNotification.getGameMapName()));
+                drawnCards, drawnSectorCard, drawnObjectCard, lastNotification.getLightedSectors(), lastNotification.getAvailableGames(), lastNotification.getPlayerToken(), lastNotification.getGameMapName()));
         PSNotification lastPNotification = game.getLastPSclientNotification();
         String lastMessage = lastNotification.getMessage();
         game.setLastPSclientNotification(new PSNotification(lastMessage + "\n[GLOBAL MESSAGE]: " + game.getCurrentPlayer().getName()

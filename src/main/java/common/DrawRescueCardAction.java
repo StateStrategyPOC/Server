@@ -1,10 +1,8 @@
 package common;
 
 /**
- * Represents the action of drawing a rescue card from the rescue card deck
- * 
- * @author Andrea Sessa
- * @author Giorgio Pea
+ * Represents the action of drawing a Rescue Card from the Rescue Cards deck
+ *
  *
  */
 public class DrawRescueCardAction extends StoreAction {

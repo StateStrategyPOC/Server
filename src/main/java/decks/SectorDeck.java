@@ -1,6 +1,5 @@
 package decks;
 
-import common.Card;
 import common.SectorCard;
 
 import java.util.Collections;

@@ -1,6 +1,5 @@
 package factories;
 
-import common.Card;
 import common.GlobalNoiseSectorCard;
 import common.LocalNoiseSectorCard;
 import common.SilenceSectorCard;

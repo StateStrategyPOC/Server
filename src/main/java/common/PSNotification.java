@@ -6,11 +6,6 @@ import java.util.ArrayList;
 /**
  * Represents a notification to be delivered to all the subscribers of a topic
  * in the logic of the publisher-subscriber pattern.
- *
- * @author Andrea Sessa
- * @author Giorgio Pea
- * @version 1.0
- * @see ClientNotification
  */
 
 public class PSNotification implements Serializable {
@@ -27,23 +22,6 @@ public class PSNotification implements Serializable {
     private final String gameMapName;
 
 
-    /**
-     * Constructs a notification o be delivered to all the subscribers of a
-     * topic in the logic of the publisher-subscriber pattern. An empty list of
-     * dead players and attacked players is automatically created as well
-     *
-     * @param message
-     * @param deadPlayers
-     * @param attackedPlayers
-     * @param humanWin
-     * @param alienWin
-     * @param escapedPlayer
-     * @param gameNeedsToStart
-     * @param turnNeedToStart
-     * @param gameCanBeStarted
-     * @param turnNeedsToEnd
-     * @param gameMapName
-     */
     public PSNotification(String message, ArrayList<PlayerToken> deadPlayers, ArrayList<PlayerToken> attackedPlayers, boolean humanWin, boolean alienWin, PlayerToken escapedPlayer, boolean gameNeedsToStart, boolean turnNeedToStart, boolean gameCanBeStarted, boolean turnNeedsToEnd, String gameMapName) {
         this.message = message;
         this.deadPlayers = deadPlayers;
@@ -59,21 +37,11 @@ public class PSNotification implements Serializable {
     }
 
 
-    /**
-     * Gets the list of players who have died during the last action
-     *
-     * @return the list of players who have died during the last action
-     */
     public ArrayList<PlayerToken> getDeadPlayers() {
         return deadPlayers;
     }
 
 
-    /**
-     * Gets the list of the players attacked during the last action
-     *
-     * @return the list of the players attacked during the last action
-     */
     public ArrayList<PlayerToken> getAttackedPlayers() {
         return attackedPlayers;
     }

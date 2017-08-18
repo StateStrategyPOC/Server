@@ -3,11 +3,11 @@ package common;
 import java.io.Serializable;
 
 /**
- * Created by giorgiopea on 14/03/17.
+ * The implementation of a lambda MVC Action
  */
 public abstract class StoreAction implements Serializable {
-    protected String actionIdentifier;
-    protected String actionGroupIdentifier;
+    protected final String actionIdentifier;
+    protected final String actionGroupIdentifier;
 
     public StoreAction(String actionIdentifier, String actionGroupIdentifier) {
         this.actionIdentifier = actionIdentifier;

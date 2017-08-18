@@ -1,11 +1,8 @@
 package common;
 
 /**
- * Represents the action of drawing a sector card from the sector card deck
- * 
- * @author Andrea Sessa
- * @author Giorgio Pea
- * @version 1.0
+ * Represents the in game action of drawing a Sector Card from the Sector Cardz deck
+ *
  */
 public class DrawSectorCardAction extends StoreAction {
 

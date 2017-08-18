@@ -1,12 +1,8 @@
 package common;
 
 /**
- * Represents the action of using an object card in the game
- * 
- * @see Action
- * @author Andrea Sessa
- * @author Giorgio Pea
- * @version 1.0
+ * Represents the in game action of using an Object Card
+ *
  */
 public class UseObjAction extends StoreAction {
 
