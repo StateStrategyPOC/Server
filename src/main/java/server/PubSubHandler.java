@@ -17,7 +17,7 @@ public class PubSubHandler extends Thread {
     // The socket associated to the handler
     private final Socket socket;
     // A queue of messages to send to the subscriber
-    private final Queue<PSNotification> buffer;
+    private final Queue<PSNotification> notificationsQueue;
     private final PlayerToken playerToken;
     // The object output stream used to perform the remote method call on the
     // subscriber
@@ -39,7 +39,7 @@ public class PubSubHandler extends Thread {
     public PubSubHandler(Socket socket, ObjectOutputStream outputStream, PlayerToken playerToken)  {
         this.socket = socket;
         this.playerToken = playerToken;
-        this.buffer = new ArrayBlockingQueue<>(10);
+        this.notificationsQueue = new ArrayBlockingQueue<>(10);
         this.objectOutputStream = outputStream;
         this.runningFlag = true;
     }
@@ -49,29 +49,27 @@ public class PubSubHandler extends Thread {
     }
 
     /**
-     * Performs a remote method call on the subscriber
-     *
-     * @param remoteMethodCall
-     *            The remote method call to be performed on the subscriber
-     * @throws IOException Networking problem.
+     * Sends a received notification to the client
+     * @param notification The received notification
+     * @throws IOException Network problem
      */
-    private void perform(PSNotification remoteMethodCall) throws IOException {
-        this.objectOutputStream.writeObject(remoteMethodCall);
+    private void sendNotification(PSNotification notification) throws IOException {
+        this.objectOutputStream.writeObject(notification);
         this.objectOutputStream.flush();
     }
 
 
     /**
      * Runs the thread defined in this class. The thread waits until the
-     * handler's associated queue of remote method calls has a remote method
-     * call, then wakes up and performs the remote method call.
+     * messages queue has a new message, and then sends the new message to the client.
      */
+    @Override
     public void run() {
         while (this.runningFlag) {
-            PSNotification remoteMethodCall = buffer.poll();
-            if (remoteMethodCall != null){
+            PSNotification outboundNotification = notificationsQueue.poll();
+            if (outboundNotification != null){
                 try {
-                    this.perform(remoteMethodCall);
+                    this.sendNotification(outboundNotification);
                 } catch (IOException e) {
                     this.runningFlag = false;
                     try {
@@ -88,8 +86,8 @@ public class PubSubHandler extends Thread {
                 try {
                     // If there are no incoming remote method calls the thread
                     // waits
-                    synchronized (buffer) {
-                        buffer.wait();
+                    synchronized (notificationsQueue) {
+                        notificationsQueue.wait();
                     }
                 } catch (InterruptedException e) {
                     e.printStackTrace();
@@ -109,10 +107,14 @@ public class PubSubHandler extends Thread {
         return playerToken;
     }
 
+    /**
+     * Enques a notification to be sent to the client
+     * @param psNotification The notification to be sent to the client
+     */
     public void queueNotification(PSNotification psNotification) {
-        buffer.add(psNotification);
-        synchronized (buffer) {
-            buffer.notify();
+        notificationsQueue.add(psNotification);
+        synchronized (notificationsQueue) {
+            notificationsQueue.notify();
         }
     }
 }

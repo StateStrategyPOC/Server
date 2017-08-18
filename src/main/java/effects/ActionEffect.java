@@ -1,7 +1,5 @@
 package effects;
 
-import common.Action;
-
 /**
  * Represents the effect associated with an action
  * 

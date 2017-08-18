@@ -1,5 +1,6 @@
 package common;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
 /**
@@ -12,7 +13,7 @@ import java.util.ArrayList;
  * @see ClientNotification
  */
 
-public class PSNotification {
+public class PSNotification implements Serializable {
     private final String message;
     private final ArrayList<PlayerToken> deadPlayers;
     private final ArrayList<PlayerToken> attackedPlayers;

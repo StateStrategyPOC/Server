@@ -54,17 +54,37 @@ public class ReqRespHandler extends Thread {
         }
     }
 
-
+    /**
+     * Listens for an object on the connection associated with this class
+     *
+     * @param inputStream The inbound stream of messages to listen on
+     * @return A received message of the type {@link common.ActionOnTheWire}
+     * @throws IOException Network problem
+     * @throws ClassNotFoundException If the received message is not of the type {@link common.ActionOnTheWire}
+     */
     private ActionOnTheWire getRequest(ObjectInputStream inputStream) throws IOException, ClassNotFoundException {
         return (ActionOnTheWire) inputStream.readObject();
     }
 
+    /**
+     * Sends a response over the connection associated with this class
+     * @param response The response of the type {@link common.RRNotification} to be sent
+     * @param outputStream The outbound message stream to be used to send the response
+     * @throws IOException Network problem
+     */
     private void sendRequest(RRNotification response, ObjectOutputStream outputStream) throws IOException {
         outputStream.writeObject(response);
         outputStream.flush();
 
     }
 
+    /**
+     * Closes the connection associated with this class
+     * @param socket The socket that represents the connection
+     * @param outputStream The outbound message stream associated with the connection
+     * @param inputStream The inbound message stream associated with the connection
+     * @throws IOException Network problem
+     */
     private void closeConnection(Socket socket, ObjectOutputStream outputStream, ObjectInputStream inputStream) throws IOException {
         outputStream.close();
         inputStream.close();
@@ -73,6 +93,12 @@ public class ReqRespHandler extends Thread {
 
     }
 
+    /**
+     * Makes the behaviour encoded in a received {@link common.ActionOnTheWire} be executed by the rest of the application
+     * via Action propagation
+     * @param request Incoming message whose encoded behaviour must be executed by the rest of the application
+     * @throws IOException Network problem
+     */
     private void resolveClientRequest(ActionOnTheWire request) throws IOException {
         if (request.getActionIdentifier().equals(EncodedBehaviourIdentifiers.getGames())) {
             ArrayList<GamePublicData> gamesList = new ArrayList<>();
