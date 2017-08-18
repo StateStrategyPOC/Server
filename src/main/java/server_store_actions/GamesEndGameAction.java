@@ -4,7 +4,7 @@ import server.Game;
 import common.StoreAction;
 
 /**
- * Created by giorgiopea on 20/03/17.
+ * An Action for signalling that a game has to end
  */
 public class GamesEndGameAction extends StoreAction {
 

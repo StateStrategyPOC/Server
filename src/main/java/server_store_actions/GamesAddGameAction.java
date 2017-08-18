@@ -4,25 +4,25 @@ import server.Game;
 import common.StoreAction;
 
 /**
- * Created by giorgiopea on 14/03/17.
+ * An Action for signalling that a new game must be managed
  */
 public class GamesAddGameAction extends StoreAction {
 
-    private final Game payload;
+    private final Game game;
 
     public GamesAddGameAction(Game game) {
         super("@SERVER_GAMES_ADD_GAME","@SERVER_GROUP");
-        this.payload = game;
+        this.game = game;
     }
 
-    public Game getPayload() {
-        return payload;
+    public Game getGame() {
+        return game;
     }
 
     @Override
     public String toString() {
         return "GamesAddGameAction{" +
-                "payload=" + payload +
+                "game=" + game +
                 ", actionIdentifier='" + actionIdentifier + '\'' +
                 ", actionGroupIdentifier='" + actionGroupIdentifier + '\'' +
                 '}';

@@ -5,6 +5,9 @@ import common.StoreAction;
 
 import java.util.UUID;
 
+/**
+ *  An Action for signaling that a Player wants to subscribe to notifications relative to a game
+ */
 public class GameSubscribeAction extends StoreAction {
 
     private final PlayerToken playerToken;

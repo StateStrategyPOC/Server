@@ -12,6 +12,10 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.util.logging.SimpleFormatter;
 
+
+/**
+ * Represents a lambda MVC Logger
+ */
 public class StoreLogger {
     private Logger logger;
     private  static StoreLogger instance;
@@ -28,6 +32,9 @@ public class StoreLogger {
         this.initLogger();
     }
 
+    /**
+     * Init the {@link Logger} associated to this class with a file handler
+     */
     private void initLogger() {
         Date date = new Date();
         DateFormat dateFormat = new SimpleDateFormat("yyyyMMdd");
@@ -49,6 +56,12 @@ public class StoreLogger {
             e.printStackTrace();
         }
     }
+
+    /**
+     * Logs the passed arguments with some other information
+     * @param action Propagated Action
+     * @param state The application's State before the propagation
+     */
     public void logPreStatePropagation(StoreAction action, ServerState state){
         Date date = new Date();
         this.logger.log(Level.INFO, "@@BEGIN_ITEM@@");
@@ -59,6 +72,11 @@ public class StoreLogger {
         this.logger.log(Level.INFO, "@@ACTION@@");
         this.logger.log(Level.INFO, action.toString());
     }
+
+    /**
+     * Logs the passed arguments with some other information
+     * @param state The application's State after a propagation of an Action
+     */
     public void logPostStatePropagation(ServerState state){
         Date date = new Date();
         this.logger.log(Level.INFO, "@@POST_TIMESTAMP@@");

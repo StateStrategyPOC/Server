@@ -9,7 +9,7 @@ public class GamesAddGameStatePolicy implements StatePolicy {
     @Override
     public ServerState apply(ServerState state, StoreAction action) {
         GamesAddGameAction castedAction = (GamesAddGameAction) action;
-        state.getGames().add(castedAction.getPayload());
+        state.getGames().add(castedAction.getGame());
         return state;
     }
 }

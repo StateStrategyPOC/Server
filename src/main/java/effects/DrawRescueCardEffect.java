@@ -15,7 +15,7 @@ import java.util.ArrayList;
  * @author Giorgio Pea
  * @version 1.0
  */
-public class DrawRescueCardEffect extends ActionEffect {
+public class DrawRescueCardEffect {
 	public static boolean executeEffect(Game game) {
 		RescueCard card = (RescueCard) game.getRescueDeck().popCard();
 		String message = "";

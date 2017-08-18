@@ -3,24 +3,23 @@ package server_store_actions;
 import common.PlayerToken;
 import common.StoreAction;
 
-import java.util.UUID;
-
 /**
- * Created by giorgiopea on 12/03/17.
+ * An Action for signalling that an in game inGameAction must be performed
  */
 public class GameMakeActionAction extends StoreAction {
 
-    private final StoreAction action;
+    private final StoreAction inGameAction;
+    //Player who wants to do the action
     private final PlayerToken playerToken;
 
-    public GameMakeActionAction(PlayerToken playerToken, StoreAction action) {
+    public GameMakeActionAction(PlayerToken playerToken, StoreAction inGameAction) {
         super("@SERVER_GAME_MAKE_ACTION","@SERVER_GROUP");
         this.playerToken = playerToken;
-        this.action = action;
+        this.inGameAction = inGameAction;
     }
 
-    public StoreAction getAction() {
-        return action;
+    public StoreAction getInGameAction() {
+        return inGameAction;
     }
 
     public PlayerToken getPlayerToken() {
@@ -30,7 +29,7 @@ public class GameMakeActionAction extends StoreAction {
     @Override
     public String toString() {
         return "GameMakeActionAction{" +
-                "action=" + action +
+                "inGameAction=" + inGameAction +
                 ", playerToken=" + playerToken +
                 ", actionIdentifier='" + actionIdentifier + '\'' +
                 ", actionGroupIdentifier='" + actionGroupIdentifier + '\'' +

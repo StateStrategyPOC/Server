@@ -5,10 +5,9 @@ import common.StoreAction;
 import java.util.UUID;
 
 /**
- * Created by giorgiopea on 13/03/17.
+ * An Action for signalling that a Player wants to join a game
  */
 public class GameJoinGameAction extends StoreAction {
-
     private final int gameId;
     private final String playerName;
 

@@ -7,14 +7,21 @@ import common.StoreAction;
 import java.io.ObjectOutputStream;
 import java.net.Socket;
 
-public class GameSetPSHandlersAction extends StoreAction {
+/**
+ * An Action for signalling that a {@link server.PubSubHandler} should be initialized to take care of async communications
+ * with a Player
+ */
+public class GameSetPSHandlerAction extends StoreAction {
 
+    //The game of the Player the handler will refer to
     private final Game game;
+    //Socket and streams to be used to persist an existing connection and use it for async communication
     private final Socket socket;
     private final ObjectOutputStream outputStream;
+    //The token of the player the handler will refer to
     private final PlayerToken playerToken;
 
-    public GameSetPSHandlersAction(Game game, PlayerToken playerToken, Socket socket, ObjectOutputStream outputStream) {
+    public GameSetPSHandlerAction(Game game, PlayerToken playerToken, Socket socket, ObjectOutputStream outputStream) {
         super("@SERVER_GAME_SET_PS","@SERVER_GROUP");
         this.game = game;
         this.playerToken = playerToken;
@@ -40,7 +47,7 @@ public class GameSetPSHandlersAction extends StoreAction {
 
     @Override
     public String toString() {
-        return "GameSetPSHandlersAction{" +
+        return "GameSetPSHandlerAction{" +
                 "game=" + game +
                 ", socket=" + socket +
                 ", outputStream=" + outputStream +

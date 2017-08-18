@@ -13,7 +13,7 @@ import server.Game;
  * @see ActionEffect
  * @see DiscardAction
  */
-public class DiscardObjCardEffect extends ActionEffect {
+public class DiscardObjCardEffect {
     public static boolean executeEffect(Game game, StoreAction action) {
         DiscardAction castedAction = (DiscardAction) action;
         Player currentPlayer = game.getCurrentPlayer();

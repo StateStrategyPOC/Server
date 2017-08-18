@@ -9,14 +9,12 @@ import java.util.Map;
 import java.util.Observer;
 
 /**
- * Created by giorgiopea on 09/03/17.
- *
+ * Represents a lambda MVC Store
  */
 public class ServerStore {
-
     private final Map<String, Resolver> actionGroupToResolver;
+    private final ObservableServerState observableState;
     private final static ServerStore instance = new ServerStore();
-    private ObservableServerState observableState;
     private final StoreLogger STORE_LOGGER;
 
 
@@ -27,9 +25,13 @@ public class ServerStore {
     private ServerStore(){
         this.actionGroupToResolver = new HashMap<>();
         this.STORE_LOGGER = StoreLogger.getInstance();
-        this.produceInitialState();
+        this.observableState = new ObservableServerState(new ServerState());
         this.fillResolverMap();
     }
+
+    /**
+     * Fills the map between {@link StoreAction#actionGroupIdentifier} and {@link Resolver}
+     */
     private void fillResolverMap(){
         this.actionGroupToResolver.put("@SERVER_GROUP", new ServerGroupResolver());
     }
@@ -44,18 +46,10 @@ public class ServerStore {
         this.observableState.addObserver(observer);
     }
 
-    private void init(ServerState initialState) {
-        this.observableState = new ObservableServerState(initialState);
-    }
-
-    private void produceInitialState(){
-        ServerState initialState = new ServerState();
-        this.init(initialState);
-    }
 
     /**
-     * Propagates an
-     * @param action
+     * Performs lambda MVC Action propagation
+     * @param action The Action to be propagated
      */
     public synchronized void propagateAction(StoreAction action) {
         Resolver resolver = this.actionGroupToResolver.get(action.getActionGroupIdentifier());

@@ -4,7 +4,7 @@ import server.Game;
 import common.StoreAction;
 
 /**
- * Created by giorgiopea on 05/05/17.
+ * An Action for signalling that a game becomes startable or not
  */
 public class GameStartableGameAction extends StoreAction {
     private final Game game;

@@ -18,7 +18,7 @@ import java.util.List;
  * @see ActionEffect
  * @see UseObjAction
  */
-public class UseObjCardEffect extends ActionEffect {
+public class UseObjCardEffect {
     /**
      * Initializes the effect wrapping inside an UseObjAction
      *

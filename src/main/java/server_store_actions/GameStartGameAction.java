@@ -4,7 +4,7 @@ import server.Game;
 import common.StoreAction;
 
 /**
- * Created by giorgiopea on 14/03/17.
+ * An Action for signalling that a game has to start
  */
 public class GameStartGameAction extends StoreAction {
 

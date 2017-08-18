@@ -6,6 +6,9 @@ import common.StoreAction;
 
 import java.util.UUID;
 
+/**
+ * An Action for signalling that the creator of a Game Room has decided to start the game
+ */
 public class GameOnDemandStartAction extends StoreAction {
 
     private final PlayerToken playerToken;

@@ -7,7 +7,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Created by giorgiopea on 13/03/17.
+ * Embeds the logic relative to the turn of an Alien Player
  */
 public class AlienTurn {
 
@@ -40,7 +40,7 @@ public class AlienTurn {
             // Actions to be set after a use sector card action
             case "@GAMEACTION_USE_SECTOR_CARD":
                 SectorCard card = ((UseSectorCardAction) action).getSectorCard();
-                if (card.hasObjectAssociated()) {
+                if (card.isHasObject()) {
                     // Need to discard an object card
                     if (currentPlayer.getPrivateDeck().getSize() == 4) {
                         nextActions.add("@GAMEACTION_DISCARD_OBJ_CARD");

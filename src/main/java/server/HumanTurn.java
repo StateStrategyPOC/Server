@@ -7,7 +7,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Created by giorgiopea on 13/03/17.
+ * Embeds the logic relative to the turn of a Human Player
  */
 public class HumanTurn {
 
@@ -50,7 +50,7 @@ public class HumanTurn {
             case "@GAMEACTION_USE_SECTOR_CARD":
                 SectorCard card = ((UseSectorCardAction) action).getSectorCard();
                 // If the sector card used has an object
-                if (card.hasObjectAssociated()) {
+                if (card.isHasObject()) {
                     if (currentPlayer.getPrivateDeck().getSize() == 4) {
                         nextActions.add("@GAMEACTION_DISCARD_OBJ_CARD");
                     } else {

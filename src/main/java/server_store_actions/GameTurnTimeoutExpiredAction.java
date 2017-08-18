@@ -4,7 +4,7 @@ import server.Game;
 import common.StoreAction;
 
 /**
- * Created by giorgiopea on 20/03/17.
+ * An Action for signaling that a player has run off time to perform an in game action
  */
 public class GameTurnTimeoutExpiredAction extends StoreAction {
 

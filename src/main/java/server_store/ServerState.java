@@ -1,7 +1,6 @@
 package server_store;
 
 import server.Game;
-import server.PubSubHandler;
 import server.ReqRespHandler;
 
 import java.io.Serializable;
@@ -12,17 +11,15 @@ import java.util.List;
  * Created by giorgiopea on 11/03/17.
  *
  */
-public class ServerState extends State implements Serializable {
+public class ServerState implements Serializable {
 
     private List<Game> games;
-    private List<ReqRespHandler> reqRespHandlers;
     private int tcpPort;
     private final long turnTimeout;
     private boolean isServerListening;
 
     public ServerState() {
         this.games = new ArrayList<>();
-        this.reqRespHandlers = new ArrayList<>();
         this.tcpPort = 29999;
         this.turnTimeout = 5*60*1000;
         this.isServerListening = true;
@@ -44,9 +41,6 @@ public class ServerState extends State implements Serializable {
         this.games = games;
     }
 
-    public List<ReqRespHandler> getReqRespHandlers() {
-        return reqRespHandlers;
-    }
 
     public Integer getTcpPort() {
         return tcpPort;
@@ -64,7 +58,6 @@ public class ServerState extends State implements Serializable {
     public String toString() {
         return "ServerState{" +
                 "games=" + games +
-                ", reqRespHandlers=" + reqRespHandlers +
                 ", tcpPort=" + tcpPort +
                 ", turnTimeout=" + turnTimeout +
                 ", isServerListening=" + isServerListening +

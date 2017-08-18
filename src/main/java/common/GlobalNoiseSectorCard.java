@@ -1,8 +1,7 @@
 package common;
 
 /**
- * Represents a global noise sector card
- *
+ * Represents a Global Noise Sector Card
  *
  */
 public class GlobalNoiseSectorCard extends SectorCard {

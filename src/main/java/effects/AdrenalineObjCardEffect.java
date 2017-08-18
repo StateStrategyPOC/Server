@@ -22,7 +22,7 @@ public class AdrenalineObjCardEffect extends ObjectCardEffect {
 		Player currentPlayer = game.getCurrentPlayer();
 		// Notifications setting
         RRNotification lastNotification = game.getLastRRclientNotification();
-        game.setLastRRclientNotification(new RRNotification(lastNotification.getActionResult(),"You will moveToSector by two sector this turn\n",lastNotification.getDrawnCards(), drawnSectorCard, drawnObjectCard, lastNotification.getLightedSectors(),lastNotification.getAvailableGames(),lastNotification.getPlayerToken(),lastNotification.getGameMapName()));
+        game.setLastRRclientNotification(new RRNotification(lastNotification.getActionResult(),"You will moveToSector by two sector this turn\n",null,null, lastNotification.getLightedSectors(),lastNotification.getAvailableGames(),lastNotification.getPlayerToken(),lastNotification.getGameMapName()));
         PSNotification lastPNotification = game.getLastPSclientNotification();
         game.setLastPSclientNotification(new PSNotification("[GLOBAL MESSAGE]: "
                 + currentPlayer.getName()

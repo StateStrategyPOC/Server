@@ -6,7 +6,7 @@ import common.StoreAction;
 import java.util.UUID;
 
 /**
- * Created by giorgiopea on 04/05/17.
+ * An Action for signalling that a Player wants to send a message to the other Players of a game
  *
  */
 public class GamePostMsgAction extends StoreAction {

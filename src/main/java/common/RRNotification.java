@@ -22,12 +22,12 @@ public class RRNotification implements Serializable {
     private final String gameMapName;
 
     public RRNotification(boolean actionResult,
-                          String message, SectorCard drawnSectorCard, ObjectCard drawnObjectCard, ArrayList<Sector> sectors, ArrayList<GamePublicData> availableGames, PlayerToken playerToken, String gameMapName) {
+                          String message, SectorCard drawnSectorCard, ObjectCard drawnObjectCard, ArrayList<Sector> lightedSectors, ArrayList<GamePublicData> availableGames, PlayerToken playerToken, String gameMapName) {
         this.actionResult = actionResult;
         this.message = message;
         this.drawnSectorCard = drawnSectorCard;
         this.drawnObjectCard = drawnObjectCard;
-        this.lightedSectors = sectors;
+        this.lightedSectors = lightedSectors;
         this.availableGames = availableGames;
         this.playerToken = playerToken;
         this.gameMapName = gameMapName;

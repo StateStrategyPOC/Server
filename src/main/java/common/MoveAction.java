@@ -1,7 +1,7 @@
 package common;
 
 /**
- * Represents the in game action of moving to a sector
+ * Represents the in game action of moving to a Sector
  *
  */
 public class MoveAction extends StoreAction {

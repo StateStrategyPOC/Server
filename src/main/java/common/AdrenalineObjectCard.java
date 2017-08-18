@@ -1,7 +1,7 @@
 package common;
 
 /**
- * Represents an adrenaline object card in the game.
+ * Represents an Adrenaline Object Card in the game.
  *
  */
 public class AdrenalineObjectCard extends ObjectCard {

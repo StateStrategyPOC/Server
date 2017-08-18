@@ -16,7 +16,7 @@ import java.util.ArrayList;
  * @see ActionEffect
  * @see DrawSectorCardAction
  */
-public class DrawSectorCardEffect extends ActionEffect {
+public class DrawSectorCardEffect {
     /**
      * Implements the abstract method defined in ActionEffect according to DrawActionFromSector
      *

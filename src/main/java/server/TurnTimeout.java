@@ -7,7 +7,7 @@ import java.util.TimerTask;
 
 
 /**
- * A thread that notifies an associated {@link Game}.
+ * A thread that notifies an associated {@link Game} for the expiration of the turn timer.
  */
 public class TurnTimeout extends TimerTask {
 

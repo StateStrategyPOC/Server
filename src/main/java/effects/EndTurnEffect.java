@@ -13,7 +13,7 @@ import server.Game;
  * @see EndTurnAction
  */
 
-public class EndTurnEffect extends ActionEffect {
+public class EndTurnEffect {
 
 
     public static boolean executeEffect(Game game, StoreAction action) {

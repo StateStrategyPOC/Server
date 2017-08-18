@@ -5,8 +5,7 @@ import common.StoreAction;
 import java.util.Observable;
 
 /**
- * Created by giorgiopea on 11/03/17.
- *
+ * Represents a wrapper to the {@link ServerState} so that its changes can be observed by means of propagated Actions
  */
 class ObservableServerState extends Observable {
 
@@ -20,8 +19,16 @@ class ObservableServerState extends Observable {
         return serverState;
     }
 
-    public void setServerState(State serverState, StoreAction lastAction) {
-        this.serverState = (ServerState) serverState;
+    /**
+     * Sets the new {@link ServerState} for the application and notifies observers with the {@link StoreAction} that
+     * has produced the new {@link ServerState}
+     *
+     * @param serverState The new {@link ServerState}
+     * @param lastAction  The {@link StoreAction} that
+     *                    has produced the new {@link ServerState}
+     */
+    public void setServerState(ServerState serverState, StoreAction lastAction) {
+        this.serverState = serverState;
         this.setChanged();
         this.notifyObservers(lastAction);
     }

@@ -3,6 +3,9 @@ package server_store;
 import server_side_policies.*;
 import server_state_policies.*;
 
+/**
+ * Represents a mapper between {@link common.StoreAction#actionIdentifier} and {@link PolicyCouple}
+ */
 public class ServerGroupResolver extends Resolver {
     @Override
     protected void fillPoliciesMap() {
@@ -25,6 +28,6 @@ public class ServerGroupResolver extends Resolver {
         this.policiesMap.put("@SERVER_GAME_TURNTIMEOUT_EXPIRED",
                 new PolicyCouple(new GameTurnTimeoutStatePolicy(), new GameTurnTimeoutSidePolicy()));
         this.policiesMap.put("@SERVER_GAME_SET_PS",
-                new PolicyCouple(new GameSetPSHandlersStatePolicy(), new GameSetPSHandlersSidePolicy()));
+                new PolicyCouple(new GameSetPSHandlerStatePolicy(), new GameSetPSHandlerSidePolicy()));
     }
 }

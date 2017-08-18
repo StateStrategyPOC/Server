@@ -1,5 +1,8 @@
 package server_store;
 
+/**
+ * Represents a container of a {@link StatePolicy} and of a {@link SidePolicy}
+ */
 public class PolicyCouple {
     private final StatePolicy statePolicy;
     private final SidePolicy sidePolicy;

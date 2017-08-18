@@ -17,7 +17,7 @@ import java.util.ArrayList;
  * @author Giorgio Pea
  * @version 1.1
  */
-public class DrawObjectCardEffect extends ActionEffect {
+public class DrawObjectCardEffect {
 
 
 	public static boolean executeEffect(Game game) {
