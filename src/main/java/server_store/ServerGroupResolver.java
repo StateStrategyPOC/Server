@@ -29,5 +29,6 @@ public class ServerGroupResolver extends Resolver {
                 new PolicyCouple(new GameTurnTimeoutStatePolicy(), new GameTurnTimeoutSidePolicy()));
         this.policiesMap.put("@SERVER_GAME_SET_PS",
                 new PolicyCouple(new GameSetPSHandlerStatePolicy(), new GameSetPSHandlerSidePolicy()));
+        this.policiesMap.put("@ERROR_ACTION", new PolicyCouple(new BlankPolicy(),null));
     }
 }
