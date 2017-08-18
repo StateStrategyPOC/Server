@@ -180,4 +180,28 @@ public class Game {
     public List<PubSubHandler> getPubSubHandlers() {
         return pubSubHandlers;
     }
+
+    @Override
+    public String toString() {
+        return "Game{" +
+                "players=" + players +
+                ", objectDeck=" + objectDeck +
+                ", rescueDeck=" + rescueDeck +
+                ", sectorDeck=" + sectorDeck +
+                ", currentPlayer=" + currentPlayer +
+                ", previousPlayer=" + previousPlayer +
+                ", turnNumber=" + turnNumber +
+                ", gamePublicData=" + gamePublicData +
+                ", mapName='" + mapName + '\'' +
+                ", gameMap=" + gameMap +
+                ", lastAction=" + lastAction +
+                ", nextActions=" + nextActions +
+                ", lastRRclientNotification=" + lastRRclientNotification +
+                ", lastPSclientNotification=" + lastPSclientNotification +
+                ", currentTimer=" + currentTimer +
+                ", didAlienWin=" + didAlienWin +
+                ", didHumansWin=" + didHumansWin +
+                ", pubSubHandlers=" + pubSubHandlers +
+                '}';
+    }
 }

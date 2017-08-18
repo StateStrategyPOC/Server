@@ -86,4 +86,21 @@ public class PSNotification implements Serializable {
     public boolean isAlienWin() {
         return alienWin;
     }
+
+    @Override
+    public String toString() {
+        return "PSNotification{" +
+                "message='" + message + '\'' +
+                ", deadPlayers=" + deadPlayers +
+                ", attackedPlayers=" + attackedPlayers +
+                ", humanWin=" + humanWin +
+                ", alienWin=" + alienWin +
+                ", escapedPlayer=" + escapedPlayer +
+                ", gameNeedsToStart=" + gameNeedsToStart +
+                ", turnNeedsToStart=" + turnNeedsToStart +
+                ", gameCanBeStarted=" + gameCanBeStarted +
+                ", turnNeedsToEnd=" + turnNeedsToEnd +
+                ", gameMapName='" + gameMapName + '\'' +
+                '}';
+    }
 }

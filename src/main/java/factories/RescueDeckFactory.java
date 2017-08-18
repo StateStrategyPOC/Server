@@ -1,5 +1,6 @@
 package factories;
 
+import common.Card;
 import common.RescueCard;
 import common.RescueType;
 import decks.Deck;

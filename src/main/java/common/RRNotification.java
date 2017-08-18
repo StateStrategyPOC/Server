@@ -77,4 +77,19 @@ public class RRNotification implements Serializable {
     public RescueCard getDrawnRescueCard() {
         return drawnRescueCard;
     }
+
+    @Override
+    public String toString() {
+        return "RRNotification{" +
+                "actionResult=" + actionResult +
+                ", message='" + message + '\'' +
+                ", drawnSectorCard=" + drawnSectorCard +
+                ", drawnObjectCard=" + drawnObjectCard +
+                ", drawnRescueCard=" + drawnRescueCard +
+                ", lightedSectors=" + lightedSectors +
+                ", availableGames=" + availableGames +
+                ", playerToken=" + playerToken +
+                ", gameMapName='" + gameMapName + '\'' +
+                '}';
+    }
 }

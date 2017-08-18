@@ -26,12 +26,12 @@ public class GameMakeActionStatePolicy implements StatePolicy {
             return state;
         }
         if (!game.getCurrentPlayer().getPlayerToken().equals(castedAction.getPlayerToken())){
-            RRNotification notification = new RRNotification(false, "You cannot perform this action",null, null, drawnRescueCard, null, null,null,null);
+            RRNotification notification = new RRNotification(false, "You cannot perform this action",null, null, null, null, null,null,null);
             game.setLastRRclientNotification(notification);
             return state;
         }
         if (!game.getNextActions().contains(gameAction.getActionIdentifier())){
-            RRNotification notification = new RRNotification(false, "You cannot perform this action",null, null, drawnRescueCard, null,null,null,null);
+            RRNotification notification = new RRNotification(false, "You cannot perform this action",null, null, null, null,null,null,null);
             game.setLastRRclientNotification(notification);
             return state;
         }
@@ -40,12 +40,12 @@ public class GameMakeActionStatePolicy implements StatePolicy {
             Method executeMethod = GameActionMapper.getInstance().getEffect(gameAction.getClass()).getMethod("executeEffect", Game.class, StoreAction.class);
             gameActionResult = (boolean) executeMethod.invoke(null,game, castedAction.getInGameAction());
             RRNotification lastNotification = game.getLastRRclientNotification();
-            game.setLastRRclientNotification(new RRNotification(gameActionResult,lastNotification.getMessage(), lastNotification.getDrawnSectorCard(), lastNotification.getDrawnObjectCard(), drawnRescueCard, lastNotification.getLightedSectors(),lastNotification.getAvailableGames(),lastNotification.getPlayerToken(),lastNotification.getGameMapName()));
+            game.setLastRRclientNotification(new RRNotification(gameActionResult,lastNotification.getMessage(), lastNotification.getDrawnSectorCard(), lastNotification.getDrawnObjectCard(), null, lastNotification.getLightedSectors(),lastNotification.getAvailableGames(),lastNotification.getPlayerToken(),lastNotification.getGameMapName()));
         } catch (NoSuchMethodException | IllegalAccessException | InvocationTargetException e) {
             e.printStackTrace();
         }
         if (!gameActionResult) {
-            RRNotification notification = new RRNotification(false, "You cannot perform this action",null, null, drawnRescueCard, null,null,null,null);
+            RRNotification notification = new RRNotification(false, "You cannot perform this action",null, null, null, null,null,null,null);
             game.setLastRRclientNotification(notification);
             return state;
         }

@@ -105,7 +105,7 @@ public class ReqRespHandler extends Thread {
             for (Game game : this.SERVER_STORE.getState().getGames()) {
                 gamesList.add(game.getGamePublicData());
             }
-            this.sendRequest(new RRNotification(true, null, null, drawnSectorCard, drawnObjectCard, null, gamesList, null, null), this.objectOutputStream);
+            this.sendRequest(new RRNotification(true, null, null, null, null, null, gamesList, null, null), this.objectOutputStream);
             this.closeConnection(this.socket, this.objectOutputStream, this.objectInputStream);
         } else if (request.getActionIdentifier().equals(EncodedBehaviourIdentifiers.joinGame())) {
             Integer gameId = (Integer) request.getParameters().get(0);
@@ -113,7 +113,7 @@ public class ReqRespHandler extends Thread {
             this.SERVER_STORE.propagateAction(new GameJoinGameAction(gameId, playerName));
             Game game = Helpers.findGameById(gameId, this.SERVER_STORE.getState().getGames());
             if (game == null) {
-                this.sendRequest(new RRNotification(false, "the action cannot be performed", null, drawnSectorCard, drawnObjectCard, null, null, null, null), this.objectOutputStream);
+                this.sendRequest(new RRNotification(false, "the action cannot be performed", null, null, null, null, null, null, null), this.objectOutputStream);
                 return;
             }
             this.sendRequest(game.getLastRRclientNotification(), this.objectOutputStream);
@@ -134,7 +134,7 @@ public class ReqRespHandler extends Thread {
             this.SERVER_STORE.propagateAction(new GameMakeActionAction(playerToken, action));
             Game game = Helpers.findGameById(playerToken.getGameId(), this.SERVER_STORE.getState().getGames());
             if (game == null) {
-                this.sendRequest(new RRNotification(false, "the action cannot be performed", null, drawnSectorCard, drawnObjectCard, null, null, null, null), this.objectOutputStream);
+                this.sendRequest(new RRNotification(false, "the action cannot be performed", null, null, null, null, null, null, null), this.objectOutputStream);
                 this.closeConnection(this.socket, this.objectOutputStream, this.objectInputStream);
                 return;
             }
@@ -145,7 +145,7 @@ public class ReqRespHandler extends Thread {
             this.SERVER_STORE.propagateAction(new GameOnDemandStartAction(playerToken));
             Game game = Helpers.findGameById(playerToken.getGameId(), this.SERVER_STORE.getState().getGames());
             if (game == null) {
-                this.sendRequest(new RRNotification(false, "the action cannot be performed", null, drawnSectorCard, drawnObjectCard, null, null, null, null), this.objectOutputStream);
+                this.sendRequest(new RRNotification(false, "the action cannot be performed", null, null, null, null, null, null, null), this.objectOutputStream);
                 this.closeConnection(this.socket, this.objectOutputStream, this.objectInputStream);
                 return;
             }
@@ -157,7 +157,7 @@ public class ReqRespHandler extends Thread {
             this.SERVER_STORE.propagateAction(new GamePostMsgAction(message, playerToken));
             Game game = Helpers.findGameById(playerToken.getGameId(), this.SERVER_STORE.getState().getGames());
             if (game == null) {
-                this.sendRequest(new RRNotification(false, "the action cannot be performed", null, drawnSectorCard, drawnObjectCard, null, null, null, null), this.objectOutputStream);
+                this.sendRequest(new RRNotification(false, "the action cannot be performed", null, null, null, null, null, null, null), this.objectOutputStream);
                 this.closeConnection(this.socket, this.objectOutputStream, this.objectInputStream);
                 return;
             }
@@ -167,7 +167,7 @@ public class ReqRespHandler extends Thread {
             PlayerToken playerToken = (PlayerToken) request.getParameters().get(0);
             Game game = Helpers.findGameById(playerToken.getGameId(), this.SERVER_STORE.getState().getGames());
             if (game == null) {
-                this.sendRequest(new RRNotification(false, "the action cannot be performed", null, drawnSectorCard, drawnObjectCard, null, null, null, null), this.objectOutputStream);
+                this.sendRequest(new RRNotification(false, "the action cannot be performed", null, null, null, null, null, null, null), this.objectOutputStream);
                 return;
             }
             PubSubHandler handler = new PubSubHandler(socket, objectOutputStream, playerToken);

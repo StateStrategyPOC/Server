@@ -55,4 +55,13 @@ public class PlayerToken implements Serializable {
             return false;
         return playerType == other.playerType;
     }
+
+    @Override
+    public String toString() {
+        return "PlayerToken{" +
+                "playerId=" + playerId +
+                ", playerType=" + playerType +
+                ", gameId=" + gameId +
+                '}';
+    }
 }

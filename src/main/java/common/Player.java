@@ -100,4 +100,18 @@ public class Player implements Serializable {
         this.hasMoved = hasMoved;
     }
 
+    @Override
+    public String toString() {
+        return "Player{" +
+                "speed=" + speed +
+                ", playerToken=" + playerToken +
+                ", currentSector=" + currentSector +
+                ", playerState=" + playerState +
+                ", privateDeck=" + privateDeck +
+                ", isSedated=" + isSedated +
+                ", isAdrenalined=" + isAdrenalined +
+                ", hasMoved=" + hasMoved +
+                ", name='" + name + '\'' +
+                '}';
+    }
 }

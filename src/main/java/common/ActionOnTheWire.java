@@ -25,4 +25,6 @@ public class ActionOnTheWire implements Serializable {
     public ArrayList<Object> getParameters() {
         return parameters;
     }
+
+
 }
