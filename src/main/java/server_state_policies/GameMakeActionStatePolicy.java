@@ -13,6 +13,7 @@ import server_store_actions.GameMakeActionAction;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.List;
+import java.util.Timer;
 
 public class GameMakeActionStatePolicy implements StatePolicy {
     @Override
@@ -67,8 +68,8 @@ public class GameMakeActionStatePolicy implements StatePolicy {
         }
         game.setDidHumansWin(checkWinConditions(PlayerType.HUMAN, game));
         game.setDidAlienWin(checkWinConditions(PlayerType.ALIEN, game));
-        //game.getCurrentTimer().cancel();
-        //game.setCurrentTimer(new Timer());
+        game.getCurrentTimer().cancel();
+        game.setCurrentTimer(new Timer());
         PSNotification lastNotification;
         if (game.isDidHumansWin()) {
             lastNotification = game.getLastPSclientNotification();

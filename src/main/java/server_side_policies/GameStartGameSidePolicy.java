@@ -2,6 +2,7 @@ package server_side_policies;
 
 import common.PSNotification;
 import server.PubSubHandler;
+import server.TurnTimeout;
 import server_store.ServerState;
 import server_store.SidePolicy;
 import common.StoreAction;
@@ -24,5 +25,6 @@ public class GameStartGameSidePolicy implements SidePolicy {
                 pubSubHandler.queueNotification(notification);
             }
         }
+        castedAction.getGame().getCurrentTimer().schedule(new TurnTimeout(castedAction.getGame()),state.getTurnTimeout());
     }
 }
