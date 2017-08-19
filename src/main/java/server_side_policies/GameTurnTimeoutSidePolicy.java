@@ -20,13 +20,13 @@ public class GameTurnTimeoutSidePolicy implements SidePolicy {
             if (handler.getPlayerToken().equals(game.getCurrentPlayer().getPlayerToken())) {
                 PSNotification notification = new PSNotification(game.getLastPSclientNotification().getMessage(),
                         null,null,false,false,null,
-                false,true,false,false,null);
+                        null, false,true,false,false,null);
                 handler.queueNotification(notification);
             }
             else if (handler.getPlayerToken().equals(game.getPreviousPlayer().getPlayerToken())) {
                 PSNotification notification = new PSNotification(game.getLastPSclientNotification().getMessage(),
                         null,null,false,false,null,
-                        false,false,false,true,null);
+                        null, false,false,false,true,null);
 
                 handler.queueNotification(notification);
             }

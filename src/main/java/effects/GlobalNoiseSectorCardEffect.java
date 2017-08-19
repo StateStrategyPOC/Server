@@ -18,7 +18,7 @@ public class GlobalNoiseSectorCardEffect extends SectorCardEffect {
 		PSNotification lastPNotification = game.getLastPSclientNotification();
 		String lastMessage = lastPNotification.getMessage();
 		game.setLastPSclientNotification(new PSNotification("[GLOBAL MESSAGE]: "+lastMessage+ " has made noise in sector "
-				+ target.getCoordinate().toString(),lastPNotification.getDeadPlayers(),lastPNotification.getAttackedPlayers(),lastPNotification.isHumanWin(),lastPNotification.isAlienWin(),lastPNotification.getEscapedPlayer(),lastPNotification.isGameNeedsToStart(),lastPNotification.isTurnNeedsToStart(),lastPNotification.isGameCanBeStarted(),lastPNotification.isTurnNeedsToEnd(),lastPNotification.getGameMapName()));
+				+ target.getCoordinate().toString(),lastPNotification.getDeadPlayers(),lastPNotification.getAttackedPlayers(),lastPNotification.isHumanWin(),lastPNotification.isAlienWin(),lastPNotification.getEscapedPlayer(), lastPNotification.getEscapingSector(), lastPNotification.isGameNeedsToStart(),lastPNotification.isTurnNeedsToStart(),lastPNotification.isGameCanBeStarted(),lastPNotification.isTurnNeedsToEnd(),lastPNotification.getGameMapName()));
 
 		return true;
 	}

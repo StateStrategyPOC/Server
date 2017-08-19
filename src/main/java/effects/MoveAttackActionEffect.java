@@ -76,7 +76,7 @@ public class MoveAttackActionEffect extends ActionEffect {
                         lastPNotification = game.getLastPSclientNotification();
                         ArrayList<PlayerToken> lastDeadPlayers = lastPNotification.getDeadPlayers();
                         lastDeadPlayers.add(player.getPlayerToken());
-                        game.setLastPSclientNotification(new PSNotification(psMessage.toString(),lastDeadPlayers,lastPNotification.getAttackedPlayers(),lastPNotification.isHumanWin(),lastPNotification.isAlienWin(),lastPNotification.getEscapedPlayer(),lastPNotification.isGameNeedsToStart(),lastPNotification.isTurnNeedsToStart(),lastPNotification.isGameCanBeStarted(),lastPNotification.isTurnNeedsToEnd(),lastPNotification.getGameMapName()));
+                        game.setLastPSclientNotification(new PSNotification(psMessage.toString(),lastDeadPlayers,lastPNotification.getAttackedPlayers(),lastPNotification.isHumanWin(),lastPNotification.isAlienWin(),lastPNotification.getEscapedPlayer(), lastPNotification.getEscapingSector(), lastPNotification.isGameNeedsToStart(),lastPNotification.isTurnNeedsToStart(),lastPNotification.isGameCanBeStarted(),lastPNotification.isTurnNeedsToEnd(),lastPNotification.getGameMapName()));
 
                         rrMessage.append("You have attacked sector ").append(targetSector.getCoordinate().toString()).append(" and so ").append(player.getName()).append(" is dead.");
                         psMessage.append("[GLOBAL MESSAGE]: ").append(currentPlayer.getName()).append(" has attacked sector ").append(targetSector.getCoordinate().toString()).append(" and so ").append(player.getName()).append(" is dead.");
@@ -88,7 +88,7 @@ public class MoveAttackActionEffect extends ActionEffect {
                         lastPNotification = game.getLastPSclientNotification();
                         ArrayList<PlayerToken> lastAttackedPlayers = lastPNotification.getAttackedPlayers();
                         lastAttackedPlayers.add(player.getPlayerToken());
-                        game.setLastPSclientNotification(new PSNotification(psMessage.toString(),lastPNotification.getDeadPlayers(),lastAttackedPlayers,lastPNotification.isHumanWin(),lastPNotification.isAlienWin(),lastPNotification.getEscapedPlayer(),lastPNotification.isGameNeedsToStart(),lastPNotification.isTurnNeedsToStart(),lastPNotification.isGameCanBeStarted(),lastPNotification.isTurnNeedsToEnd(),lastPNotification.getGameMapName()));
+                        game.setLastPSclientNotification(new PSNotification(psMessage.toString(),lastPNotification.getDeadPlayers(),lastAttackedPlayers,lastPNotification.isHumanWin(),lastPNotification.isAlienWin(),lastPNotification.getEscapedPlayer(), lastPNotification.getEscapingSector(), lastPNotification.isGameNeedsToStart(),lastPNotification.isTurnNeedsToStart(),lastPNotification.isGameCanBeStarted(),lastPNotification.isTurnNeedsToEnd(),lastPNotification.getGameMapName()));
                         rrMessage.append("You have attacked sector ").append(targetSector.getCoordinate().toString()).append(" and so ").append(player.getName()).append(" has defended.");
 
                         psMessage.append("[GLOBAL MESSAGE]: ").append(currentPlayer.getName()).append(" has attacked sector ").append(targetSector.getCoordinate().toString()).append(" and so ").append(player.getName()).append(" has defended.");
@@ -102,7 +102,7 @@ public class MoveAttackActionEffect extends ActionEffect {
                 game.setLastRRclientNotification(new RRNotification(lastNotification.isActionResult(),rrMessage.toString(),lastNotification.getDrawnSectorCard(),lastNotification.getDrawnObjectCard(),lastNotification.getDrawnRescueCard(), lastNotification.getLightedSectors(),lastNotification.getAvailableGames(),lastNotification.getPlayerToken()));
 
                 lastPNotification = game.getLastPSclientNotification();
-                game.setLastPSclientNotification(new PSNotification(psMessage.toString(),lastPNotification.getDeadPlayers(),lastPNotification.getAttackedPlayers(),lastPNotification.isHumanWin(),lastPNotification.isAlienWin(),lastPNotification.getEscapedPlayer(),lastPNotification.isGameNeedsToStart(),lastPNotification.isTurnNeedsToStart(),lastPNotification.isGameCanBeStarted(),lastPNotification.isTurnNeedsToEnd(),lastPNotification.getGameMapName()));
+                game.setLastPSclientNotification(new PSNotification(psMessage.toString(),lastPNotification.getDeadPlayers(),lastPNotification.getAttackedPlayers(),lastPNotification.isHumanWin(),lastPNotification.isAlienWin(),lastPNotification.getEscapedPlayer(), lastPNotification.getEscapingSector(), lastPNotification.isGameNeedsToStart(),lastPNotification.isTurnNeedsToStart(),lastPNotification.isGameCanBeStarted(),lastPNotification.isTurnNeedsToEnd(),lastPNotification.getGameMapName()));
 
                 for (Player player : deadPlayers){
                     targetSector.removePlayer(player);

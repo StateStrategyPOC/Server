@@ -15,6 +15,7 @@ public class PSNotification implements Serializable {
     private final boolean humanWin;
     private final boolean alienWin;
     private final PlayerToken escapedPlayer;
+    private final Sector escapingSector;
     private final boolean gameNeedsToStart;
     private final boolean turnNeedsToStart;
     private final boolean gameCanBeStarted;
@@ -22,13 +23,14 @@ public class PSNotification implements Serializable {
     private final String gameMapName;
 
 
-    public PSNotification(String message, ArrayList<PlayerToken> deadPlayers, ArrayList<PlayerToken> attackedPlayers, boolean humanWin, boolean alienWin, PlayerToken escapedPlayer, boolean gameNeedsToStart, boolean turnNeedToStart, boolean gameCanBeStarted, boolean turnNeedsToEnd, String gameMapName) {
+    public PSNotification(String message, ArrayList<PlayerToken> deadPlayers, ArrayList<PlayerToken> attackedPlayers, boolean humanWin, boolean alienWin, PlayerToken escapedPlayer, Sector escapingSector, boolean gameNeedsToStart, boolean turnNeedToStart, boolean gameCanBeStarted, boolean turnNeedsToEnd, String gameMapName) {
         this.message = message;
         this.deadPlayers = deadPlayers;
         this.attackedPlayers = attackedPlayers;
         this.humanWin = humanWin;
         this.alienWin = alienWin;
         this.escapedPlayer = escapedPlayer;
+        this.escapingSector = escapingSector;
         this.gameNeedsToStart = gameNeedsToStart;
         this.turnNeedsToStart = turnNeedToStart;
         this.gameCanBeStarted = gameCanBeStarted;
@@ -85,6 +87,10 @@ public class PSNotification implements Serializable {
 
     public boolean isAlienWin() {
         return alienWin;
+    }
+
+    public Sector getEscapingSector() {
+        return escapingSector;
     }
 
     @Override

@@ -18,7 +18,7 @@ public class GameStartableGameSidePolicy implements SidePolicy {
                 return;
             }
             PSNotification notification = new PSNotification(null, null,null,
-                    false,false,null,false,false,true,false, null);
+                    false,false,null, null, false,false,true,false, null);
 
             handler.queueNotification(notification);
         }

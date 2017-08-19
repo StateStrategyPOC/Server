@@ -2,6 +2,8 @@ package effects;
 
 import common.*;
 import server.Game;
+import server_store.ServerStore;
+import server_store_actions.GameRemovePlayerAction;
 
 /**
  * Represents the effect associated to the in game action of drawing a Rescue Card
@@ -24,8 +26,7 @@ public class DrawRescueCardEffect extends ActionEffect {
 			RRNotification lastNotification = game.getLastRRclientNotification();
 			game.setLastRRclientNotification(new RRNotification(lastNotification.isActionResult(),lastNotification.getMessage(),
 					lastNotification.getDrawnSectorCard(), lastNotification.getDrawnObjectCard(), card, lastNotification.getLightedSectors(),lastNotification.getAvailableGames(),lastNotification.getPlayerToken()));
-            game.setLastPSclientNotification(new PSNotification(lastMessage+message,lastPNotification.getDeadPlayers(),lastPNotification.getAttackedPlayers(),lastPNotification.isHumanWin(),lastPNotification.isAlienWin(),game.getCurrentPlayer().getPlayerToken(),lastPNotification.isGameNeedsToStart(),lastPNotification.isTurnNeedsToStart(),lastPNotification.isGameCanBeStarted(),lastPNotification.isTurnNeedsToEnd(),lastPNotification.getGameMapName()));
-
+            game.setLastPSclientNotification(new PSNotification(lastMessage+message,lastPNotification.getDeadPlayers(),lastPNotification.getAttackedPlayers(),lastPNotification.isHumanWin(),lastPNotification.isAlienWin(),game.getCurrentPlayer().getPlayerToken(), game.getCurrentPlayer().getCurrentSector(), lastPNotification.isGameNeedsToStart(),lastPNotification.isTurnNeedsToStart(),lastPNotification.isGameCanBeStarted(),lastPNotification.isTurnNeedsToEnd(),lastPNotification.getGameMapName()));
 			EndTurnEffect.executeEffect(game, new EndTurnAction());
 		} else {
 			RRNotification lastNotification = game.getLastRRclientNotification();
@@ -35,7 +36,7 @@ public class DrawRescueCardEffect extends ActionEffect {
             message = "\n[GLOBAL MESSAGE]: "
 					+ game.getCurrentPlayer().getName()
 					+ " has not escaped from aliens";
-            game.setLastPSclientNotification(new PSNotification(lastMessage+message,lastPNotification.getDeadPlayers(),lastPNotification.getAttackedPlayers(),lastPNotification.isHumanWin(),lastPNotification.isAlienWin(),lastPNotification.getEscapedPlayer(),lastPNotification.isGameNeedsToStart(),lastPNotification.isTurnNeedsToStart(),lastPNotification.isGameCanBeStarted(),lastPNotification.isTurnNeedsToEnd(),lastPNotification.getGameMapName()));
+            game.setLastPSclientNotification(new PSNotification(lastMessage+message,lastPNotification.getDeadPlayers(),lastPNotification.getAttackedPlayers(),lastPNotification.isHumanWin(),lastPNotification.isAlienWin(),lastPNotification.getEscapedPlayer(), lastPNotification.getEscapingSector(), lastPNotification.isGameNeedsToStart(),lastPNotification.isTurnNeedsToStart(),lastPNotification.isGameCanBeStarted(),lastPNotification.isTurnNeedsToEnd(),lastPNotification.getGameMapName()));
 
         }
         return true;

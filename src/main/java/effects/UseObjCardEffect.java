@@ -51,7 +51,7 @@ public class UseObjCardEffect extends ActionEffect {
                     + castedAction.getObjectCard().toString(),lastNotification.getDrawnSectorCard(),lastNotification.getDrawnObjectCard(),lastNotification.getDrawnRescueCard(), lastNotification.getLightedSectors(),lastNotification.getAvailableGames(),lastNotification.getPlayerToken()));
             String message = "[GLOBAL MESSAGE]: "+ game.getCurrentPlayer().getName() + " has used a "
                     + castedAction.getObjectCard().toString();
-            PSNotification psNotification = new PSNotification(message, null,null,false,false,null,false,false,false,false,null);
+            PSNotification psNotification = new PSNotification(message, null,null,false,false,null, null, false,false,false,false,null);
             game.getObjectDeck().addToDiscard(castedAction.getObjectCard());
             game.getCurrentPlayer().getPrivateDeck()
                     .removeCard(castedAction.getObjectCard());

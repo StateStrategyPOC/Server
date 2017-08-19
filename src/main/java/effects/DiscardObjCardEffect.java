@@ -23,7 +23,7 @@ public class DiscardObjCardEffect extends ActionEffect {
                 + discardedCard.toString() + " object card", lastNotification.getDrawnSectorCard(),lastNotification.getDrawnObjectCard(), lastNotification.getDrawnRescueCard(), lastNotification.getLightedSectors(), lastNotification.getAvailableGames(), lastNotification.getPlayerToken()));
         PSNotification lastPNotification = game.getLastPSclientNotification();
         game.setLastPSclientNotification(new PSNotification("[GLOBAL MESSAGE]: "
-                + currentPlayer.getName() + " has discarded an object card\n",lastPNotification.getDeadPlayers(),lastPNotification.getAttackedPlayers(),lastPNotification.isHumanWin(),lastPNotification.isAlienWin(),lastPNotification.getEscapedPlayer(),lastPNotification.isGameNeedsToStart(),lastPNotification.isTurnNeedsToStart(),lastPNotification.isGameCanBeStarted(),lastPNotification.isTurnNeedsToEnd(),lastPNotification.getGameMapName()));
+                + currentPlayer.getName() + " has discarded an object card\n",lastPNotification.getDeadPlayers(),lastPNotification.getAttackedPlayers(),lastPNotification.isHumanWin(),lastPNotification.isAlienWin(),lastPNotification.getEscapedPlayer(), lastPNotification.getEscapingSector(), lastPNotification.isGameNeedsToStart(),lastPNotification.isTurnNeedsToStart(),lastPNotification.isGameCanBeStarted(),lastPNotification.isTurnNeedsToEnd(),lastPNotification.getGameMapName()));
 
         //
         game.setLastAction(castedAction);

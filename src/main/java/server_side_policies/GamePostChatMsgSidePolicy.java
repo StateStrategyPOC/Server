@@ -16,7 +16,7 @@ public class GamePostChatMsgSidePolicy implements SidePolicy {
         GamePostMsgAction castedAction = (GamePostMsgAction) action;
         ServerStore SERVER_STORE = ServerStore.getInstance();
         PSNotification notification = new PSNotification(castedAction.getMessage(), null,null,
-                false,false,null,false,false,false,false, null);
+                false,false,null, null, false,false,false,false, null);
         Game game = Helpers.findGameById(castedAction.getPlayerToken().getGameId(),SERVER_STORE.getState().getGames());
         if (game == null){
             return;

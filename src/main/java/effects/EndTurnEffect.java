@@ -24,7 +24,7 @@ public class EndTurnEffect extends ActionEffect {
         game.setPreviousPlayer(game.getCurrentPlayer());
         shiftCurrentPlayer(game);
         PSNotification lastPNotification = game.getLastPSclientNotification();
-        game.setLastPSclientNotification(new PSNotification(message+game.getCurrentPlayer().getName()+" now is your turn",lastPNotification.getDeadPlayers(),lastPNotification.getAttackedPlayers(),lastPNotification.isHumanWin(),lastPNotification.isAlienWin(),lastPNotification.getEscapedPlayer(),lastPNotification.isGameNeedsToStart(),lastPNotification.isTurnNeedsToStart(),lastPNotification.isGameCanBeStarted(),lastPNotification.isTurnNeedsToEnd(),lastPNotification.getGameMapName()));
+        game.setLastPSclientNotification(new PSNotification(message+game.getCurrentPlayer().getName()+" now is your turn",lastPNotification.getDeadPlayers(),lastPNotification.getAttackedPlayers(),lastPNotification.isHumanWin(),lastPNotification.isAlienWin(),lastPNotification.getEscapedPlayer(), lastPNotification.getEscapingSector(), lastPNotification.isGameNeedsToStart(),lastPNotification.isTurnNeedsToStart(),lastPNotification.isGameCanBeStarted(),lastPNotification.isTurnNeedsToEnd(),lastPNotification.getGameMapName()));
         // Notify the client
         game.setLastAction(action);
         return true;
@@ -45,7 +45,10 @@ public class EndTurnEffect extends ActionEffect {
             }
             index++;
         }
-        game.setCurrentPlayer(game.getPlayers().get(index));
+        Player player = game.getPlayers().get(index);
+        if (player.getPlayerState() == PlayerState.ALIVE){
+            game.setCurrentPlayer(player);
+        }
     }
 
 }

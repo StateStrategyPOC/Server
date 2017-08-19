@@ -21,7 +21,7 @@ public class AdrenalineObjCardEffect extends ObjectCardEffect {
         PSNotification lastPNotification = game.getLastPSclientNotification();
         game.setLastPSclientNotification(new PSNotification("[GLOBAL MESSAGE]: "
                 + currentPlayer.getName()
-                + " has used an adrenaline object card\n",lastPNotification.getDeadPlayers(),lastPNotification.getAttackedPlayers(),lastPNotification.isHumanWin(),lastPNotification.isAlienWin(),lastPNotification.getEscapedPlayer(),lastPNotification.isGameNeedsToStart(),lastPNotification.isTurnNeedsToStart(),lastPNotification.isGameCanBeStarted(),lastPNotification.isTurnNeedsToEnd(),lastPNotification.getGameMapName()));
+                + " has used an adrenaline object card\n",lastPNotification.getDeadPlayers(),lastPNotification.getAttackedPlayers(),lastPNotification.isHumanWin(),lastPNotification.isAlienWin(),lastPNotification.getEscapedPlayer(), lastPNotification.getEscapingSector(), lastPNotification.isGameNeedsToStart(),lastPNotification.isTurnNeedsToStart(),lastPNotification.isGameCanBeStarted(),lastPNotification.isTurnNeedsToEnd(),lastPNotification.getGameMapName()));
 		currentPlayer.setAdrenalined(true);
 		return true;
 	}
