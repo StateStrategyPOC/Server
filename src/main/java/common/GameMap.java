@@ -204,6 +204,9 @@ public class GameMap {
      * @return True if the reachability is verified with success, otherwise false
      */
     public boolean checkSectorAdiacency(Sector sourceSector, Sector targetSector, int maxDistance, boolean forceMaxMovement) {
+        if (targetSector.getSectorType() == SectorType.CLOSED_RESCUE){
+            return false;
+        }
         List<List<Sector>> visitedSectors = new ArrayList<>();
         List<Sector> neighbors = this.searchableGraph.neighborListOf(sourceSector);
         visitedSectors.add(neighbors);
