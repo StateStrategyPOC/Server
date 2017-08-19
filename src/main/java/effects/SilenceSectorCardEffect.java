@@ -4,7 +4,6 @@ package effects;
 import common.PSNotification;
 import common.RRNotification;
 import common.SectorCard;
-import common.SilenceSectorCard;
 import server.Game;
 
 /**

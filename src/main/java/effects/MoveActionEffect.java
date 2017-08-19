@@ -2,7 +2,6 @@ package effects;
 
 import common.*;
 import server.Game;
-import common.StoreAction;
 
 /**
  * Represents the effect of the moving a player

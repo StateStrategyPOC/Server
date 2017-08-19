@@ -3,8 +3,6 @@ package effects;
 import common.*;
 import server.Game;
 
-import java.util.ArrayList;
-
 /**
  * Represents the effect associated to the in game action of drawing a Rescue Card
  *
@@ -12,7 +10,7 @@ import java.util.ArrayList;
 public class DrawRescueCardEffect extends ActionEffect {
 	public static boolean executeEffect(Game game) {
 		RescueCard card = (RescueCard) game.getRescueDeck().popCard();
-		String message = "";
+		String message;
         PSNotification lastPNotification = game.getLastPSclientNotification();
         String lastMessage = lastPNotification.getMessage();
 

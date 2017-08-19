@@ -4,8 +4,6 @@ import common.*;
 import decks.SectorDeck;
 import server.Game;
 
-import java.util.ArrayList;
-
 /**
  * Represents the effect associated to the in game action of drawing a Sector Card
  */

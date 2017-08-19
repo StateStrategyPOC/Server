@@ -43,9 +43,7 @@ public class Coordinate implements Serializable {
 		if (getClass() != obj.getClass())
 			return false;
 		Coordinate other = (Coordinate) obj;
-		if (x != other.x)
-			return false;
-		return y == other.y;
+		return x == other.x && y == other.y;
 	}
 
 	@Override
