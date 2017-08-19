@@ -20,7 +20,7 @@ public class ServerState implements Serializable {
     public ServerState() {
         this.games = new ArrayList<>();
         this.tcpPort = 29999;
-        this.turnTimeout = 5*60*1000;
+        this.turnTimeout = 50*60*1000;
         this.isServerListening = true;
     }
 

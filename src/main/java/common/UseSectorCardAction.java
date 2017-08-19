@@ -16,4 +16,5 @@ public class UseSectorCardAction extends StoreAction {
     public SectorCard getSectorCard() {
         return sectorCard;
     }
+
 }

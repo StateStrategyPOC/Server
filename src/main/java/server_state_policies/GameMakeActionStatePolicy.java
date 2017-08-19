@@ -34,6 +34,8 @@ public class GameMakeActionStatePolicy implements StatePolicy {
             game.setLastRRclientNotification(notification);
             return state;
         }
+        game.setLastRRclientNotification(new RRNotification(false,null,null,null,null,null,null,null));
+        game.setLastPSclientNotification(new PSNotification(null,null,null,false,false,null,null,false,false,false,false,null));
         // Executes the action's associated logic and get the result
         try {
             Method executeMethod = GameActionMapper.getInstance().getEffect(gameAction.getClass()).getMethod("executeEffect", Game.class, StoreAction.class);
