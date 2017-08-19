@@ -16,4 +16,13 @@ public class MoveAttackAction extends StoreAction {
     public Sector getTargetSector() {
         return targetSector;
     }
+
+    @Override
+    public String toString() {
+        return "MoveAttackAction{" +
+                "targetSector=" + targetSector +
+                ", actionIdentifier='" + actionIdentifier + '\'' +
+                ", actionGroupIdentifier='" + actionGroupIdentifier + '\'' +
+                '}';
+    }
 }
