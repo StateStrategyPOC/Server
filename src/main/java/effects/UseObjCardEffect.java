@@ -47,8 +47,8 @@ public class UseObjCardEffect extends ActionEffect {
 
         try {
             RRNotification lastNotification = game.getLastRRclientNotification();
-            game.setLastRRclientNotification(new RRNotification(lastNotification.getActionResult(),"You have used a "
-                    + castedAction.getObjectCard().toString(),lastNotification.getDrawnSectorCard(),lastNotification.getDrawnObjectCard(),lastNotification.getDrawnRescueCard(), lastNotification.getLightedSectors(),lastNotification.getAvailableGames(),lastNotification.getPlayerToken(),lastNotification.getGameMapName()));
+            game.setLastRRclientNotification(new RRNotification(lastNotification.isActionResult(),"You have used a "
+                    + castedAction.getObjectCard().toString(),lastNotification.getDrawnSectorCard(),lastNotification.getDrawnObjectCard(),lastNotification.getDrawnRescueCard(), lastNotification.getLightedSectors(),lastNotification.getAvailableGames(),lastNotification.getPlayerToken()));
             String message = "[GLOBAL MESSAGE]: "+ game.getCurrentPlayer().getName() + " has used a "
                     + castedAction.getObjectCard().toString();
             PSNotification psNotification = new PSNotification(message, null,null,false,false,null,false,false,false,false,null);

@@ -99,7 +99,7 @@ public class MoveAttackActionEffect extends ActionEffect {
                     psMessage.append("[GLOBAL MESSAGE]: ").append(currentPlayer.getName()).append(" has attacked sector ").append(targetSector.getCoordinate().toString()).append(" but it contained no players.");
                 }
                 RRNotification lastNotification = game.getLastRRclientNotification();
-                game.setLastRRclientNotification(new RRNotification(lastNotification.getActionResult(),rrMessage.toString(),lastNotification.getDrawnSectorCard(),lastNotification.getDrawnObjectCard(),lastNotification.getDrawnRescueCard(), lastNotification.getLightedSectors(),lastNotification.getAvailableGames(),lastNotification.getPlayerToken(),lastNotification.getGameMapName()));
+                game.setLastRRclientNotification(new RRNotification(lastNotification.isActionResult(),rrMessage.toString(),lastNotification.getDrawnSectorCard(),lastNotification.getDrawnObjectCard(),lastNotification.getDrawnRescueCard(), lastNotification.getLightedSectors(),lastNotification.getAvailableGames(),lastNotification.getPlayerToken()));
 
                 lastPNotification = game.getLastPSclientNotification();
                 game.setLastPSclientNotification(new PSNotification(psMessage.toString(),lastPNotification.getDeadPlayers(),lastPNotification.getAttackedPlayers(),lastPNotification.isHumanWin(),lastPNotification.isAlienWin(),lastPNotification.getEscapedPlayer(),lastPNotification.isGameNeedsToStart(),lastPNotification.isTurnNeedsToStart(),lastPNotification.isGameCanBeStarted(),lastPNotification.isTurnNeedsToEnd(),lastPNotification.getGameMapName()));

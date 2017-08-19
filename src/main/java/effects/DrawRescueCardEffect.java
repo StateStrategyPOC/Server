@@ -22,15 +22,15 @@ public class DrawRescueCardEffect extends ActionEffect {
 					+ game.getCurrentPlayer().getName()
 					+ " has escaped from aliens!";
 			RRNotification lastNotification = game.getLastRRclientNotification();
-			game.setLastRRclientNotification(new RRNotification(lastNotification.getActionResult(),lastNotification.getMessage(),
-					lastNotification.getDrawnSectorCard(), lastNotification.getDrawnObjectCard(), card, lastNotification.getLightedSectors(),lastNotification.getAvailableGames(),lastNotification.getPlayerToken(),lastNotification.getGameMapName()));
+			game.setLastRRclientNotification(new RRNotification(lastNotification.isActionResult(),lastNotification.getMessage(),
+					lastNotification.getDrawnSectorCard(), lastNotification.getDrawnObjectCard(), card, lastNotification.getLightedSectors(),lastNotification.getAvailableGames(),lastNotification.getPlayerToken()));
             game.setLastPSclientNotification(new PSNotification(lastMessage+message,lastPNotification.getDeadPlayers(),lastPNotification.getAttackedPlayers(),lastPNotification.isHumanWin(),lastPNotification.isAlienWin(),game.getCurrentPlayer().getPlayerToken(),lastPNotification.isGameNeedsToStart(),lastPNotification.isTurnNeedsToStart(),lastPNotification.isGameCanBeStarted(),lastPNotification.isTurnNeedsToEnd(),lastPNotification.getGameMapName()));
 
 			EndTurnEffect.executeEffect(game, new EndTurnAction());
 		} else {
 			RRNotification lastNotification = game.getLastRRclientNotification();
-			game.setLastRRclientNotification(new RRNotification(lastNotification.getActionResult(),lastNotification.getMessage(),
-					lastNotification.getDrawnSectorCard(), lastNotification.getDrawnObjectCard(), card, lastNotification.getLightedSectors(),lastNotification.getAvailableGames(),lastNotification.getPlayerToken(),lastNotification.getGameMapName()));			game.getCurrentPlayer().getCurrentSector()
+			game.setLastRRclientNotification(new RRNotification(lastNotification.isActionResult(),lastNotification.getMessage(),
+					lastNotification.getDrawnSectorCard(), lastNotification.getDrawnObjectCard(), card, lastNotification.getLightedSectors(),lastNotification.getAvailableGames(),lastNotification.getPlayerToken()));game.getCurrentPlayer().getCurrentSector()
 					.setSectorType(SectorType.CLOSED_RESCUE);
             message = "\n[GLOBAL MESSAGE]: "
 					+ game.getCurrentPlayer().getName()

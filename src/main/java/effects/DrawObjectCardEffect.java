@@ -22,8 +22,8 @@ public class DrawObjectCardEffect extends ActionEffect {
 			message = "\n[GLOBAL MESSAGE]: No more object cards";
 		} else {
 			RRNotification lastNotification = game.getLastRRclientNotification();
-			game.setLastRRclientNotification(new RRNotification(lastNotification.getActionResult(),lastNotification.getMessage(),
-					lastNotification.getDrawnSectorCard(), objectCard, lastNotification.getDrawnRescueCard(), lastNotification.getLightedSectors(),lastNotification.getAvailableGames(),lastNotification.getPlayerToken(),lastNotification.getGameMapName()));
+			game.setLastRRclientNotification(new RRNotification(lastNotification.isActionResult(),lastNotification.getMessage(),
+					lastNotification.getDrawnSectorCard(), objectCard, lastNotification.getDrawnRescueCard(), lastNotification.getLightedSectors(),lastNotification.getAvailableGames(),lastNotification.getPlayerToken()));
 			game.getCurrentPlayer().getPrivateDeck().addCard(objectCard);
 			message = "\n[GLOBAL MESSAGE]: "
 					+ game.getCurrentPlayer().getName()

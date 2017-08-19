@@ -22,7 +22,7 @@ public class GameMakeActionSidePolicy implements SidePolicy {
         if (game == null){
             return;
         }
-        if (!game.getLastRRclientNotification().getActionResult()){
+        if (!game.getLastRRclientNotification().isActionResult()){
             return;
         }
         for (PubSubHandler handler : game.getPubSubHandlers()) {

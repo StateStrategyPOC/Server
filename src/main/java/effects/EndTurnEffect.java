@@ -16,8 +16,8 @@ public class EndTurnEffect extends ActionEffect {
         game.getCurrentPlayer().setSedated(false);
         game.getCurrentPlayer().setHasMoved(false);
         RRNotification lastNotification = game.getLastRRclientNotification();
-        game.setLastRRclientNotification(new RRNotification(lastNotification.getActionResult(),"\nYou have ended your turn",
-                lastNotification.getDrawnSectorCard(),lastNotification.getDrawnObjectCard(),lastNotification.getDrawnRescueCard(), lastNotification.getLightedSectors(),lastNotification.getAvailableGames(),lastNotification.getPlayerToken(),lastNotification.getGameMapName()));
+        game.setLastRRclientNotification(new RRNotification(lastNotification.isActionResult(),"\nYou have ended your turn",
+                lastNotification.getDrawnSectorCard(),lastNotification.getDrawnObjectCard(),lastNotification.getDrawnRescueCard(), lastNotification.getLightedSectors(),lastNotification.getAvailableGames(),lastNotification.getPlayerToken()));
         String message = "\n[GLOBAL MESSAGE]: "
                 + game.getCurrentPlayer().getName()
                 + " has ended its turn.\n[GLOBAL MESSAGE]: ";

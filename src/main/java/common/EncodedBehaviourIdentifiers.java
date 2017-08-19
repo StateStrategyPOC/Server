@@ -1,7 +1,7 @@
-package server;
+package common;
 
 /**
- * Created by giorgiopea on 25/04/17.
+ * A container of identifier for different requestable behaviour by the client to the server
  *
  */
 public class EncodedBehaviourIdentifiers {
@@ -31,6 +31,6 @@ public class EncodedBehaviourIdentifiers {
     }
 
     public static String getGames() {
-        return "$getGames";
+        return "$getAvailableGames";
     }
 }

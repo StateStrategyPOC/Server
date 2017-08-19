@@ -44,8 +44,8 @@ public class Game {
         this.gamePublicData = new GamePublicData(counter, "Game_" + counter);
         this.turnNumber = 0;
         this.lastAction = null;
-        this.lastPSclientNotification = null;
-        this.lastRRclientNotification = null;
+        this.lastRRclientNotification = new RRNotification(false,null,null,null,null,null,null,null);
+        this.lastPSclientNotification = new PSNotification(null,null,null,false,false,null,false,false,false,false,null);
         this.currentTimer = null;
         this.didHumansWin = false;
         this.didHumansWin = false;

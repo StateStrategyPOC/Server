@@ -12,7 +12,7 @@ public class SuppressorEffect extends ObjectCardEffect {
         Player currentPlayer = game.getCurrentPlayer();
         currentPlayer.setSedated(true);
         RRNotification lastNotification = game.getLastRRclientNotification();
-        game.setLastRRclientNotification(new RRNotification(lastNotification.getActionResult(), "You will not draw any sector card this turn", lastNotification.getDrawnSectorCard(), lastNotification.getDrawnObjectCard(), lastNotification.getDrawnRescueCard(), lastNotification.getLightedSectors(), lastNotification.getAvailableGames(), lastNotification.getPlayerToken(), lastNotification.getGameMapName()));
+        game.setLastRRclientNotification(new RRNotification(lastNotification.isActionResult(), "You will not draw any sector card this turn", lastNotification.getDrawnSectorCard(), lastNotification.getDrawnObjectCard(), lastNotification.getDrawnRescueCard(), lastNotification.getLightedSectors(), lastNotification.getAvailableGames(), lastNotification.getPlayerToken()));
         PSNotification lastPNotification = game.getLastPSclientNotification();
         String lastMessage = lastPNotification.getMessage();
         game.setLastPSclientNotification(new PSNotification(lastMessage + "\n[GLOBAL MESSAGE]: He/she will not draw any sector card this turn", lastPNotification.getDeadPlayers(), lastPNotification.getAttackedPlayers(), lastPNotification.isHumanWin(), lastPNotification.isAlienWin(), lastPNotification.getEscapedPlayer(), lastPNotification.isGameNeedsToStart(), lastPNotification.isTurnNeedsToStart(), lastPNotification.isGameCanBeStarted(), lastPNotification.isTurnNeedsToEnd(), lastPNotification.getGameMapName()));
