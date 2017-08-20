@@ -27,6 +27,7 @@ public class DrawRescueCardEffect extends ActionEffect {
 			game.setLastRRclientNotification(new RRNotification(lastNotification.isActionResult(),lastNotification.getMessage(),
 					lastNotification.getDrawnSectorCard(), lastNotification.getDrawnObjectCard(), card, lastNotification.getLightedSectors(),lastNotification.getAvailableGames(),lastNotification.getPlayerToken()));
             game.setLastPSclientNotification(new PSNotification(lastMessage+message,lastPNotification.getDeadPlayers(),lastPNotification.getAttackedPlayers(),lastPNotification.isHumanWin(),lastPNotification.isAlienWin(),game.getCurrentPlayer().getPlayerToken(), game.getCurrentPlayer().getCurrentSector(), lastPNotification.isGameNeedsToStart(),lastPNotification.isTurnNeedsToStart(),lastPNotification.isGameCanBeStarted(),lastPNotification.isTurnNeedsToEnd(),lastPNotification.getGameMapName()));
+            game.getCurrentPlayer().setPlayerState(PlayerState.ESCAPED);
 			EndTurnEffect.executeEffect(game, new EndTurnAction());
 		} else {
 			RRNotification lastNotification = game.getLastRRclientNotification();

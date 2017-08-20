@@ -54,7 +54,6 @@ public class MoveActionEffect extends ActionEffect {
                 RRNotification lastNotification = game.getLastRRclientNotification();
                 game.setLastRRclientNotification(new RRNotification(lastNotification.isActionResult(),"You have moved to sector "
                         + targetSector.getCoordinate().toString(),null,null,null, null,null,null));
-                PSNotification lastPNotification = game.getLastPSclientNotification();
                 game.setLastPSclientNotification(new PSNotification("[GLOBAL MESSAGE]: "
                         + currentPlayer.getName() + " has moved.",null,null,false,false,null,null,false,false, false,false,null));
 
