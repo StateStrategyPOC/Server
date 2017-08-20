@@ -5,4 +5,5 @@ package common;
  * only used for polymorphism purposes.
  */
 public abstract class ObjectCard extends Card {
+
 }
