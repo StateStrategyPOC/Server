@@ -23,7 +23,7 @@ public class DrawSectorCardEffect extends ActionEffect {
         game.setLastRRclientNotification(new RRNotification(lastNotification.isActionResult(), lastNotification.getMessage(),
                 sectorCard, lastNotification.getDrawnObjectCard(), lastNotification.getDrawnRescueCard(), lastNotification.getLightedSectors(), lastNotification.getAvailableGames(), lastNotification.getPlayerToken()));
         PSNotification lastPNotification = game.getLastPSclientNotification();
-        String lastMessage = lastNotification.getMessage();
+        String lastMessage = lastPNotification.getMessage();
         game.setLastPSclientNotification(new PSNotification(lastMessage + "\n[GLOBAL MESSAGE]: " + game.getCurrentPlayer().getName()
                 + " has drawn a sector card", lastPNotification.getDeadPlayers(), lastPNotification.getAttackedPlayers(), lastPNotification.isHumanWin(), lastPNotification.isAlienWin(), lastPNotification.getEscapedPlayer(), lastPNotification.getEscapingSector(), lastPNotification.isGameNeedsToStart(), lastPNotification.isTurnNeedsToStart(), lastPNotification.isGameCanBeStarted(), lastPNotification.isTurnNeedsToEnd(), lastPNotification.getGameMapName()));
 
