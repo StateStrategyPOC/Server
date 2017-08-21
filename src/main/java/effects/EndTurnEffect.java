@@ -31,23 +31,18 @@ public class EndTurnEffect extends ActionEffect {
     }
 
     private static void shiftCurrentPlayer(Game game) {
-        int size = game.getPlayers().size();
-        int index = 0;
-        while (index != size){
-            Player current = game.getPlayers().get(index);
-            if (current.equals(game.getCurrentPlayer())){
-                if ( index == size - 1){
-                    index = 0;
-                    break;
-                }
-                index++;
-                break;
-            }
-            index++;
+
+        int currentPlayerIndex = game.getPlayers().indexOf(game.getCurrentPlayer());
+        Player player;
+        if (currentPlayerIndex != game.getPlayers().size() - 1){
+            player = game.getPlayers().get(currentPlayerIndex + 1);
         }
-        Player player = game.getPlayers().get(index);
-        if (player.getPlayerState() == PlayerState.ALIVE){
-            game.setCurrentPlayer(player);
+        else {
+            player = game.getPlayers().get(0);
+        }
+        game.setCurrentPlayer(player);
+        if (player.getPlayerState() != PlayerState.ALIVE){
+            shiftCurrentPlayer(game);
         }
     }
 
