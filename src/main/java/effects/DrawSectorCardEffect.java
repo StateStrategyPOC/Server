@@ -4,8 +4,6 @@ import common.*;
 import decks.SectorDeck;
 import server.Game;
 
-import java.util.ArrayList;
-
 /**
  * Represents the effect associated to the in game action of drawing a Sector Card
  */
@@ -22,12 +20,12 @@ public class DrawSectorCardEffect extends ActionEffect {
         SectorCard sectorCard = (SectorCard) sectorDeck.popCard();
         // Notify the client
         RRNotification lastNotification = game.getLastRRclientNotification();
-        game.setLastRRclientNotification(new RRNotification(lastNotification.getActionResult(), lastNotification.getMessage(),
-                sectorCard, lastNotification.getDrawnObjectCard(), lastNotification.getDrawnRescueCard(), lastNotification.getLightedSectors(), lastNotification.getAvailableGames(), lastNotification.getPlayerToken(), lastNotification.getGameMapName()));
+        game.setLastRRclientNotification(new RRNotification(lastNotification.isActionResult(), lastNotification.getMessage(),
+                sectorCard, lastNotification.getDrawnObjectCard(), lastNotification.getDrawnRescueCard(), lastNotification.getLightedSectors(), lastNotification.getAvailableGames(), lastNotification.getPlayerToken()));
         PSNotification lastPNotification = game.getLastPSclientNotification();
-        String lastMessage = lastNotification.getMessage();
+        String lastMessage = lastPNotification.getMessage();
         game.setLastPSclientNotification(new PSNotification(lastMessage + "\n[GLOBAL MESSAGE]: " + game.getCurrentPlayer().getName()
-                + " has drawn a sector card", lastPNotification.getDeadPlayers(), lastPNotification.getAttackedPlayers(), lastPNotification.isHumanWin(), lastPNotification.isAlienWin(), lastPNotification.getEscapedPlayer(), lastPNotification.isGameNeedsToStart(), lastPNotification.isTurnNeedsToStart(), lastPNotification.isGameCanBeStarted(), lastPNotification.isTurnNeedsToEnd(), lastPNotification.getGameMapName()));
+                + " has drawn a sector card", lastPNotification.getDeadPlayers(), lastPNotification.getAttackedPlayers(), lastPNotification.isHumanWin(), lastPNotification.isAlienWin(), lastPNotification.getEscapedPlayer(), lastPNotification.getEscapingSector(), lastPNotification.isGameNeedsToStart(), lastPNotification.isTurnNeedsToStart(), lastPNotification.isGameCanBeStarted(), lastPNotification.isTurnNeedsToEnd(), lastPNotification.getGameMapName()));
 
         sectorDeck.addToDiscard(sectorCard);
         sectorDeck.refill();

@@ -30,5 +30,6 @@ public class ServerGroupResolver extends Resolver {
         this.policiesMap.put("@SERVER_GAME_SET_PS",
                 new PolicyCouple(new GameSetPSHandlerStatePolicy(), new GameSetPSHandlerSidePolicy()));
         this.policiesMap.put("@ERROR_ACTION", new PolicyCouple(new BlankPolicy(),null));
+        this.policiesMap.put("@SERVER_GAME_REMOVE_PLAYER",new PolicyCouple(new GameRemovePlayerStatePolicy(),null));
     }
 }

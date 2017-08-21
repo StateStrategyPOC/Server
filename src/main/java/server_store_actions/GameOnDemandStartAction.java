@@ -4,8 +4,6 @@ package server_store_actions;
 import common.PlayerToken;
 import common.StoreAction;
 
-import java.util.UUID;
-
 /**
  * An Action for signalling that the creator of a Game Room has decided to start the game
  */

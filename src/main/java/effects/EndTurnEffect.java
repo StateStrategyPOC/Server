@@ -16,15 +16,15 @@ public class EndTurnEffect extends ActionEffect {
         game.getCurrentPlayer().setSedated(false);
         game.getCurrentPlayer().setHasMoved(false);
         RRNotification lastNotification = game.getLastRRclientNotification();
-        game.setLastRRclientNotification(new RRNotification(lastNotification.getActionResult(),"\nYou have ended your turn",
-                lastNotification.getDrawnSectorCard(),lastNotification.getDrawnObjectCard(),lastNotification.getDrawnRescueCard(), lastNotification.getLightedSectors(),lastNotification.getAvailableGames(),lastNotification.getPlayerToken(),lastNotification.getGameMapName()));
+        game.setLastRRclientNotification(new RRNotification(lastNotification.isActionResult(),"\nYou have ended your turn",
+                lastNotification.getDrawnSectorCard(),lastNotification.getDrawnObjectCard(),lastNotification.getDrawnRescueCard(), lastNotification.getLightedSectors(),lastNotification.getAvailableGames(),lastNotification.getPlayerToken()));
         String message = "\n[GLOBAL MESSAGE]: "
                 + game.getCurrentPlayer().getName()
                 + " has ended its turn.\n[GLOBAL MESSAGE]: ";
         game.setPreviousPlayer(game.getCurrentPlayer());
         shiftCurrentPlayer(game);
         PSNotification lastPNotification = game.getLastPSclientNotification();
-        game.setLastPSclientNotification(new PSNotification(message+game.getCurrentPlayer().getName()+" now is your turn",lastPNotification.getDeadPlayers(),lastPNotification.getAttackedPlayers(),lastPNotification.isHumanWin(),lastPNotification.isAlienWin(),lastPNotification.getEscapedPlayer(),lastPNotification.isGameNeedsToStart(),lastPNotification.isTurnNeedsToStart(),lastPNotification.isGameCanBeStarted(),lastPNotification.isTurnNeedsToEnd(),lastPNotification.getGameMapName()));
+        game.setLastPSclientNotification(new PSNotification(message+game.getCurrentPlayer().getName()+" now is your turn",lastPNotification.getDeadPlayers(),lastPNotification.getAttackedPlayers(),lastPNotification.isHumanWin(),lastPNotification.isAlienWin(),lastPNotification.getEscapedPlayer(), lastPNotification.getEscapingSector(), lastPNotification.isGameNeedsToStart(),lastPNotification.isTurnNeedsToStart(),lastPNotification.isGameCanBeStarted(),lastPNotification.isTurnNeedsToEnd(),lastPNotification.getGameMapName()));
         // Notify the client
         game.setLastAction(action);
         return true;
@@ -45,7 +45,10 @@ public class EndTurnEffect extends ActionEffect {
             }
             index++;
         }
-        game.setCurrentPlayer(game.getPlayers().get(index));
+        Player player = game.getPlayers().get(index);
+        if (player.getPlayerState() == PlayerState.ALIVE){
+            game.setCurrentPlayer(player);
+        }
     }
 
 }

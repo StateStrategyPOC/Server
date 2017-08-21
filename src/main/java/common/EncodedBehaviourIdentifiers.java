@@ -1,4 +1,4 @@
-package server;
+package common;
 
 /**
  * A container of identifier for different requestable behaviour by the client to the server

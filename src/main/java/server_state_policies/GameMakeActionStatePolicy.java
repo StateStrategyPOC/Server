@@ -8,12 +8,12 @@ import server.Helpers;
 import server.HumanTurn;
 import server_store.ServerState;
 import server_store.StatePolicy;
-import common.StoreAction;
 import server_store_actions.GameMakeActionAction;
 
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.List;
+import java.util.Timer;
 
 public class GameMakeActionStatePolicy implements StatePolicy {
     @Override
@@ -26,26 +26,28 @@ public class GameMakeActionStatePolicy implements StatePolicy {
             return state;
         }
         if (!game.getCurrentPlayer().getPlayerToken().equals(castedAction.getPlayerToken())){
-            RRNotification notification = new RRNotification(false, "You cannot perform this action",null, null, null, null, null,null,null);
+            RRNotification notification = new RRNotification(false, "You cannot perform this action",null, null, null, null, null,null);
             game.setLastRRclientNotification(notification);
             return state;
         }
         if (!game.getNextActions().contains(gameAction.getActionIdentifier())){
-            RRNotification notification = new RRNotification(false, "You cannot perform this action",null, null, null, null,null,null,null);
+            RRNotification notification = new RRNotification(false, "You cannot perform this action",null, null, null, null,null,null);
             game.setLastRRclientNotification(notification);
             return state;
         }
+        game.setLastRRclientNotification(new RRNotification(false,null,null,null,null,null,null,null));
+        game.setLastPSclientNotification(new PSNotification(null,null,null,false,false,null,null,false,false,false,false,null));
         // Executes the action's associated logic and get the result
         try {
             Method executeMethod = GameActionMapper.getInstance().getEffect(gameAction.getClass()).getMethod("executeEffect", Game.class, StoreAction.class);
             gameActionResult = (boolean) executeMethod.invoke(null,game, castedAction.getInGameAction());
             RRNotification lastNotification = game.getLastRRclientNotification();
-            game.setLastRRclientNotification(new RRNotification(gameActionResult,lastNotification.getMessage(), lastNotification.getDrawnSectorCard(), lastNotification.getDrawnObjectCard(), null, lastNotification.getLightedSectors(),lastNotification.getAvailableGames(),lastNotification.getPlayerToken(),lastNotification.getGameMapName()));
+            game.setLastRRclientNotification(new RRNotification(gameActionResult,lastNotification.getMessage(), lastNotification.getDrawnSectorCard(), lastNotification.getDrawnObjectCard(), null, lastNotification.getLightedSectors(),lastNotification.getAvailableGames(),lastNotification.getPlayerToken()));
         } catch (NoSuchMethodException | IllegalAccessException | InvocationTargetException e) {
             e.printStackTrace();
         }
         if (!gameActionResult) {
-            RRNotification notification = new RRNotification(false, "You cannot perform this action",null, null, null, null,null,null,null);
+            RRNotification notification = new RRNotification(false, "You cannot perform this action",null, null, null, null,null,null);
             game.setLastRRclientNotification(notification);
             return state;
         }
@@ -66,8 +68,8 @@ public class GameMakeActionStatePolicy implements StatePolicy {
         }
         game.setDidHumansWin(checkWinConditions(PlayerType.HUMAN, game));
         game.setDidAlienWin(checkWinConditions(PlayerType.ALIEN, game));
-        //game.getCurrentTimer().cancel();
-        //game.setCurrentTimer(new Timer());
+        game.getCurrentTimer().cancel();
+        game.setCurrentTimer(new Timer());
         PSNotification lastNotification;
         if (game.isDidHumansWin()) {
             lastNotification = game.getLastPSclientNotification();
@@ -78,7 +80,7 @@ public class GameMakeActionStatePolicy implements StatePolicy {
                     true,
                     false,
                     lastNotification.getEscapedPlayer(),
-                    lastNotification.isGameNeedsToStart(),
+                    lastNotification.getEscapingSector(), lastNotification.isGameNeedsToStart(),
                     lastNotification.isTurnNeedsToStart(),
                     lastNotification.isGameCanBeStarted(),
                     lastNotification.isTurnNeedsToEnd(),
@@ -94,7 +96,7 @@ public class GameMakeActionStatePolicy implements StatePolicy {
                     lastNotification.isHumanWin(),
                     true,
                     lastNotification.getEscapedPlayer(),
-                    lastNotification.isGameNeedsToStart(),
+                    lastNotification.getEscapingSector(), lastNotification.isGameNeedsToStart(),
                     lastNotification.isTurnNeedsToStart(),
                     lastNotification.isGameCanBeStarted(),
                     lastNotification.isTurnNeedsToEnd(),

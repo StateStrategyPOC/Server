@@ -1,7 +1,6 @@
 package server_store;
 
 import server.Game;
-import server.ReqRespHandler;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -21,7 +20,7 @@ public class ServerState implements Serializable {
     public ServerState() {
         this.games = new ArrayList<>();
         this.tcpPort = 29999;
-        this.turnTimeout = 5*60*1000;
+        this.turnTimeout = 60*10*1000;
         this.isServerListening = true;
     }
 

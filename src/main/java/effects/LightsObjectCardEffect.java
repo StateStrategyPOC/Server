@@ -46,10 +46,10 @@ public class LightsObjectCardEffect extends ObjectCardEffect {
         RRNotification lastNotification = game.getLastRRclientNotification();
         String message = lastNotification.getMessage();
         message += ". Players spotted: " + msg;
-        game.setLastRRclientNotification(new RRNotification(lastNotification.getActionResult(), message, lastNotification.getDrawnSectorCard(),lastNotification.getDrawnObjectCard(),lastNotification.getDrawnRescueCard(), incriminatedSectors, lastNotification.getAvailableGames(), lastNotification.getPlayerToken(), lastNotification.getGameMapName()));
+        game.setLastRRclientNotification(new RRNotification(lastNotification.isActionResult(), message, lastNotification.getDrawnSectorCard(),lastNotification.getDrawnObjectCard(),lastNotification.getDrawnRescueCard(), incriminatedSectors, lastNotification.getAvailableGames(), lastNotification.getPlayerToken()));
         PSNotification lastPNotification = game.getLastPSclientNotification();
         String lastMessage = lastPNotification.getMessage();
-        game.setLastPSclientNotification(new PSNotification(lastMessage + globalMessage + msg, lastPNotification.getDeadPlayers(), lastPNotification.getAttackedPlayers(), lastPNotification.isHumanWin(), lastPNotification.isAlienWin(), lastPNotification.getEscapedPlayer(), lastPNotification.isGameNeedsToStart(), lastPNotification.isTurnNeedsToStart(), lastPNotification.isGameCanBeStarted(), lastPNotification.isTurnNeedsToEnd(), lastPNotification.getGameMapName()));
+        game.setLastPSclientNotification(new PSNotification(lastMessage + globalMessage + msg, lastPNotification.getDeadPlayers(), lastPNotification.getAttackedPlayers(), lastPNotification.isHumanWin(), lastPNotification.isAlienWin(), lastPNotification.getEscapedPlayer(), lastPNotification.getEscapingSector(), lastPNotification.isGameNeedsToStart(), lastPNotification.isTurnNeedsToStart(), lastPNotification.isGameCanBeStarted(), lastPNotification.isTurnNeedsToEnd(), lastPNotification.getGameMapName()));
         return true;
     }
 }

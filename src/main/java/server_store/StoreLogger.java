@@ -17,7 +17,7 @@ import java.util.logging.SimpleFormatter;
  * Represents a lambda MVC Logger
  */
 public class StoreLogger {
-    private Logger logger;
+    private final Logger logger;
     private  static StoreLogger instance;
 
     public static StoreLogger getInstance(){

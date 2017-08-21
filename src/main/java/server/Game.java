@@ -4,7 +4,6 @@ import common.*;
 import decks.ObjectDeck;
 import decks.RescueDeck;
 import decks.SectorDeck;
-import common.StoreAction;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -18,15 +17,15 @@ public class Game {
     // Communication related stuff
     private static int counter = 0;
 
-    private List<Player> players;
+    private final List<Player> players;
     private ObjectDeck objectDeck;
     private RescueDeck rescueDeck;
     private SectorDeck sectorDeck;
     private Player currentPlayer;
     private Player previousPlayer;
     private int turnNumber;
-    private GamePublicData gamePublicData;
-    private String mapName;
+    private final GamePublicData gamePublicData;
+    private final String mapName;
     private GameMap gameMap;
     private StoreAction lastAction;
     private List<String> nextActions;
@@ -45,8 +44,8 @@ public class Game {
         this.gamePublicData = new GamePublicData(counter, "Game_" + counter);
         this.turnNumber = 0;
         this.lastAction = null;
-        this.lastPSclientNotification = null;
-        this.lastRRclientNotification = null;
+        this.lastRRclientNotification = new RRNotification(false,null,null,null,null,null,null,null);
+        this.lastPSclientNotification = new PSNotification(null,null,null,false,false,null, null, false,false,false,false,null);
         this.currentTimer = null;
         this.didHumansWin = false;
         this.didHumansWin = false;

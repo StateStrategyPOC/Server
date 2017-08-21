@@ -19,10 +19,10 @@ public class TeleportObjCardEffect extends ObjectCardEffect {
 		curr.setCurrentSector(humanSector);
 		humanSector.addPlayer(curr);
 		RRNotification lastNotification = game.getLastRRclientNotification();
-		game.setLastRRclientNotification(new RRNotification(lastNotification.getActionResult(),"You've teleported to the human sector",lastNotification.getDrawnSectorCard(), lastNotification.getDrawnObjectCard(),lastNotification.getDrawnRescueCard(), lastNotification.getLightedSectors(),lastNotification.getAvailableGames(),lastNotification.getPlayerToken(),lastNotification.getGameMapName()));
+		game.setLastRRclientNotification(new RRNotification(lastNotification.isActionResult(),"You've teleported to the human sector",lastNotification.getDrawnSectorCard(), lastNotification.getDrawnObjectCard(),lastNotification.getDrawnRescueCard(), lastNotification.getLightedSectors(),lastNotification.getAvailableGames(),lastNotification.getPlayerToken()));
 		PSNotification lastPNotification = game.getLastPSclientNotification();
 		String lastMessage = lastPNotification.getMessage();
-		game.setLastPSclientNotification(new PSNotification(lastMessage+ "\n[GLOBAL MESSAGE]: He/She will be teleported to the human sector",lastPNotification.getDeadPlayers(),lastPNotification.getAttackedPlayers(),lastPNotification.isHumanWin(),lastPNotification.isAlienWin(),lastPNotification.getEscapedPlayer(),lastPNotification.isGameNeedsToStart(),lastPNotification.isTurnNeedsToStart(),lastPNotification.isGameCanBeStarted(),lastPNotification.isTurnNeedsToEnd(),lastPNotification.getGameMapName()));
+		game.setLastPSclientNotification(new PSNotification(lastMessage+ "\n[GLOBAL MESSAGE]: He/She will be teleported to the human sector",lastPNotification.getDeadPlayers(),lastPNotification.getAttackedPlayers(),lastPNotification.isHumanWin(),lastPNotification.isAlienWin(),lastPNotification.getEscapedPlayer(), lastPNotification.getEscapingSector(), lastPNotification.isGameNeedsToStart(),lastPNotification.isTurnNeedsToStart(),lastPNotification.isGameCanBeStarted(),lastPNotification.isTurnNeedsToEnd(),lastPNotification.getGameMapName()));
 		return true;
 	}
 }

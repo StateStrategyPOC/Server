@@ -70,15 +70,13 @@ public class PrivateDeck implements Serializable {
 	 * @return true if the card will not increase the size of the private deck's
 	 *         set of cards to 5, false otherwise
 	 */
-	public boolean addCard(ObjectCard card) {
+	public void addCard(ObjectCard card) {
 		/*
 		 * The private deck must contain a maximum of three cards
 		 */
 		if (content.size() <= 4) {
 			content.add(card);
-			return true;
 		}
-		return false;
 	}
 
 	/**

@@ -6,7 +6,6 @@ import server.Helpers;
 import server_store.ServerState;
 import server_store.ServerStore;
 import server_store.SidePolicy;
-import common.StoreAction;
 import server_store_actions.GameStartGameAction;
 import server_store_actions.GameOnDemandStartAction;
 
@@ -22,10 +21,10 @@ public class GameOnDemandStartSidePolicy implements SidePolicy {
         }
         if (game.getCurrentPlayer().getPlayerToken().equals(castedAction.getPlayerToken())) {
             SERVER_STORE.propagateAction(new GameStartGameAction(game));
-            rrNotification = new RRNotification(true,null,null, null, null, null,null,null,null);
+            rrNotification = new RRNotification(true,null,null, null, null, null,null,null);
 
         } else {
-            rrNotification = new RRNotification(false,null,null,null, null, null,null,null,null);
+            rrNotification = new RRNotification(false,null,null,null, null, null,null,null);
 
         }
         game.setLastRRclientNotification(rrNotification);

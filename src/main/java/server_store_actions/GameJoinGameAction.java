@@ -2,8 +2,6 @@ package server_store_actions;
 
 import common.StoreAction;
 
-import java.util.UUID;
-
 /**
  * An Action for signalling that a Player wants to join a game
  */

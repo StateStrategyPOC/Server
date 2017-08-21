@@ -1,11 +1,9 @@
 package server;
 
-import common.PSNotification;
 import common.Player;
 import common.PlayerToken;
 
 import java.util.List;
-import java.util.UUID;
 
 public class Helpers {
     public static Game findGameById(Integer gameId, List<Game> games){
@@ -21,6 +19,15 @@ public class Helpers {
         for (PubSubHandler handler : game.getPubSubHandlers()){
             if (handler.getPlayerToken().equals(playerToken)){
                 return handler;
+            }
+        }
+        return null;
+    }
+
+    public static Player findPlayerByToken(PlayerToken playerToken, List<Player> players) {
+        for (Player player : players){
+            if (playerToken.equals(player.getPlayerToken())){
+                return player;
             }
         }
         return null;

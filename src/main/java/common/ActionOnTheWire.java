@@ -26,5 +26,11 @@ public class ActionOnTheWire implements Serializable {
         return parameters;
     }
 
-
+    @Override
+    public String toString() {
+        return "ActionOnTheWire{" +
+                "actionIdentifier='" + actionIdentifier + '\'' +
+                ", parameters=" + parameters +
+                '}';
+    }
 }

@@ -16,4 +16,5 @@ public class MoveAction extends StoreAction {
     public Sector getTargetSector() {
         return targetSector;
     }
+
 }

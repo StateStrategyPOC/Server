@@ -2,7 +2,6 @@ package effects;
 
 import common.*;
 import server.Game;
-import common.StoreAction;
 
 /**
  * Represents the effect of the moving a player
@@ -53,11 +52,10 @@ public class MoveActionEffect extends ActionEffect {
                 currentPlayer.setCurrentSector(targetSector);
                 targetSector.addPlayer(currentPlayer);
                 RRNotification lastNotification = game.getLastRRclientNotification();
-                game.setLastRRclientNotification(new RRNotification(lastNotification.getActionResult(),"You have moved to sector "
-                        + targetSector.getCoordinate().toString(),lastNotification.getDrawnSectorCard(),lastNotification.getDrawnObjectCard(),lastNotification.getDrawnRescueCard(), lastNotification.getLightedSectors(),lastNotification.getAvailableGames(),lastNotification.getPlayerToken(),lastNotification.getGameMapName()));
-                PSNotification lastPNotification = game.getLastPSclientNotification();
+                game.setLastRRclientNotification(new RRNotification(lastNotification.isActionResult(),"You have moved to sector "
+                        + targetSector.getCoordinate().toString(),null,null,null, null,null,null));
                 game.setLastPSclientNotification(new PSNotification("[GLOBAL MESSAGE]: "
-                        + currentPlayer.getName() + " has moved.",lastPNotification.getDeadPlayers(),lastPNotification.getAttackedPlayers(),lastPNotification.isHumanWin(),lastPNotification.isAlienWin(),lastPNotification.getEscapedPlayer(),lastPNotification.isGameNeedsToStart(),lastPNotification.isTurnNeedsToStart(),lastPNotification.isGameCanBeStarted(),lastPNotification.isTurnNeedsToEnd(),lastPNotification.getGameMapName()));
+                        + currentPlayer.getName() + " has moved.",null,null,false,false,null,null,false,false, false,false,null));
 
                 // If the target sector is a dangerous sector continue the
                 // execution
