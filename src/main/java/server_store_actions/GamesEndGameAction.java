@@ -22,9 +22,9 @@ public class GamesEndGameAction extends StoreAction {
     @Override
     public String toString() {
         return "GamesEndGameAction{" +
-                "game=" + game +
                 ", actionIdentifier='" + actionIdentifier + '\'' +
                 ", actionGroupIdentifier='" + actionGroupIdentifier + '\'' +
+                "game=" + game +
                 '}';
     }
 }
