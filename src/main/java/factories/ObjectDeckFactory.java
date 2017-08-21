@@ -29,8 +29,8 @@ public class ObjectDeckFactory extends DeckFactory {
 		deck.add(new SuppressorObjectCard());
 		deck.add(new SuppressorObjectCard());
 		deck.add(new SuppressorObjectCard());
-		deck.add(new DefenseObjectCard());
-		deck.add(new LightsObjectCard(null));
+        deck.add(new DefenseObjectCard());
+        deck.add(new LightsObjectCard(null));
 		deck.add(new LightsObjectCard(null));
 		// Deck shuffling
 		long seed = System.nanoTime();
