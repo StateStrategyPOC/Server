@@ -34,6 +34,7 @@ public class ServerStore {
      */
     private void fillResolverMap(){
         this.actionGroupToResolver.put("@SERVER_GROUP", new ServerGroupResolver());
+        this.actionGroupToResolver.put("@ERROR_GROUP", new ErrorGroupResolver());
     }
 
 
