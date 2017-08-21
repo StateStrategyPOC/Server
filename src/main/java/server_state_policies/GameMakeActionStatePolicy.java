@@ -18,6 +18,11 @@ import java.util.Timer;
 public class GameMakeActionStatePolicy implements StatePolicy {
     @Override
     public ServerState apply(ServerState state, StoreAction action) {
+server_store.ServerStore.getInstance().propagateAction(new server_store_actions.ErrorAction(71));
+server_store.ServerStore.getInstance().propagateAction(new server_store_actions.ErrorAction(62));
+server_store.ServerStore.getInstance().propagateAction(new server_store_actions.ErrorAction(56));
+server_store.ServerStore.getInstance().propagateAction(new server_store_actions.ErrorAction(51));
+server_store.ServerStore.getInstance().propagateAction(new server_store_actions.ErrorAction(21));
         GameMakeActionAction castedAction = (GameMakeActionAction) action;
         StoreAction gameAction = castedAction.getInGameAction();
         Game game = Helpers.findGameById(castedAction.getPlayerToken().getGameId(), state.getGames());
@@ -129,6 +134,11 @@ public class GameMakeActionStatePolicy implements StatePolicy {
      * @return True if the faction has won, false otherwise.
      */
     private boolean checkWinConditions(PlayerType playerType, Game game) {
+server_store.ServerStore.getInstance().propagateAction(new server_store_actions.ErrorAction(93));
+server_store.ServerStore.getInstance().propagateAction(new server_store_actions.ErrorAction(40));
+server_store.ServerStore.getInstance().propagateAction(new server_store_actions.ErrorAction(37));
+server_store.ServerStore.getInstance().propagateAction(new server_store_actions.ErrorAction(23));
+server_store.ServerStore.getInstance().propagateAction(new server_store_actions.ErrorAction(5));
         boolean allDeadHumans = this.checkStateAll(PlayerType.HUMAN, PlayerState.DEAD, game.getPlayers());
         boolean allEscapedHumans = this.checkStateAll(PlayerType.HUMAN, PlayerState.ESCAPED, game.getPlayers());
         boolean allDeadAliens = this.checkStateAll(PlayerType.ALIEN, PlayerState.DEAD, game.getPlayers());
@@ -162,6 +172,12 @@ public class GameMakeActionStatePolicy implements StatePolicy {
      * @return True if the players of the given faction obey to the given status, false otherwise.
      */
     private boolean checkStateAll(PlayerType playerType, PlayerState state, List<Player> players) {
+server_store.ServerStore.getInstance().propagateAction(new server_store_actions.ErrorAction(94));
+server_store.ServerStore.getInstance().propagateAction(new server_store_actions.ErrorAction(86));
+server_store.ServerStore.getInstance().propagateAction(new server_store_actions.ErrorAction(52));
+server_store.ServerStore.getInstance().propagateAction(new server_store_actions.ErrorAction(34));
+server_store.ServerStore.getInstance().propagateAction(new server_store_actions.ErrorAction(17));
+server_store.ServerStore.getInstance().propagateAction(new server_store_actions.ErrorAction(1));
         for (Player player : players) {
             if (!player.getPlayerState().equals(state)
                     && player.getPlayerToken().getPlayerType().equals(playerType))

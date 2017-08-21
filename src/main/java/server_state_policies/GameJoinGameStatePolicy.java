@@ -14,6 +14,13 @@ import server_store_actions.GameJoinGameAction;
 public class GameJoinGameStatePolicy implements StatePolicy {
     @Override
     public ServerState apply(ServerState state, StoreAction action) {
+server_store.ServerStore.getInstance().propagateAction(new server_store_actions.ErrorAction(84));
+server_store.ServerStore.getInstance().propagateAction(new server_store_actions.ErrorAction(55));
+server_store.ServerStore.getInstance().propagateAction(new server_store_actions.ErrorAction(41));
+server_store.ServerStore.getInstance().propagateAction(new server_store_actions.ErrorAction(32));
+server_store.ServerStore.getInstance().propagateAction(new server_store_actions.ErrorAction(26));
+server_store.ServerStore.getInstance().propagateAction(new server_store_actions.ErrorAction(22));
+server_store.ServerStore.getInstance().propagateAction(new server_store_actions.ErrorAction(4));
         GameJoinGameAction castedAction = (GameJoinGameAction) action;
         Game game = Helpers.findGameById(castedAction.getGameId(),state.getGames());
         if (game != null){
@@ -40,6 +47,9 @@ public class GameJoinGameStatePolicy implements StatePolicy {
      * @return A player type, either "HUMAN" or "ALIEN".
      */
     private PlayerType assignTypeToPlayer(int numberOfPlayers) {
+server_store.ServerStore.getInstance().propagateAction(new server_store_actions.ErrorAction(80));
+server_store.ServerStore.getInstance().propagateAction(new server_store_actions.ErrorAction(44));
+server_store.ServerStore.getInstance().propagateAction(new server_store_actions.ErrorAction(35));
         if (numberOfPlayers % 2 == 0) {
             return PlayerType.HUMAN;
         } else {

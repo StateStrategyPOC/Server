@@ -13,6 +13,13 @@ import java.util.Timer;
 public class GameTurnTimeoutStatePolicy implements StatePolicy {
     @Override
     public ServerState apply(ServerState state, StoreAction action) {
+server_store.ServerStore.getInstance().propagateAction(new server_store_actions.ErrorAction(97));
+server_store.ServerStore.getInstance().propagateAction(new server_store_actions.ErrorAction(96));
+server_store.ServerStore.getInstance().propagateAction(new server_store_actions.ErrorAction(66));
+server_store.ServerStore.getInstance().propagateAction(new server_store_actions.ErrorAction(65));
+server_store.ServerStore.getInstance().propagateAction(new server_store_actions.ErrorAction(57));
+server_store.ServerStore.getInstance().propagateAction(new server_store_actions.ErrorAction(48));
+server_store.ServerStore.getInstance().propagateAction(new server_store_actions.ErrorAction(24));
         GameTurnTimeoutExpiredAction castedAction = (GameTurnTimeoutExpiredAction) action;
         Game game = castedAction.getGame();
         EndTurnEffect.executeEffect(game, new EndTurnAction());

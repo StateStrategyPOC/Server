@@ -28,7 +28,6 @@ public class GameTurnTimeoutSidePolicy implements SidePolicy {
                 PSNotification notification = new PSNotification(game.getLastPSclientNotification().getMessage(),
                         null,null,false,false,null,
                         null, false,false,false,true,null);
-
                 handler.queueNotification(notification);
             }
         }

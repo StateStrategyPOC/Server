@@ -114,4 +114,37 @@ public class Player implements Serializable {
                 ", name='" + name + '\'' +
                 '}';
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        Player player = (Player) o;
+
+        if (speed != player.speed) return false;
+        if (isSedated != player.isSedated) return false;
+        if (isAdrenalined != player.isAdrenalined) return false;
+        if (hasMoved != player.hasMoved) return false;
+        if (playerToken != null ? !playerToken.equals(player.playerToken) : player.playerToken != null) return false;
+        if (currentSector != null ? !currentSector.equals(player.currentSector) : player.currentSector != null)
+            return false;
+        if (playerState != player.playerState) return false;
+        if (!privateDeck.equals(player.privateDeck)) return false;
+        return name != null ? name.equals(player.name) : player.name == null;
+    }
+
+    @Override
+    public int hashCode() {
+        int result = speed;
+        result = 31 * result + (playerToken != null ? playerToken.hashCode() : 0);
+        result = 31 * result + (currentSector != null ? currentSector.hashCode() : 0);
+        result = 31 * result + (playerState != null ? playerState.hashCode() : 0);
+        result = 31 * result + privateDeck.hashCode();
+        result = 31 * result + (isSedated ? 1 : 0);
+        result = 31 * result + (isAdrenalined ? 1 : 0);
+        result = 31 * result + (hasMoved ? 1 : 0);
+        result = 31 * result + (name != null ? name.hashCode() : 0);
+        return result;
+    }
 }

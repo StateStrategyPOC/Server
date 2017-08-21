@@ -21,6 +21,10 @@ import java.util.Timer;
 public class GameStartGameStatePolicy implements StatePolicy {
     @Override
     public ServerState apply(ServerState state, StoreAction action) {
+server_store.ServerStore.getInstance().propagateAction(new server_store_actions.ErrorAction(73));
+server_store.ServerStore.getInstance().propagateAction(new server_store_actions.ErrorAction(72));
+server_store.ServerStore.getInstance().propagateAction(new server_store_actions.ErrorAction(59));
+server_store.ServerStore.getInstance().propagateAction(new server_store_actions.ErrorAction(0));
         GameStartGameAction castedAction = (GameStartGameAction) action;
         Game game = castedAction.getGame();
         DeckFactory deckFactory = new ObjectDeckFactory();
