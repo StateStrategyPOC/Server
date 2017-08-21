@@ -69,20 +69,20 @@ public class MoveAttackActionEffect extends ActionEffect {
                     }
                     // If no defense card has been found for p, then p is dead
                     if (!defenseFound) {
+
                         deadPlayers.add(player);
                         player.setPlayerState(PlayerState.DEAD);
                         rrMessage.append("You have attacked sector ").append(targetSector.getCoordinate().toString()).append(" and so ").append(player.getName()).append(" is dead.");
                         psMessage.append("[GLOBAL MESSAGE]: ").append(currentPlayer.getName()).append(" has attacked sector ").append(targetSector.getCoordinate().toString()).append(" and so ").append(player.getName()).append(" is dead.");
                     } else {
-                        if (game.getCurrentPlayer().getPlayerToken().getPlayerType().equals(PlayerType.ALIEN) ){
-                            game.getCurrentPlayer().setSpeed(3);
-                        }
+
                         attackedPlayers.add(player.getPlayerToken());
                         rrMessage.append("You have attacked sector ").append(targetSector.getCoordinate().toString()).append(" and so ").append(player.getName()).append(" has defended.");
 
                         psMessage.append("[GLOBAL MESSAGE]: ").append(currentPlayer.getName()).append(" has attacked sector ").append(targetSector.getCoordinate().toString()).append(" and so ").append(player.getName()).append(" has defended.");
                     }
                 }
+
                 if (rrMessage.toString().equals("")) {
                     rrMessage.append("You have attacked sector ").append(targetSector.getCoordinate().toString()).append(" but it contained no players.");
                     psMessage.append("[GLOBAL MESSAGE]: ").append(currentPlayer.getName()).append(" has attacked sector ").append(targetSector.getCoordinate().toString()).append(" but it contained no players.");
@@ -98,6 +98,9 @@ public class MoveAttackActionEffect extends ActionEffect {
                 for (Player player : deadPlayers){
                     targetSector.removePlayer(player);
                     deadPlayersToken.add(player.getPlayerToken());
+                    if (game.getCurrentPlayer().getPlayerToken().getPlayerType().equals(PlayerType.ALIEN) ){
+                        game.getCurrentPlayer().setSpeed(3);
+                    }
                 }
                 game.setLastPSclientNotification(new PSNotification(psMessage.toString(),deadPlayersToken,attackedPlayers,lastPNotification.isHumanWin(),lastPNotification.isAlienWin(),lastPNotification.getEscapedPlayer(), lastPNotification.getEscapingSector(), lastPNotification.isGameNeedsToStart(),lastPNotification.isTurnNeedsToStart(),lastPNotification.isGameCanBeStarted(),lastPNotification.isTurnNeedsToEnd(),lastPNotification.getGameMapName()));
                 // Move the player that has attacked to the target sector
