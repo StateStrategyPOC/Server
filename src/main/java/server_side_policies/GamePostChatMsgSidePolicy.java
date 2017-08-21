@@ -15,7 +15,6 @@ public class GamePostChatMsgSidePolicy implements SidePolicy {
     @Override
     public void apply(ServerState state, StoreAction action) {
         GamePostMsgAction castedAction = (GamePostMsgAction) action;
-        ServerStore SERVER_STORE = ServerStore.getInstance();
 
         Game game = Helpers.findGameById(castedAction.getPlayerToken().getGameId(),state.getGames());
         if (game == null){

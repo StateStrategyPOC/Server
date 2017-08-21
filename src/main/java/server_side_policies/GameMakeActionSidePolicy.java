@@ -17,7 +17,7 @@ public class GameMakeActionSidePolicy implements SidePolicy {
     public void apply(ServerState state, StoreAction action) {
         GameMakeActionAction castedAction = (GameMakeActionAction) action;
         ServerStore SERVER_STORE = ServerStore.getInstance();
-        Game game = Helpers.findGameById(castedAction.getPlayerToken().getGameId(),SERVER_STORE.getState().getGames());
+        Game game = Helpers.findGameById(castedAction.getPlayerToken().getGameId(),state.getGames());
 
         if (game == null){
             return;
