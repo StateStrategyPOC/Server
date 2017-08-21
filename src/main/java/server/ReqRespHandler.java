@@ -156,7 +156,6 @@ public class ReqRespHandler extends Thread {
                 this.closeConnection(this.socket, this.objectOutputStream, this.objectInputStream);
                 return;
             }
-            this.sendRequest(game.getLastRRclientNotification(), this.objectOutputStream);
             this.closeConnection(this.socket, this.objectOutputStream, this.objectInputStream);
         } else if (request.getActionIdentifier().equals(EncodedBehaviourIdentifiers.subscribe())) {
             PlayerToken playerToken = (PlayerToken) request.getParameters().get(0);
