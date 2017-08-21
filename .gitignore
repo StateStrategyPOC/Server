@@ -126,7 +126,7 @@ fabric.properties
 *.class
 
 # Log file
-*.log
+#*.log
 
 # BlueJ files
 *.ctxt
@@ -188,4 +188,4 @@ buildNumber.properties
 
 # End of https://www.gitignore.io/api/java,maven,macos,eclipse,intellij
 # Custom rules
-*.log.*
+#*.log.*
